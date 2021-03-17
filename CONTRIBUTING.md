@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-load-helper`
+* `cd ember-async-data`
 * `yarn install`
 
 ## Linting

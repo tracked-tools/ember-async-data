@@ -298,7 +298,7 @@ class TrackedAsyncData<T> {
 ##### Notes
 
 - The class is *not* intended for subclassing, and will in fact throw in the constructor if you try to subclass it!
-- The `value` and `error` getters will *warn* if you access them and the underlying promise is in the wrong state. In the future, this will be converted to throwing an error. (It currently only warns because classic computed properties actively lookup and cache the values returned from their dependenet keys.)
+- The `value` and `error` getters will *warn* if you access them and the underlying promise is in the wrong state. In the future, this will be converted to throwing an error. (It currently only warns because classic computed properties actively lookup and cache the values returned from their dependent keys.)
 
 #### `load` function
 
@@ -329,7 +329,7 @@ In the past, Ember developers tended to reach for `PromiseProxyMixin` to solve t
 1.  Because it directly proxies to the underlying promise values, it is possible to misuse by accessing the properties of the resolved type synchronously, instead of properly awaiting the value of the promise (either with `await` or with `.then()`).
 2.  Because it is a mixin, it cannot be used with Glimmer components, and in general is not compatible with the future direction of Ember, which is moving *away* from mixins and *toward* appropriate use of delegates (whether services or non-singleton regular classes), composition, and pure functions.
 
-The `load` helper is a fully-featured replacement for `PromiseProxyMixin`, with none of these pitfalls. This takes a promise as a parameter and returns an object `LoadState` which contains the loading state and value/error. This helper provides a consistent way for developers to load data in their components without running into common pitfalls with concurrency.
+The `load` helper is a fully-featured replacement for `PromiseProxyMixin`, with none of these pitfalls. This takes a promise as a parameter and returns a `TrackedAsyncData` object which handles the pending/resolved/rejected state as well as value/error data. The associated `load` helper provides a consistent way for developers to load data in their component templates.
 
 
 ## Contributing
@@ -342,4 +342,4 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 ## Credit
 
-Research into the ideas behind this code happened at [LinkedIn](https://www.linkedin.com) by [Yaobin Dong](https://www.linkedin.com/in/yaobin-dong-8a881481/) and [Lucy Lin](https://www.linkedin.com/in/lucylylin/) with support from [Lewis Miller](https://www.linkedin.com/in/lewis-miller/) and [Chris Krycho](https://www.linkedin.com/in/chriskrycho/). While this new implementation is distinct from that one in many ways, it would have been impossible without those initial efforts!
+Research into the ideas behind this code happened at [LinkedIn](https://www.linkedin.com), with key work done by [Yaobin Dong](https://www.linkedin.com/in/yaobin-dong-8a881481/), [Lucy Lin](https://www.linkedin.com/in/lucylylin/), [Lewis Miller](https://www.linkedin.com/in/lewis-miller/), and [Chris Krycho](https://www.linkedin.com/in/chriskrycho/). While this new implementation is distinct from that one in many ways, it would have been impossible without those initial efforts!

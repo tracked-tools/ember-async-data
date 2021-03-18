@@ -1,12 +1,14 @@
 <p align="center">
-  <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml'>
-    <img src='https://github.com/chriskrycho/ember-async-data/workflows/CI/badge.svg?branch=main' title='CI'>
+  
+  <a href="https://github.com/chriskrycho/ember-async-data/actions/workflows/CI.yml">
+    <img src="https://github.com/chriskrycho/ember-async-data/actions/workflows/CI.yml/badge.svg" alt="CI" style="max-width:100%;">
   </a>
-  <!-- <a href='https://www.npmjs.com/package/ember-async-data'>
+  <a href='https://www.npmjs.com/package/ember-async-data'>
     <img src='https://img.shields.io/npm/v/ember-async-data.svg' alt='npm'>
-  </a> -->
+  </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L29'>
-    <img src='https://img.shields.io/badge/Node-14%20LTS%20%7C%2015-darkgreen' alt='supported Node versions'>
+    <!--<img src='https://img.shields.io/badge/Node-14%20LTS%20%7C%2015-darkgreen' alt='supported Node versions'>-->
+    <img src='https://img.shields.io/badge/Node-14%20LTS-darkgreen' alt='supported Node versions'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L61'>
     <img src='https://img.shields.io/badge/TypeScript-4.1%20%7C%204.2%20%7C%20next-3178c6' alt='supported TypeScript versions'>

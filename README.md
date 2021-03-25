@@ -110,7 +110,12 @@ Additionally, it's often valuable to load data only when required, because it fa
 You can use `TrackedAsyncData` either directly in JavaScript or via the `{{load}}` helper in templates.
 
 - [In JavaScript](#in-javascript)
+    - [With TypeScript](#with-typescript)
+    - [Note on Usage with API Calls](#note-on-usage-with-api-calls)
+    - [`load` function](#load-function)
+    - [Subclassing](#subclassing)
 - [In Templates](#in-templates)
+
 
 ### In JavaScript
 
@@ -189,6 +194,19 @@ TrackedAsyncData: {
 
 You can use `TrackedAsyncData` with *any* value, not just a `Promise`, which is convenient when working with data which may or may not already be in a `Promise`.
 
+
+#### With TypeScript
+
+This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. (Note that with the current implementation, it's impossible to "narrow" this type. We may improve this in the future!)
+
+```ts
+let example = new TrackedAsyncData(Promise.resolve("a string"));
+if (example.state === "RESOLVED") {
+  console.log(example.value.length); // type is `string` so this is safe
+}
+```
+
+
 #### Note on Usage with API Calls
 
 When using `TrackedAsyncData` with an API call in a getter, it is important to use `@cached` (via the [ember-cached-decorator-polyfill](https://github.com/ember-polyfills/ember-cached-decorator-polyfill)) with the getter. Otherwise, you can end up triggering the creation of multiple API calls. For example, given a backing class like this:
@@ -238,6 +256,7 @@ This is the *correct* default behavior, even though it might be surprising at fi
 
 _**Note:** in the future, we will make a set of [Resources](https://www.pzuraq.com/introducing-use/) layered on top of the core data types here, which will allow us to build in caching for API calls._
 
+
 #### `load` function
 
 For symmetry with templates, you can also use `load` in JavaScript; it has the exact same semantics as calling `new TrackedPromise`. Using `load`, the example from the top of the README would look like this:
@@ -264,9 +283,61 @@ Note that this has the exact same requirements around API calls as the direct us
 
 It is illegal to subclass `TrackedAsyncData`; trying to invoke a subclass will throw an error.
 
+
 ### In templates
 
-To use a `TrackedAsyncData` in templates, we provide the `load` helper. You can pass it any value, and it will return a `TrackedAsyncData` for that value. Since `TrackedAsyncData` has 
+To use a `TrackedAsyncData` in templates, we provide the `load` helper. You can pass it any value, and it will return a `TrackedAsyncData` for that value. You can then use the `.isPending`, `.isResolved`, and `.isRejected` properties to conditionally render content based on the state of the promise.
+
+You could use this to build a component which uses named blocks to provide a nice API for end users:
+
+```hbs
+<div class='loader'>
+  {{#let (load @promise) as |result|}}
+    {{#if result.isPending}}
+      <div class='loader__pending'>
+        {{if (has-block "pending")}}
+          {{yield to="pending"}}
+        {{else}}
+          Loading...
+        {{/if}}
+      </div>
+    {{else if result.isResolved}}
+      <div class='loader__resolved'>
+        {{if (has-block "resolved")}}
+          {{yield result.value to="resolved"}}
+        {{else}}
+          {{result.value}}
+        {{/if}}
+      </div>
+    {{else if result.isRejected}}
+      <div class='loader__rejected'>
+        {{if (has-block "rejected")}}
+          {{yield result.error to="rejected"}}
+        {{else}}
+          {{result.error}}
+        {{/if}}
+      </div>
+    {{/if}}
+    {{yield 
+  {{/let}}
+</div>
+```
+
+Then callers could use it like this:
+
+```hbs
+<Loader @promise={{this.someQuery}}>
+  <:pending>Hang on, we’ll get that data for you!</:pending>
+
+  <:resolved as |value|>
+    Cool! The value you asked for was: {{value}}.
+  <:/resolve>
+
+  <:rejected as |error|>
+    Oh no, we couldn't get that data for you. Here's what we know: {{error}}
+  <:/rejected>
+</Loader>
+```
 
 ## API
 
@@ -276,7 +347,8 @@ You can currently use this in three distinct ways:
 2. With the `load` utility function exported from the helper file. (This is not preferred, but exists for backwards compatibility and symmetry with the helper, until we have a `Resource`-style API available.)
 3. With the `{{load}}` helper in templates.
 
-#### `TrackedAsyncData`
+
+### `TrackedAsyncData`
 
 The public API for `TrackedAsyncData`:
 
@@ -290,20 +362,23 @@ class TrackedAsyncData<T> {
   get isRejected(): boolean;
 
   // Only available if `isResolved`.
-  get value(): T;
+  get value(): T | null;
 
   // Only available if `isRejected`.
   get error(): unknown;
 }
 ```
 
-##### Notes
 
-- The `context` argument is currently optional but will become mandatory at 1.0. This allows the type to be torn down correctly as part of Ember's "destroyables" API.
+#### Notes
+
+- `value` is `T | null` today, but only for the sake of safe interop with Ember Classic computed properties (which eagerly evaluate getters for the sake of). You *should not* rely on the `null` fallback, as accessing `value` when `isResolved` is false will become a hard error at the 1.0 release. The same is true of `error`.
+- The `context` argument is currently optional but will become mandatory at the 1.0 release. This allows the type to be torn down correctly as part of Ember's "destroyables" API.
 - The class is *not* intended for subclassing, and will in fact throw in the constructor if you try to subclass it!
 - The `value` and `error` getters will *warn* if you access them and the underlying promise is in the wrong state. In the future, this will be converted to throwing an error. (It currently only warns because classic computed properties actively lookup and cache the values returned from their dependent keys.)
 
-#### `load` function
+
+### `load` function
 
 The `load` helper function is basically just a static constructor for `TrackedAsyncData`:
 
@@ -312,7 +387,7 @@ function load<T>(data: T | Promise<T>, context?: object): TrackedAsyncData<T>;
 ```
 
 
-## In templates
+### In templates
 
 The `{{load}}` helper is identical to the `load` function but in template space: it accepts a single positional parameter of a promise as its only argument, and yields a `TrackedAsyncData` for that promise. (See usage examples [above](#in-templates).)
 

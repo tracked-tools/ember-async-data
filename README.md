@@ -61,6 +61,8 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
       }
     }
     ```
+    
+    (See the guide [below](#in-javascript) for why this uses `@cached`!)
 
     ```hbs
     {{#if this.someData.isResolved}}

@@ -306,7 +306,34 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
 
   ```ts
   import Component from '@glimmer/component';
-  import { cached } from 'ember-
+  import { cached } from '@glimmer/tracking';
+  import { inject as service } from '@ember/service';
+  import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+
+  export default class SmartProfile extends Component<{ id: number }> {
+    @service store;
+
+    @cached
+    get someData() {
+      let recordPromise = this.store.findRecord('user', this.args.id);
+      return new TrackedAsyncData(recordPromise);
+    }
+  }
+  ```
+
+  And a corresponding template:
+
+  ```hbs
+  {{#if this.someData.isResolved}}
+    <PresentTheData @data={{this.someData.data}} />
+  {{else if this.someData.isPending}}
+    <LoadingSpinner />
+  {{else if this.someData.isRejected}}
+    <p>
+      Whoops! Looks like something went wrong!
+      {{this.someData.error.message}}
+    </p>
+  {{/endif}}
   ```
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;

@@ -1,22 +1,20 @@
 module.exports = {
   useYarn: true,
+  command: "tsc --noEmit && tsc --noEmit --project type-tests/base.json",
   scenarios: [
     {
-      command: "tsc --noEmit && tsc --noEmit --project type-tests/base.json",
       name: "ts-4.1",
       npm: {
         typescript: "~4.1",
       },
     },
     {
-      command: "tsc --noEmit && tsc --noEmit --project type-tests/base.json",
       name: "ts-4.2",
       npm: {
         typescript: "~4.2",
       },
     },
     {
-      command: "tsc --noEmit && tsc --noEmit --project type-tests/base.json",
       name: "ts-next",
       allowedToFail: true,
       npm: {

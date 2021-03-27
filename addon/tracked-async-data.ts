@@ -20,11 +20,11 @@ const waiter = buildWaiter("ember-async-data");
 // *only* for the `get` and `set` method (the only methods we use, but also the
 // only methods for which this narrowing is relevant).
 const TRACKED_PROMISES = new WeakMap() as {
-  get<T>(key: Promise<T>): TrackedAsyncData<T> | null;
+  get<T>(key: Promise<T>): _TrackedAsyncData<T> | null;
   set<T>(
     key: Promise<T>,
-    value: TrackedAsyncData<T>
-  ): WeakMap<Promise<T>, TrackedAsyncData<T>>;
+    value: _TrackedAsyncData<T>
+  ): WeakMap<Promise<T>, _TrackedAsyncData<T>>;
 };
 
 /** A very cheap representation of the of a promise. */
@@ -46,27 +46,11 @@ class State<T> {
   @tracked data: StateRepr<T> = PENDING;
 }
 
-/**
-  An autotracked `Promise` handler, representing asynchronous data.
-
-  Given a `Promise` instance, a `TrackedAsyncData` behaves exactly lik the
-  original `Promise`, except that it makes the state of the `Promise` visible
-  via tracked state, so you can check whether the promise is pending, resolved,
-  or rejected; and so you can get the value if it has resolved or the error if
-  it has rejected.
-
-  Every `Promise` in the system is guaranteed to be associated with at most a
-  single `TrackedAsyncData`.
-
-  ## Example
-
-  ```ts
-  import Component from '@glimmer/component';
-  import { cached } from 'ember-
-  ```
-
- */
-export default class TrackedAsyncData<T> {
+// NOTE: this class is the implementation behind the types; the public types
+// layer on additional safety. See below! Additionally, the docs for the class
+// itself are applied to the export, not to the class, so that they will appear
+// when users refer to *that*.
+class _TrackedAsyncData<T> {
   #token: unknown;
 
   /**
@@ -80,7 +64,7 @@ export default class TrackedAsyncData<T> {
       cleaned up you may see all following tests fail.
    */
   constructor(data: T | Promise<T>, context?: object) {
-    if (this.constructor !== TrackedAsyncData) {
+    if (this.constructor !== _TrackedAsyncData) {
       throw new Error("tracked-async-data cannot be subclassed");
     }
 
@@ -243,10 +227,94 @@ export default class TrackedAsyncData<T> {
   }
 }
 
-type JSONRepr<T> =
+/**
+  The JSON representation of a `TrackedAsyncData`, useful for e.g. logging.
+
+  Note that you cannot reconstruct a `TrackedAsyncData` *from* this, because it
+  is impossible to get the original promise when in a pending state!
+ */
+export type JSONRepr<T> =
   | { isPending: true; isResolved: false; isRejected: false }
-  | { isPending: false; isResolved: true; value: T; isRejected: false }
+  | { isPending: false; isResolved: true; isRejected: false; value: T }
   | { isPending: false; isResolved: false; isRejected: true; error: unknown };
+
+// The exported type is the intersection of three narrowed interfaces. Doing it
+// this way has two nice benefits:
+//
+// 1.  It allows narrowing to work. For example:
+//
+//     ```ts
+//     let data = new TrackedAsyncData(Promise.resolve("hello"));
+//     if (data.isPending) {
+//       data.value;  // null
+//       data.error;  // null
+//     } else if (data.isPending) {
+//       data.value;  // null
+//       data.error;  // null
+//     } else if (data.isRejected) {
+//       data.value;  // null
+//       data.error;  // unknown, can now be narrowed
+//     }
+//     ```
+//
+//     This dramatically improves the usability of the type in type-aware
+//     contexts (including with templates when using Glint!)
+//
+// 2.  Using `interface extends` means that (a) it is guaranteed to be a subtype
+//     of the `_TrackedAsyncData` type, (b) that the docstrings applied to the
+//     base type still work, and (c) that the types which are *common* to the
+//     shared implementations (i.e. `.toJSON()` and `.toString()`) are shared
+//     automatically.
+
+interface Pending<T> extends _TrackedAsyncData<T> {
+  isPending: true;
+  isResolved: false;
+  isRejected: false;
+  value: null;
+  error: null;
+}
+
+interface Resolved<T> extends _TrackedAsyncData<T> {
+  isPending: false;
+  isResolved: true;
+  isRejected: false;
+  value: T;
+  error: null;
+}
+
+interface Rejected<T> extends _TrackedAsyncData<T> {
+  isPending: false;
+  isResolved: false;
+  isRejected: true;
+  value: null;
+  error: unknown;
+}
+
+/**
+  An autotracked `Promise` handler, representing asynchronous data.
+
+  Given a `Promise` instance, a `TrackedAsyncData` behaves exactly lik the
+  original `Promise`, except that it makes the state of the `Promise` visible
+  via tracked state, so you can check whether the promise is pending, resolved,
+  or rejected; and so you can get the value if it has resolved or the error if
+  it has rejected.
+
+  Every `Promise` in the system is guaranteed to be associated with at most a
+  single `TrackedAsyncData`.
+
+  ## Example
+
+  ```ts
+  import Component from '@glimmer/component';
+  import { cached } from 'ember-
+  ```
+ */
+type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
+const TrackedAsyncData = _TrackedAsyncData as new <T>(
+  data: T | Promise<T>,
+  context?: {}
+) => TrackedAsyncData<T>;
+export default TrackedAsyncData;
 
 /** Utility type to check whether the string `key` is a proeprty on an object */
 function has<K extends PropertyKey, T>(

@@ -5,6 +5,8 @@ import { settled } from "@ember/test-helpers";
 
 module("Unit | TrackedAsyncData", function () {
   test("cannot be subclassed", function (assert) {
+    // @ts-expect-error: The type is not statically subclassable, either, so
+    //   this fails both at the type-checking level and dynamically at runtime.
     class Subclass extends TrackedAsyncData<unknown> {}
 
     assert.throws(() => new Subclass(Promise.resolve("nope")));

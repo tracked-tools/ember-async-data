@@ -1,6 +1,6 @@
 {
   "name": "ember-async-data",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A utility/helper and data structure for representing a `Promise` in a declarative, reactive way in Glimmer.js and Ember Octane.",
   "keywords": [
     "ember-addon"

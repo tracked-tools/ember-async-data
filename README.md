@@ -31,7 +31,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
     ```hbs
     {{#let (load @somePromise) as |result|}}
       {{#if result.isResolved}}
-        <PresentTheData @data={{result.data}} />
+        <PresentTheData @data={{result.value}} />
       {{else if result.isPending}}
         <LoadingSpinner />
       {{else if result.isRejected}}
@@ -66,7 +66,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
     ```hbs
     {{#if this.someData.isResolved}}
-      <PresentTheData @data={{this.someData.data}} />
+      <PresentTheData @data={{this.someData.value}} />
     {{else if this.someData.isPending}}
       <LoadingSpinner />
     {{else if this.someData.isRejected}}

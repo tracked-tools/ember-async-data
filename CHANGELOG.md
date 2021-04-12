@@ -36,6 +36,8 @@ switch (data.state) {
 
 Decorated `.state` with `@dependentKeyCompat` so it can be used as a dependent key with classic computed properties.
 
+[#6]: https://github.com/chriskrycho/ember-async-data/pull/6 
+
 ## [v0.2.0] (2021-03-27)
 
 This is a wholly backwards-compatible change, which just adds one new feature and improves some docs.

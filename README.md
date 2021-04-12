@@ -199,14 +199,39 @@ You can use `TrackedAsyncData` with *any* value, not just a `Promise`, which is 
 
 #### With TypeScript
 
-This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. (Note that with the current implementation, it's impossible to "narrow" this type. We may improve this in the future!)
+This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. Type narrowing works correctly: if you check the `.state` property or any of the `.isPending`, `.isResolved`, or `.isRejected` properties, the resulting type will 
 
-```ts
-let example = new TrackedAsyncData(Promise.resolve("a string"));
-if (example.state === "RESOLVED") {
-  console.log(example.value.length); // type is `string` so this is safe
-}
-```
+- With `.state`:
+
+    ```ts
+    let example = new TrackedAsyncData(Promise.resolve({ theAnswer: 42 }));
+    switch (example.state) {
+      case 'PENDING':
+        console.log(example.value?.theAnswer);  // 🛑 WARN; type is `number | null`
+        console.log(example.error);             // 🛑 WARN
+        break;
+      case 'RESOLVED':
+        console.log(example.value.theAnswer);   // ✅
+        console.log(example.error);             // 🛑 WARN
+        break;
+      case 'RESOLVED':
+        console.log(example.value?.theAnswer);  // 🛑 WARN; type is `number | 
+        console.log(example.error);             // ✅
+        break;
+      default:
+        assertUnreachable(example);             // ✅ as long as all cases covered
+    }
+    ```
+
+
+- With the boolean property checks `.isPending`, `.isResolved`, or `.isRejected`:
+
+    ```ts
+    let example = new TrackedAsyncData(Promise.resolve("a string"));
+    if (example.isResolved) {
+      console.log(example.value.length); // ✅ type is `string`
+    }
+    ```
 
 
 #### Note on Usage with API Calls

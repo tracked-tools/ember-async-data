@@ -237,7 +237,7 @@ Then if the template checks the `fullProfile` state in multiple places, it will 
 
 <div class='profile {{if (not this.fullProfile.isResolved) "pending"}}'>
   {{#if this.fullProfile.isResolved}}
-    {{#let this.fullProfile.data as |profile|}}
+    {{#let this.fullProfile.value as |profile|}}
       <p>{{profile.name}} ({{profile.description}})</p>
 
       <img

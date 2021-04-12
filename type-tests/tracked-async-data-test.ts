@@ -3,6 +3,8 @@ import TrackedAsyncData, {
 } from "ember-async-data/tracked-async-data";
 import { expectTypeOf } from "expect-type";
 
+declare function unreachable(x: never): never;
+
 declare class PublicAPI<T> {
   constructor(data: T | Promise<T>);
   get state(): "PENDING" | "RESOLVED" | "REJECTED";
@@ -59,4 +61,19 @@ if (data.isPending) {
 } else if (data.isRejected) {
   expectTypeOf(data.value).toEqualTypeOf(null);
   expectTypeOf(data.error).toEqualTypeOf<unknown>();
+} else {
+  unreachable(data);
+}
+
+if (data.state === "PENDING") {
+  expectTypeOf(data.value).toEqualTypeOf(null);
+  expectTypeOf(data.error).toEqualTypeOf(null);
+} else if (data.state === "RESOLVED") {
+  expectTypeOf(data.value).toEqualTypeOf<string>();
+  expectTypeOf(data.error).toEqualTypeOf(null);
+} else if (data.state === "REJECTED") {
+  expectTypeOf(data.value).toEqualTypeOf(null);
+  expectTypeOf(data.error).toEqualTypeOf<unknown>();
+} else {
+  unreachable(data);
 }

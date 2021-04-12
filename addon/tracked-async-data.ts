@@ -133,6 +133,7 @@ class _TrackedAsyncData<T> {
   /**
    * The resolution state of the promise.
    */
+  @dependentKeyCompat
   get state(): State<T>["data"][0] {
     return this.#state.data[0];
   }
@@ -267,6 +268,7 @@ export type JSONRepr<T> =
 //     automatically.
 
 interface Pending<T> extends _TrackedAsyncData<T> {
+  state: "PENDING";
   isPending: true;
   isResolved: false;
   isRejected: false;
@@ -275,6 +277,7 @@ interface Pending<T> extends _TrackedAsyncData<T> {
 }
 
 interface Resolved<T> extends _TrackedAsyncData<T> {
+  state: "RESOLVED";
   isPending: false;
   isResolved: true;
   isRejected: false;
@@ -283,6 +286,7 @@ interface Resolved<T> extends _TrackedAsyncData<T> {
 }
 
 interface Rejected<T> extends _TrackedAsyncData<T> {
+  state: "REJECTED";
   isPending: false;
   isResolved: false;
   isRejected: true;

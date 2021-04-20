@@ -1296,9 +1296,9 @@
   version "3.16.1"
   resolved "https://registry.npmjs.org/@types/ember__template/-/ember__template-3.16.1.tgz"
 
-"@types/ember__test-helpers@^1.7.3":
-  version "1.7.3"
-  resolved "https://registry.npmjs.org/@types/ember__test-helpers/-/ember__test-helpers-1.7.3.tgz"
+"@types/ember__test-helpers@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__test-helpers/-/ember__test-helpers-2.0.0.tgz#b4b8323693789670720f55a51b1f8e6cd6bfbe29"
   dependencies:
     "@types/ember" "*"
     "@types/ember__application" "*"

@@ -27,8 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # Node 15 is currently broken, Node 12 is almost EOL, Node 16 isn't out
-        node-version: ["14"]
+        node-version: ["14", "16"]
 
     steps:
       - uses: actions/checkout@v2

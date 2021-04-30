@@ -4680,8 +4680,8 @@ ember-source@~3.26.1:
     silent-error "^1.1.1"
 
 ember-template-lint@^3.2.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-3.3.0.tgz#2e85aceb4a5c41112145c5895a37fee576930665"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-3.3.1.tgz#09825ec320f1491e9f17d40ad12f10340179f844"
   dependencies:
     "@ember-template-lint/todo-utils" "^8.0.0"
     chalk "^4.1.1"

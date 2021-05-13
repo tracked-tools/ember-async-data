@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v0.4.0] (2021-05-13)
+
+### Fixed :hammer_and_wrench:
+
+`@ember/test-waiters` is now a direct dependency as it's used by app code.
+
 ## [v0.3.0] (2021-04-12)
 
 ### Added :star:
@@ -36,7 +42,7 @@ switch (data.state) {
 
 Decorated `.state` with `@dependentKeyCompat` so it can be used as a dependent key with classic computed properties.
 
-[#6]: https://github.com/chriskrycho/ember-async-data/pull/6 
+[#6]: https://github.com/chriskrycho/ember-async-data/pull/6
 
 ## [v0.2.0] (2021-03-27)
 

@@ -376,6 +376,179 @@ Then callers could use it like this:
 </Loader>
 ```
 
+### Testing
+
+Working with the full range of behavior from `TrackedAsyncData` in tests will require you to manage the inherent asynchrony of the system much more explicitly than you may be used to. This is unavoidable: the point of the helper and data type *is* dealing with asynchrony in an explicit way.
+
+As a starting point, you can and should ask: "Is testing the a loading spinner when `someTrackedAsyncData.isLoading` something I actually need an automated test for, or can I verify it manually just once?" Depending on your app, your answer might be that just verifying it manually is a better use of your time! In other cases, testing that behavior might be essential: for example, if you are building an abstraction on top of `TrackedAsyncData` for *others* to consume.
+
+#### Unit testing
+
+Unit testing is straightforward. Using a tool like [`RSVP.defer()`](https://github.com/tildeio/rsvp.js/blob/master/lib/rsvp/defer.js), you can create a promise and control its resolution and verify that your use of `TrackedAsyncData` does what you need it to. Whenever you trigger a change in the state of the underlying promise, you will need to wait for promise resolution in the test. There are two ways to do this:
+
+1. If you are working with a promise directly, you can simply `await` the promise itself.
+2. If you are working with things which might or might not be promises, or working at a higher level of abstraction where you don’t have direct access to the promise, you can `await` the `settled()` helper from `@ember/test-helpers`, since `TrackedAsyncData` integrates into Ember’s test waiter system.
+
+```js
+import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { defer } from 'rsvp';
+import { module, test } from 'qunit';
+import { settled } from '@ember/test-helpers';
+
+module('my very own tests', function (hooks) {
+  test('directly awaiting the promise works', async function (assert) {
+    let { promise, resolve } = defer();
+    let asyncData = new TrackedAsyncData(promise);
+    assert.true(asyncData.isPending);
+
+    let expectedValue = "cool";
+    resolve(expectedValue);
+    await promise;
+    assert.true(asyncData.isResolved);
+    asset.equal(asyncData.value, expectedValue);
+  });
+
+  test('awaiting `settled` also works', async function (assert) {
+    let { promise, resolve } = defer();
+    let asyncData = new TrackedAsyncData(promise);
+    assert.true(asyncData.isPending);
+
+    let expectedValue = "cool";
+    resolve(expectedValue);
+    await settled();
+    assert.true(asyncData.isResolved);
+    asset.equal(asyncData.value, expectedValue);
+  });
+});
+```
+
+Handling errors is slightly more complicated: `TrackedAsyncData` “re-throws” the promises it works with when they have errors, to avoid silently swallowing them in a way that prevents you from using them with logging infrastructure or otherwise dealing with them in your app’s infrastructure. However, this means you must also account for them in your testing:
+
+```js
+  test('it handles errors', function (assert) {
+    assert.expect(2);
+
+    let { promise, reject } = defer();
+    let asyncData = new TrackedAsyncData(promise);
+
+    reject(new Error("this is the error!"));
+    await promise.catch((error) => {
+      assert.equal(error.message, "this is the error!");
+    });
+
+    assert.true(asyncData.isRejected);
+    assert.equal(asyncData.error.message, "this is the error!");
+  });
+```
+
+#### Integration testing
+
+Integration/render tests are similar to those with unit testing, but with an additional wrinkle: all of Ember’s integration test helpers are *also* asynchronous, and the asynchrony of those test helpers and the `TrackedAsyncData` become “entangled” when they interact. That is: when you render something which depends on the state of the `TrackedAsyncData`, the promise which `TrackedAsyncData` is handling and the promise for rendering are effectively tied together.
+
+So this code, which you might write if you haven’t dealt with this before, ***WILL NOT WORK***:
+
+```js
+import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { defer } from 'rsvp';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from '@ember/test-helpers';
+import { render } from "@ember/test-helpers";
+import hbs from "htmlbars-inline-precompile";
+
+module('my very own tests', function (hooks) {
+  setupRenderingTest(hooks);
+
+  test('THIS DOES NOT WORK', function (assert) {
+    let { promise, resolve } = defer();
+    this.data = new TrackedAsyncData(promise);
+
+    await render(hbs`
+      <div data-test-data>
+        {{#if this.data.isPending}}
+          Loading...
+        {{else if this.data.isResolved}}
+          Loaded: {{this.data.value}}
+        {{else if this.data.isRejected}}
+          Error: {{this.data.error.message}}
+        {{/if}}
+      </div>
+    `);
+
+     assert.dom('[data-test-data]').hasText('Loading...');
+  });
+});
+```
+
+This test will simply time out without ever having finished, because the test waiters in the render promise and the test waiters in `TrackedAsyncData` are tangled up together. Instead, we need to separate the rendering promise from the promise in `TrackedAsyncData`. We can instead render the template and, instead of waiting for *that* promise to resolve, use Ember’s `waitFor` helper to wait for the *results* of rendering to happen. Then when we are done dealing with the promise, we can resolve it and *then* `await` the result of the render promise. This will let the test clean up correctly:
+
+```js
+import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { defer } from 'rsvp';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from '@ember/test-helpers';
+import { render, waitFor } from "@ember/test-helpers";
+import hbs from "htmlbars-inline-precompile";
+
+module('my very own tests', function (hooks) {
+  setupRenderingTest(hooks);
+
+  test('this actually works', function (assert) {
+    let { promise, resolve } = defer();
+    this.data = new TrackedAsyncData(promise);
+
+    const renderPromise = render(hbs`
+      <div data-test-data>
+        {{#if this.data.isPending}}
+          Loading...
+        {{else if this.data.isResolved}}
+          Loaded: {{this.data.value}}
+        {{else if this.data.isRejected}}
+          Error: {{this.data.error.message}}
+        {{/if}}
+      </div>
+    `);
+
+     // Here we waits for the *result* of rendering, rather than the render
+     // promise itself. Once we have rendered, we can make assertions about
+     // what rendered:
+     await waitFor('data-test-data');
+     assert.dom('[data-test-data]').hasText('Loading...');
+
+     // Then to clean up the test, we need the original promise to resolve
+     // so the test waiter system isn't just stuck waiting for it forever.
+     resolve();
+     // Finally, we 
+     await renderPromise;
+  });
+});
+```
+
+While this might seem a bit annoying, it means that we actually *can* control all the related bits of asynchronous code that we need, and—more just as importantly—it means we avoid leaking promises across tests (a common cause of test instability) and means that in general tests following the “happy path” *don’t* have to worry about managing this asynchrony themselves.
+
+For that happy path, you can use a *resolved* `TrackedAsyncData` and everything will always “just work” as you’d expect:
+
+```js
+  test('the "happy path" works easily', async function (assert) {
+    this.data = new TrackedAsyncData(Promise.resolve("a value"));
+
+    await render(hbs`
+      <div data-test-data>
+        {{#if this.data.isPending}}
+          Loading...
+        {{else if this.data.isResolved}}
+          Loaded: {{this.data.value}}
+        {{else if this.data.isRejected}}
+          Error: {{this.data.error.message}}
+        {{/if}}
+      </div>
+    `);
+
+     assert.dom('[data-test-data]').hasText('Loaded: a value');
+  });
+```
+
+In other words, the only time you have to care about the details of handling async in your tests is when you want to render and step through the different async states explicitly.
+
 ## API
 
 You can currently use this in three distinct ways:

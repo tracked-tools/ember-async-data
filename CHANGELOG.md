@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v0.5.0] (2021-06-01)
+
+### Added :star:
+
+- Add support for [TypeScript 4.3](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html) (#63)
+- Add re-exports from the index (#70): you can now `import { TrackedAsyncData, load } from 'ember-async-data';
+
+### Docs 📖
+
+- Add a section on testing (#69)
+
 ## [v0.4.0] (2021-05-13)
 
 ### Fixed :hammer_and_wrench:
@@ -76,6 +87,8 @@ if (data.isPending) {
 
 Initial release, with `TrackedAsyncData` and a `load` helper!
 
+[v0.5.0]: https://github.com/chriskrycho/ember-async-data/compare/v0.4.0...v0.5.0
+[v0.4.0]: https://github.com/chriskrycho/ember-async-data/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/chriskrycho/ember-async-data/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/chriskrycho/ember-async-data/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/chriskrycho/ember-async-data/compare/b1d0dbf...v0.1.0

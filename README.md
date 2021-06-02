@@ -49,7 +49,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
     import Component from '@glimmer/component';
     import { cached } from '@glimmer/tracking';
     import { inject as service } from '@ember/service';
-    import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+    import { TrackedAsyncData } from 'ember-async-data';
 
     export default class SmartProfile extends Component {
       @service store;
@@ -155,7 +155,7 @@ function defer() {
 Now we can create promises to resolve or reject and pass them to `TrackedAsyncData`:
 
 ```ts
-import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { TrackedAsyncData } from 'ember-async-data';
 
 let firstDeferred = defer();
 let willResolve = new TrackedAsyncData(firstDeferred.promise);
@@ -253,7 +253,7 @@ When using `TrackedAsyncData` with an API call in a getter, it is important to u
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import type Store from '@ember-data/store';
-import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { TrackedAsyncData } from 'ember-async-data';
 
 export default class Profile extends Component<{ userId: string }> {
   @service store: Store;
@@ -303,7 +303,7 @@ For symmetry with templates, you can also use `load` in JavaScript; it has the e
 import Component from '@glimmer/component';
 import { cached } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import { load } from 'ember-async-data/helpers/load';
+import { load } from 'ember-async-data';
 
 export default class SmartProfile extends Component {
   @service store;
@@ -391,7 +391,7 @@ Unit testing is straightforward. Using a tool like [`RSVP.defer()`](https://gith
 2. If you are working with things which might or might not be promises, or working at a higher level of abstraction where you don’t have direct access to the promise, you can `await` the `settled()` helper from `@ember/test-helpers`, since `TrackedAsyncData` integrates into Ember’s test waiter system.
 
 ```js
-import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { TrackedAsyncData } from 'ember-async-data';
 import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { settled } from '@ember/test-helpers';
@@ -449,7 +449,7 @@ Integration/render tests are similar to those with unit testing, but with an add
 So this code, which you might write if you haven’t dealt with this before, ***WILL NOT WORK***:
 
 ```js
-import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { TrackedAsyncData } from 'ember-async-data';
 import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
@@ -483,7 +483,7 @@ module('my very own tests', function (hooks) {
 This test will simply time out without ever having finished, because the test waiters in the render promise and the test waiters in `TrackedAsyncData` are tangled up together. Instead, we need to separate the rendering promise from the promise in `TrackedAsyncData`. We can instead render the template and, instead of waiting for *that* promise to resolve, use Ember’s `waitFor` helper to wait for the *results* of rendering to happen. Then when we are done dealing with the promise, we can resolve it and *then* `await` the result of the render promise. This will let the test clean up correctly:
 
 ```js
-import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { TrackedAsyncData } from 'ember-async-data';
 import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';

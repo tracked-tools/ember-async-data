@@ -127,6 +127,7 @@ You can use `TrackedAsyncData` either directly in JavaScript or via the `{{load}
     - [`load` function](#load-function)
     - [Subclassing](#subclassing)
 - [In Templates](#in-templates)
+- [Testing](#testing)
 
 
 ### In JavaScript

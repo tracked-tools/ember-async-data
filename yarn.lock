@@ -1571,8 +1571,9 @@
   resolved "https://registry.npmjs.org/@types/ember__error/-/ember__error-3.16.1.tgz"
 
 "@types/ember__object@*", "@types/ember__object@^3.12.3":
-  version "3.12.5"
-  resolved "https://registry.yarnpkg.com/@types/ember__object/-/ember__object-3.12.5.tgz#f3d5ea5e410d52b3e837267e411d72d7469eb844"
+  version "3.12.6"
+  resolved "https://registry.yarnpkg.com/@types/ember__object/-/ember__object-3.12.6.tgz#5f77662881e3c6f877d63e08b46861c52a36714a"
+  integrity sha512-LAGldyJmFpErWLCm1HOAGd3G4E7Sem+AzQycKH+zSiYSwKVxNSpzUIU1yewlScHn5WvKwLEVE2H6mPvwvkQ+yA==
   dependencies:
     "@types/ember__object" "*"
     "@types/rsvp" "*"

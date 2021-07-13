@@ -1552,8 +1552,9 @@
     "@types/ember__object" "*"
 
 "@types/ember__debug@*", "@types/ember__debug@^3.16.3":
-  version "3.16.3"
-  resolved "https://registry.npmjs.org/@types/ember__debug/-/ember__debug-3.16.3.tgz"
+  version "3.16.4"
+  resolved "https://registry.yarnpkg.com/@types/ember__debug/-/ember__debug-3.16.4.tgz#b5fca2a568505f7e0a39b5ab5f489f8d32990caf"
+  integrity sha512-Tlz6TB2nRbRczGa+v2+nGPvF8Cw0WRp29t3uT6Ryog6W2Alocqclsqc57EsGgLi1g4jEPP53NUI3dIJGa3AUig==
   dependencies:
     "@types/ember__debug" "*"
     "@types/ember__engine" "*"

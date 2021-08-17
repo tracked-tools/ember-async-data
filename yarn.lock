@@ -5388,9 +5388,9 @@ eslint-config-prettier@^8.1.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
 
 eslint-plugin-ember@^10.4.1:
-  version "10.5.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.5.1.tgz#3ec65cb562b438c64aa28d772606dbb55705e037"
-  integrity sha512-6cubCQdsybN2DtuXnlkhqi3SemBk4ktjq2k4vcjFG8QLmrpmiS6sDwIZMM/TLI8f9QwZIjmewhwS4zB/77E47w==
+  version "10.5.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.5.2.tgz#4b6112994294beac8a7a64afcec6c5effd30c790"
+  integrity sha512-CCYuBFW6AB9/mKYUDfSriXVEQVrsCfxWEoFIChoFmUW5pdmu7Qd+AsdfNzw+2DX3U94fftKpnRMTMraFdbBWSw==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     css-tree "^1.0.0-alpha.39"

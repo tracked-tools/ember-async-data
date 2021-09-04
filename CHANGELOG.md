@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## v0.5.1 (2021-09-04)
+
+#### :house: Internal
+* [#71](https://github.com/chriskrycho/ember-async-data/pull/71) Configure release-it for future releases ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 2
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
 ## [v0.5.0] (2021-06-01)
 
 ### Added :star:

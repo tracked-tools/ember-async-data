@@ -1,6 +1,6 @@
 import { tracked } from "@glimmer/tracking";
 import { dependentKeyCompat } from "@ember/object/compat";
-import { warn } from "@ember/debug";
+import { assert, warn } from "@ember/debug";
 import { buildWaiter } from "@ember/test-waiters";
 import {
   associateDestroyableChild,
@@ -63,7 +63,12 @@ class _TrackedAsyncData<T> {
       parameter, and you have a test failure which causes async code to not get
       cleaned up you may see all following tests fail.
    */
-  constructor(data: T | Promise<T>, context?: object) {
+  constructor(data: T | Promise<T>, context: {}) {
+    assert(
+      "You must pass a destroyable object as the context for TrackedAsyncData",
+      !!context
+    );
+
     if (this.constructor !== _TrackedAsyncData) {
       throw new Error("tracked-async-data cannot be subclassed");
     }
@@ -108,17 +113,10 @@ class _TrackedAsyncData<T> {
     // Handle teardown safely so that (a) we don't try to do destroyable
     // teardown if we don't have a context and (b) if we are able to set it up,
     // we don't leak async state!
-    if (context) {
-      associateDestroyableChild(context, this);
-      registerDestructor(this, () => {
-        waiter.endAsync(this.#token);
-      });
-    } else {
-      warn(
-        "creating a TrackedAsyncData without a context may cause leaking async, and will be unsupported in a future version",
-        { id: "tracked-async-data::destroyables-context" }
-      );
-    }
+    associateDestroyableChild(context, this);
+    registerDestructor(this, () => {
+      waiter.endAsync(this.#token);
+    });
   }
 
   /**
@@ -343,7 +341,7 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
 const TrackedAsyncData = _TrackedAsyncData as new <T>(
   data: T | Promise<T>,
-  context?: {}
+  context: {}
 ) => TrackedAsyncData<T>;
 export default TrackedAsyncData;
 

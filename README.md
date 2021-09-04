@@ -210,7 +210,7 @@ You can use `TrackedAsyncData` with *any* value, not just a `Promise`, which is 
 
 #### With TypeScript
 
-This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. Type narrowing works correctly: if you check the `.state` property or any of the `.isPending`, `.isResolved`, or `.isRejected` properties, the resulting type will 
+This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. Type narrowing works correctly: if you check the `.state` property or any of the `.isPending`, `.isResolved`, or `.isRejected` properties, the resulting type will have the correct corresponding types for `.value` and `.error`.
 
 - With `.state`:
 
@@ -356,7 +356,6 @@ You could use this to build a component which uses named blocks to provide a nic
         {{/if}}
       </div>
     {{/if}}
-    {{yield 
   {{/let}}
 </div>
 ```

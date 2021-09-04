@@ -78,6 +78,35 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
     ```
 
 
+## Contents <!-- omit in toc -->
+
+- [Compatibility](#compatibility)
+  - [TypeScript](#typescript)
+- [Installation](#installation)
+- [Motivation](#motivation)
+- [Usage](#usage)
+  - [In JavaScript](#in-javascript)
+    - [With TypeScript](#with-typescript)
+    - [Note on Usage with API Calls](#note-on-usage-with-api-calls)
+    - [`load` function](#load-function)
+    - [Subclassing](#subclassing)
+  - [In templates](#in-templates)
+  - [Testing](#testing)
+    - [Unit testing](#unit-testing)
+    - [Integration testing](#integration-testing)
+- [API](#api)
+  - [`TrackedAsyncData`](#trackedasyncdata)
+    - [Notes](#notes)
+  - [`load` function](#load-function-1)
+  - [In templates](#in-templates-1)
+- [Explanation](#explanation)
+  - [Background and history](#background-and-history)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credit](#credit)
+
+---
+
 ## Compatibility
 
 * Ember.js v3.16 or above (requires Octane Edition)
@@ -210,7 +239,7 @@ You can use `TrackedAsyncData` with *any* value, not just a `Promise`, which is 
 
 #### With TypeScript
 
-This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. Type narrowing works correctly: if you check the `.state` property or any of the `.isPending`, `.isResolved`, or `.isRejected` properties, the resulting type will 
+This library provides full type safety for `TrackedAsyncData`; see [**API**](#api) below for details. The resulting `value` will always be of the same type as the `Promise` you pass in. Type narrowing works correctly: if you check the `.state` property or any of the `.isPending`, `.isResolved`, or `.isRejected` properties, the resulting type will have the correct corresponding types for `.value` and `.error`.
 
 - With `.state`:
 
@@ -356,7 +385,6 @@ You could use this to build a component which uses named blocks to provide a nic
         {{/if}}
       </div>
     {{/if}}
-    {{yield 
   {{/let}}
 </div>
 ```

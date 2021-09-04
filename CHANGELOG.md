@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+
+## v0.6.0 (2021-09-04)
+
+#### :boom: Breaking Change
+* [#152](https://github.com/chriskrycho/ember-async-data/pull/152) Breaking: drop support for versions of Ember before 3.24 LTS ([@chriskrycho](https://github.com/chriskrycho))
+* [#149](https://github.com/chriskrycho/ember-async-data/pull/149) Breaking: require destroyable context ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v0.5.1 (2021-09-04)
 
 #### :house: Internal

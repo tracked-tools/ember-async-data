@@ -19,7 +19,7 @@ module("Unit | load", function (hooks) {
   });
 
   test("given a plain value", async function (assert) {
-    const result = load(12);
+    const result = load(12, this);
     assert.ok(
       result instanceof TrackedAsyncData,
       "it returns a TrackedAsyncData instance"

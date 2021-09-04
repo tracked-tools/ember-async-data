@@ -65,7 +65,7 @@ import TrackedAsyncData from "ember-async-data/tracked-async-data";
  */
 export function load<T>(
   data: T | Promise<T>,
-  context?: object
+  context: {}
 ): TrackedAsyncData<T> {
   return new TrackedAsyncData(data, context);
 }

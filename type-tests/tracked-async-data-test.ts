@@ -20,17 +20,17 @@ declare class PublicAPI<T> {
   toString(): string;
 }
 
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(12);
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith("hello");
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(true);
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(null);
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(undefined);
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith({ cool: "story" });
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(["neat"]);
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve());
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve(12));
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject());
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject("gah"));
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(12, {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith("hello", {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(true, {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(null, {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(undefined, {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith({ cool: "story" }, {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(["neat"], {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve(), {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve(12), {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject(), {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject("gah"), {});
 
 // We use `toMatchTypeOf` here to confirm the union type which makes up
 // `TrackedAsyncData` is structurally compatible with the desired public

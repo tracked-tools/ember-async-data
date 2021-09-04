@@ -78,6 +78,35 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
     ```
 
 
+## Contents <!-- omit in toc -->
+
+- [Compatibility](#compatibility)
+  - [TypeScript](#typescript)
+- [Installation](#installation)
+- [Motivation](#motivation)
+- [Usage](#usage)
+  - [In JavaScript](#in-javascript)
+    - [With TypeScript](#with-typescript)
+    - [Note on Usage with API Calls](#note-on-usage-with-api-calls)
+    - [`load` function](#load-function)
+    - [Subclassing](#subclassing)
+  - [In templates](#in-templates)
+  - [Testing](#testing)
+    - [Unit testing](#unit-testing)
+    - [Integration testing](#integration-testing)
+- [API](#api)
+  - [`TrackedAsyncData`](#trackedasyncdata)
+    - [Notes](#notes)
+  - [`load` function](#load-function-1)
+  - [In templates](#in-templates-1)
+- [Explanation](#explanation)
+  - [Background and history](#background-and-history)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credit](#credit)
+
+---
+
 ## Compatibility
 
 * Ember.js v3.16 or above (requires Octane Edition)

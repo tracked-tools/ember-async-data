@@ -55,7 +55,7 @@ jobs:
 
   tests_compat:
     needs: tests_linux
-    name: "Tests: Ember compatibility (ember-source@${{ matrix.node-version }})"
+    name: "Tests: Ember compatibility (ember-source@${{ matrix.ember-version }})"
     runs-on: ubuntu-latest
     strategy:
       matrix:

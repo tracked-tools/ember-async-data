@@ -1,8 +1,11 @@
 {
   "extends": "../tsconfig.json",
-  "paths": {
-    "ember-async-data": ".",
-    "ember-async-data/*": "./*"
+  "compilerOptions": {
+    "paths": {
+      "ember-async-data": ["addon"],
+      "ember-async-data/*": ["addon/*"],
+      "@ember/destroyable": ["node_modules/ember-destroyable-polyfill"]
+    }
   },
-  "includes": ["./tracked-async-data.ts", "./load-test.ts"]
+  "include": ["./tracked-async-data-test.ts", "./load-test.ts"]
 }

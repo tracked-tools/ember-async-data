@@ -1805,11 +1805,12 @@
     "@types/ember-test-helpers" "*"
     "@types/qunit" "*"
 
-"@types/ember-resolver@^5.0.10":
-  version "5.0.10"
-  resolved "https://registry.npmjs.org/@types/ember-resolver/-/ember-resolver-5.0.10.tgz"
+"@types/ember-resolver@*", "@types/ember-resolver@^5.0.10":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@types/ember-resolver/-/ember-resolver-5.0.11.tgz#db931fb5c2d6bda4e29adea132fb48c7ed17aa62"
+  integrity sha512-2BL9d8kBdNUO9Je6KBF7Q34BSwbQG6vzCzTeSopt8FAmLDfaDU9xDDdyZobpfy9GR36mCSeG9b9wr4bgYh/MYw==
   dependencies:
-    "@types/ember" "*"
+    "@types/ember__object" "*"
 
 "@types/ember-test-helpers@*":
   version "1.0.9"
@@ -1874,13 +1875,13 @@
   dependencies:
     "@types/ember__object" "*"
 
-"@types/ember__debug@*", "@types/ember__debug@^3.16.3":
-  version "3.16.5"
-  resolved "https://registry.yarnpkg.com/@types/ember__debug/-/ember__debug-3.16.5.tgz#ce04532c100fdc1c97c9f308d69a88d6e956db97"
-  integrity sha512-Sj0idBMOd33PubBbxtXty+tzyVIAbxK4cf8q0AKZ0z5wOL0wsFOLCvMgRMxSME3DB2uvJd4u9tGr15XFM+Z03A==
+"@types/ember__debug@*", "@types/ember__debug@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__debug/-/ember__debug-4.0.0.tgz#02d3d710988988e5cff094ddcd45e5364727b161"
+  integrity sha512-yY+U7veF8jYFJdm+IU+7Y/DoxVsyV/73UvFUdR0jCasMVL9vuGkVx0rXlqe6XAM2cWI1LwV7zKQzgqDC8kQD2g==
   dependencies:
+    "@types/ember-resolver" "*"
     "@types/ember__debug" "*"
-    "@types/ember__engine" "*"
     "@types/ember__object" "*"
 
 "@types/ember__engine@*":

@@ -97,16 +97,14 @@ class _TrackedAsyncData<T> {
 
     // Otherwise, we know that haven't yet handled that promise anywhere in the
     // system, so we continue creating a new instance.
-    promise.then(
-      (value) => {
-        this.#state.data = ["RESOLVED", value];
+    promise
+      .then(
+        (value) => (this.#state.data = ["RESOLVED", value]),
+        (error) => (this.#state.data = ["REJECTED", error])
+      )
+      .finally(() => {
         waiter.endAsync(this.#token);
-      },
-      (error) => {
-        this.#state.data = ["REJECTED", error];
-        waiter.endAsync(this.#token);
-      }
-    );
+      });
 
     TRACKED_PROMISES.set(promise, this);
 

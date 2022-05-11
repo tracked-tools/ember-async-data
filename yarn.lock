@@ -2331,9 +2331,9 @@
   resolved "https://registry.npmjs.org/@types/ember__error/-/ember__error-3.16.1.tgz"
 
 "@types/ember__object@*", "@types/ember__object@~4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/ember__object/-/ember__object-4.0.1.tgz#0713bd5ffc6aa41520b2684f5577817649226099"
-  integrity sha512-ra9/ZV6YaQi2UQ0rchDJGveQEOnTCzkgUQzeJLSvvtJc1JPvAfYX55+kdYl79QTqwYxl86YMAlElSvdJNbjTPQ==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/ember__object/-/ember__object-4.0.2.tgz#070f1a36961f7df777e1fceed2551a648db0fd23"
+  integrity sha512-m3xjqjs7bGVT0+QXlgIoDMsp/oqePobnf4IiVoFdXLBpGCICiOAEi7HuUtCLi57WTvx0lYsS9hE1vgGyZn9qnw==
   dependencies:
     "@types/ember" "*"
     "@types/ember__object" "*"
@@ -5457,8 +5457,9 @@ ember-cli-babel@^7.0.0, ember-cli-babel@^7.13.0, ember-cli-babel@^7.13.2, ember-
     semver "^5.5.0"
 
 ember-cli-dependency-checker@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npmjs.org/ember-cli-dependency-checker/-/ember-cli-dependency-checker-3.2.0.tgz"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-3.3.1.tgz#16b44d7a1a1e946f59859fad97f32e616d78323a"
+  integrity sha512-Tg6OeijjXNKWkDm6057Tr0N9j9Vlz/ITewXWpn1A/+Wbt3EowBx5ZKfvoupqz05EznKgL1B/ecG0t+JN7Qm6MA==
   dependencies:
     chalk "^2.3.0"
     find-yarn-workspace-root "^1.1.0"
@@ -6169,9 +6170,9 @@ eslint-config-prettier@^8.3.0:
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-plugin-ember@^10.5.4:
-  version "10.5.9"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.5.9.tgz#4071ac135c7207c7d4942e9fa75b710214885469"
-  integrity sha512-kJsdAaKNcfRvZBZ+YZ67pxxUgl+aPLFAnoFJNwTo+BsaptiOCsHUEc4xUKXiInH2BJOC6mg0FQcZKn1a6gwKrA==
+  version "10.6.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.6.1.tgz#04ea84cc82307f64a2faa4f2855b30e5ebf9f722"
+  integrity sha512-R+TN3jwhYQ2ytZCA1VkfJDZSGgHFOHjsHU1DrBlRXYRepThe56PpuGxywAyDvQ7inhoAz3e6G6M60PzpvjzmNg==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     css-tree "^2.0.4"

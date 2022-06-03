@@ -109,7 +109,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
 ## Compatibility
 
-* Ember.js v3.16 or above (requires Octane Edition)
+* Ember.js v3.28 or above (requires Octane Edition)
 * Ember CLI v2.13 or above
 * Node.js v14 or above
 

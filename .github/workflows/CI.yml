@@ -59,7 +59,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ember-version: ["lts-3.24", "release", "beta", "canary"]
+        ember-version:
+          - "lts-3.28"
+          - "release"
+          - "beta"
+          - "canary"
 
     steps:
       - uses: actions/checkout@v2

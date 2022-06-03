@@ -11,7 +11,7 @@
     <img src='https://img.shields.io/badge/Node-14%20LTS-darkgreen' alt='supported Node versions'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L61'>
-    <img src='https://img.shields.io/badge/TypeScript-4.1%20%7C%204.2%20%7C%204.3%20%7C%204.4%20%7C%204.5%20%7C%20next-3178c6' alt='supported TypeScript versions'>
+    <img src='https://img.shields.io/badge/TypeScript-4.5%20%7C%204.6%20%7C%204.7%20%7C%20next-3178c6' alt='supported TypeScript versions'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/Nightly.yml'>
     <img src='https://github.com/chriskrycho/ember-async-data/workflows/Nightly%20TypeScript%20Run/badge.svg' alt='Nightly TypeScript Run'>
@@ -117,12 +117,12 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
 This project follows the current draft of [the Semantic Versioning for TypeScript Types][semver] proposal.
 
-- **Currently supported TypeScript versions:** v4.1, v4.2, v4.3, v4.4, v4.5
+- **Currently supported TypeScript versions:** v4.5, v4.6, v4.7
 - **Compiler support policy:** [simple majors][sm]
 - **Public API:** all published types not in a `-private` module are public
 
-[semver]: https://github.com/chriskrycho/ember-rfcs/blob/semver-for-ts/text/0730-semver-for-ts.md
-[sm]: https://github.com/chriskrycho/ember-rfcs/blob/semver-for-ts/text/0730-semver-for-ts.md#simple-majors
+[semver]: https://www.semver-ts.org
+[sm]: https://www.semver-ts.org/#simple-majors
 
 
 ## Installation

@@ -7,8 +7,7 @@
     <img src='https://img.shields.io/npm/v/ember-async-data.svg' alt='npm'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L29'>
-    <!--<img src='https://img.shields.io/badge/Node-14%20LTS%20%7C%2015-darkgreen' alt='supported Node versions'>-->
-    <img src='https://img.shields.io/badge/Node-14%20LTS-darkgreen' alt='supported Node versions'>
+    <img src='https://img.shields.io/badge/Node-14%20LTS%20%7C%2016%20LTS%20%7C%2018-darkgreen' alt='supported Node versions'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L61'>
     <img src='https://img.shields.io/badge/TypeScript-4.5%20%7C%204.6%20%7C%204.7%20%7C%20next-3178c6' alt='supported TypeScript versions'>

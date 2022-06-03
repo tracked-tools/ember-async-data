@@ -2352,9 +2352,10 @@
   dependencies:
     "@types/ember__object" "*"
 
-"@types/ember@*":
-  version "3.16.4"
-  resolved "https://registry.npmjs.org/@types/ember/-/ember-3.16.4.tgz"
+"@types/ember@*", "@types/ember@~4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember/-/ember-4.0.0.tgz#0c29294fa0e5aa07ba6090f60243707dde8fc411"
+  integrity sha512-IR4o8OkFgoiRKVLRI8URvyNhEBSkjO5DXp2900/TptxOl0Retu8/tKtFaRTwkqteg2a0/6zXAA1rpFb3BbxNpA==
   dependencies:
     "@types/ember__application" "*"
     "@types/ember__array" "*"
@@ -2373,36 +2374,42 @@
     "@types/ember__test" "*"
     "@types/ember__utils" "*"
     "@types/htmlbars-inline-precompile" "*"
-    "@types/jquery" "*"
     "@types/rsvp" "*"
 
 "@types/ember__application@*":
-  version "3.16.2"
-  resolved "https://registry.npmjs.org/@types/ember__application/-/ember__application-3.16.2.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__application/-/ember__application-4.0.0.tgz#a4d2fead37845550dad83bb1fd8afd52052563a7"
+  integrity sha512-1Atwevfyu1/vjiezPPdP4s96BxWGelEQlCJRU5ZQV9WlzVuMTuCDPumZ1lQdS4/EYycFZeod030FjE3CT9mZFA==
   dependencies:
+    "@types/ember" "*"
+    "@types/ember-resolver" "*"
     "@types/ember__application" "*"
     "@types/ember__engine" "*"
     "@types/ember__object" "*"
     "@types/ember__routing" "*"
 
 "@types/ember__array@*":
-  version "3.16.4"
-  resolved "https://registry.npmjs.org/@types/ember__array/-/ember__array-3.16.4.tgz"
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/ember__array/-/ember__array-4.0.1.tgz#b62126ed080b29351a5633bd28e595a5cfee27ce"
+  integrity sha512-fwrYcYmFbsEnu77Xn9z3WSAp6tqpwn8Wksx8RzGg5pib6VmFD/dkT5jefwoKtlcImsxUNEoP1VgWKrdrpGaQcg==
   dependencies:
+    "@types/ember" "*"
     "@types/ember__array" "*"
     "@types/ember__object" "*"
 
 "@types/ember__component@*":
-  version "3.16.4"
-  resolved "https://registry.npmjs.org/@types/ember__component/-/ember__component-3.16.4.tgz"
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/@types/ember__component/-/ember__component-4.0.8.tgz#09a5f954f734fcbe6c988a173f4de4fa09084470"
+  integrity sha512-YVGn/kpWtpZAu6I2XtS9fsZV+78/sON5NyKzK5EOUyMiCwwpbUr5XL8dTSdkHehYrsfzJikcYvqpmwbNZSJxGQ==
   dependencies:
+    "@types/ember" "*"
     "@types/ember__component" "*"
     "@types/ember__object" "*"
-    "@types/jquery" "*"
 
 "@types/ember__controller@*":
-  version "3.16.4"
-  resolved "https://registry.npmjs.org/@types/ember__controller/-/ember__controller-3.16.4.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__controller/-/ember__controller-4.0.0.tgz#f8891840ebb84cb54eba82385e3b2dbe805d692a"
+  integrity sha512-rxJt8McWaaIZFsu2z+IB7TvgSjglAPb07Pj0F7OGvZQ3j9NV7kreqqics/cHQIEBG3GgVAewBE+xI5D6PNq/vg==
   dependencies:
     "@types/ember__object" "*"
 
@@ -2416,15 +2423,18 @@
     "@types/ember__object" "*"
 
 "@types/ember__engine@*":
-  version "3.16.2"
-  resolved "https://registry.npmjs.org/@types/ember__engine/-/ember__engine-3.16.2.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__engine/-/ember__engine-4.0.0.tgz#e39c06d98c7a085912508e8257c48a70196c1a87"
+  integrity sha512-AfJHIWaBeZ+TZWJbSoUz7LK+z8uNPjMqmucz8C5u+EV2NDiaq02oGPTB4SeKInLNBMga8c5xvz0gVefZJnTBnQ==
   dependencies:
+    "@types/ember-resolver" "*"
     "@types/ember__engine" "*"
     "@types/ember__object" "*"
 
 "@types/ember__error@*":
-  version "3.16.1"
-  resolved "https://registry.npmjs.org/@types/ember__error/-/ember__error-3.16.1.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__error/-/ember__error-4.0.0.tgz#c73037e65c1c3d7060b97f98135ba73c712972b1"
+  integrity sha512-1WVMR65/QTqPzMWafK2vKEwGafILxRxItbWJng6eEJyKDHRvvHFCl3XzJ4dQjdFcfOlozsn0mmEYCpjKoyzMqA==
 
 "@types/ember__object@*", "@types/ember__object@~4.0.0":
   version "4.0.2"
@@ -2436,40 +2446,45 @@
     "@types/rsvp" "*"
 
 "@types/ember__polyfills@*":
-  version "3.12.1"
-  resolved "https://registry.npmjs.org/@types/ember__polyfills/-/ember__polyfills-3.12.1.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__polyfills/-/ember__polyfills-4.0.0.tgz#d83ae94ff2890ad47798315426d9916f39ff4ae6"
+  integrity sha512-Yk85J18y1Ys6agoIBLdJWu6ZkWe68oaC9JPyW7BhOINVNKm89PXrR/yxdOJ1/vN1Hj7ZZQKq+4X6fz3sxebavA==
 
 "@types/ember__routing@*":
-  version "3.16.9"
-  resolved "https://registry.npmjs.org/@types/ember__routing/-/ember__routing-3.16.9.tgz"
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@types/ember__routing/-/ember__routing-4.0.7.tgz#16cc442fcee2dda06dc79bb3d7fd5002f154ad07"
+  integrity sha512-iWsk8C0WIqqK6dgK1UdJisyQLs6rVq/+A2f7fXjdLJHA+SAHK8aqfCHHFkTuiy4sXkM/PBINmP9qHpk4KrScbw==
   dependencies:
-    "@types/ember__component" "*"
+    "@types/ember" "*"
     "@types/ember__controller" "*"
     "@types/ember__object" "*"
     "@types/ember__routing" "*"
     "@types/ember__service" "*"
 
 "@types/ember__runloop@*":
-  version "3.16.3"
-  resolved "https://registry.npmjs.org/@types/ember__runloop/-/ember__runloop-3.16.3.tgz"
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/ember__runloop/-/ember__runloop-4.0.1.tgz#7f6e45af7dbf1158655ef3ad852852b0bf87065f"
+  integrity sha512-3HrsavVrdgxUkYptQUv/e9RwJG02cV9WbnJxKSvwl9ZYpeX4JbuDVucjTWk5BAvJUVtbiQLPGzLEHZ6daoCbbg==
   dependencies:
+    "@types/ember" "*"
     "@types/ember__runloop" "*"
 
 "@types/ember__service@*":
-  version "3.16.1"
-  resolved "https://registry.npmjs.org/@types/ember__service/-/ember__service-3.16.1.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__service/-/ember__service-4.0.0.tgz#ae6164e3b5d927fe17513b49867b52dc0222490d"
+  integrity sha512-FbN2y6tRb6NIV+kmzQcxRAoB17vH7qHCfzcKlxsmt2EI7fboLTcdeKpZKPBEromRXg83fx67QX1b95WcwSGtaw==
   dependencies:
     "@types/ember__object" "*"
 
 "@types/ember__string@*":
-  version "3.16.3"
-  resolved "https://registry.npmjs.org/@types/ember__string/-/ember__string-3.16.3.tgz"
-  dependencies:
-    "@types/ember__template" "*"
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@types/ember__string/-/ember__string-3.0.9.tgz#669188ccea5a61777a36bf88a05ba6875dc9b7d7"
+  integrity sha512-v9QwhhfTTgJH6PCviWlz3JgcraYdSWQoTg2XN5Z7bPgXMJYXczxB/N22L9FnuFgDYdN87yXdTJv6E9rw2YGEhw==
 
 "@types/ember__template@*":
-  version "3.16.1"
-  resolved "https://registry.npmjs.org/@types/ember__template/-/ember__template-3.16.1.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__template/-/ember__template-4.0.0.tgz#3423b6ddc3a6cf0b13a1e0fd5f1a84eec664a095"
+  integrity sha512-51bAEQecMKpDYRXMmVVfU7excrtxDJixRU7huUsAm4acBCqL2+TmMgTqZEkOQSNy6qnKUc2ktSzX28a9//C6pA==
 
 "@types/ember__test-helpers@*", "@types/ember__test-helpers@~2.6.1":
   version "2.6.1"
@@ -2490,8 +2505,11 @@
     "@types/ember__application" "*"
 
 "@types/ember__utils@*":
-  version "3.16.2"
-  resolved "https://registry.npmjs.org/@types/ember__utils/-/ember__utils-3.16.2.tgz"
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/ember__utils/-/ember__utils-4.0.0.tgz#a7e9e11334b5e203324e6155ff74c2b33ec21567"
+  integrity sha512-gwSFUm+6t6StkQxSllbn9lqRms/dXMCQDieRfaTGN8IRatnKjJoEPME3A0T6O9afsU6viBQyqlPyFxsOWknYkg==
+  dependencies:
+    "@types/ember" "*"
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.3"
@@ -2554,12 +2572,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/htmlbars-inline-precompile/-/htmlbars-inline-precompile-3.0.0.tgz#4d3f19eeb2af9f4605620e13a566dae3952a4f68"
   integrity sha512-n1YwM/Q937KmS9W4Ytran71nzhhcT2FDQI00eRGBNUyeErLZspBdDBewEe1F8tcRlUdsCVo2AZBLJsRjEceTRg==
-
-"@types/jquery@*":
-  version "3.5.5"
-  resolved "https://registry.npmjs.org/@types/jquery/-/jquery-3.5.5.tgz"
-  dependencies:
-    "@types/sizzle" "*"
 
 "@types/json-schema@*", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.7", "@types/json-schema@^7.0.8":
   version "7.0.9"
@@ -2641,10 +2653,6 @@
   dependencies:
     "@types/mime" "^1"
     "@types/node" "*"
-
-"@types/sizzle@*":
-  version "2.3.2"
-  resolved "https://registry.npmjs.org/@types/sizzle/-/sizzle-2.3.2.tgz"
 
 "@types/symlink-or-copy@^1.2.0":
   version "1.2.0"

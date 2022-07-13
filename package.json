@@ -41,7 +41,7 @@
     "@types/ember__debug": "~4.0.0",
     "@types/ember__object": "~4.0.0",
     "@types/ember__test": "~4.0.0",
-    "@types/ember__test-helpers": "~2.6.1",
+    "@types/ember__test-helpers": "~2.8.0",
     "@types/htmlbars-inline-precompile": "~3.0.0",
     "@types/qunit": "~2.19.1",
     "@types/rsvp": "~4.0.4",

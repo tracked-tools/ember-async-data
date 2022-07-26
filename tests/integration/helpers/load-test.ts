@@ -258,6 +258,7 @@ module("Integration | Helper | load", function (hooks) {
       assert.equal(error instanceof Error && error.message, "foobar");
     });
 
+    // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error("foobar"));
 
     const renderPromise = render(hbs`

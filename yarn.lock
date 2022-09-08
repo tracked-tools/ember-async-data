@@ -6916,10 +6916,10 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-expect-type@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/expect-type/-/expect-type-0.13.0.tgz#916646a7a73f3ee77039a634ee9035efe1876eb2"
-  integrity sha512-CclevazQfrqo8EvbLPmP7osnb1SZXkw47XPPvUUpeMz4HuGzDltE7CaIt3RLyT9UQrwVK/LDn+KVcC0hcgjgDg==
+expect-type@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/expect-type/-/expect-type-0.14.2.tgz#3924d0e596455a9b27af48e8a99c582cdd4506eb"
+  integrity sha512-ed3+tr5ujbIYXZ8Pl/VgIphwJQ0q5tBLGGdn7Zvwt1WyPBRX83xjT5pT77P/GkuQbctx0K2ZNSSan7eruJqTCQ==
 
 express@^4.10.7, express@^4.18.1:
   version "4.18.1"
@@ -13034,9 +13034,9 @@ typescript-memoize@^1.0.1:
   integrity sha512-LQPKVXK8QrBBkL/zclE6YgSWn0I8ew5m0Lf+XL00IwMhlotqRLlzHV+BRrljVQIc+NohUAuQP7mg4HQwrx5Xbg==
 
 typescript@4.8:
-  version "4.8.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
-  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
+  version "4.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
+  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"

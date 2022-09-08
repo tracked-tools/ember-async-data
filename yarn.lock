@@ -6096,10 +6096,10 @@ ember-cli-version-checker@^5.1.1, ember-cli-version-checker@^5.1.2:
     semver "^7.3.4"
     silent-error "^1.1.1"
 
-ember-cli@~4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-4.6.0.tgz#ff409b99d074414a8944bdadf6db820eaf2dfb7b"
-  integrity sha512-4OAPHJJt4wARrTzfpfEM49KA1JJjMZ/8mhUncdqJFJG19/mS6yJiAUemnsLhZLnbjicB/gYSQ3rrUv/vxeX3cA==
+ember-cli@~4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-4.7.0.tgz#1fc5f272eaf3059e5b7a958f40486d3b1494fade"
+  integrity sha512-OJApGmIFBqzIYLQ6Qmp7BdJZxtNExkp2oUaAoFJhu9Z5VAVnORFiPOR+bQkR50SNVusHTvlR4zC7mMLrNTy+XQ==
   dependencies:
     "@babel/core" "^7.18.6"
     "@babel/plugin-transform-modules-amd" "^7.18.6"
@@ -6916,10 +6916,10 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-expect-type@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/expect-type/-/expect-type-0.13.0.tgz#916646a7a73f3ee77039a634ee9035efe1876eb2"
-  integrity sha512-CclevazQfrqo8EvbLPmP7osnb1SZXkw47XPPvUUpeMz4HuGzDltE7CaIt3RLyT9UQrwVK/LDn+KVcC0hcgjgDg==
+expect-type@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/expect-type/-/expect-type-0.14.2.tgz#3924d0e596455a9b27af48e8a99c582cdd4506eb"
+  integrity sha512-ed3+tr5ujbIYXZ8Pl/VgIphwJQ0q5tBLGGdn7Zvwt1WyPBRX83xjT5pT77P/GkuQbctx0K2ZNSSan7eruJqTCQ==
 
 express@^4.10.7, express@^4.18.1:
   version "4.18.1"

@@ -40,6 +40,7 @@
     "@types/ember-resolver": "^5.0.10",
     "@types/ember__debug": "~4.0.0",
     "@types/ember__object": "~4.0.0",
+    "@types/ember__routing": "^4.0.10",
     "@types/ember__test": "~4.0.0",
     "@types/ember__test-helpers": "~2.8.0",
     "@types/htmlbars-inline-precompile": "~3.0.0",

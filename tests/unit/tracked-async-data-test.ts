@@ -154,6 +154,7 @@ module("Unit | TrackedAsyncData", function () {
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise, this);
 
+    // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error("foobar"));
     await deferred.promise.catch((error) => {
       assert.ok(
@@ -190,6 +191,7 @@ module("Unit | TrackedAsyncData", function () {
     const result = new TrackedAsyncData(deferred.promise, this);
     assert.equal(result.state, "PENDING");
 
+    // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error("foobar"));
     await deferred.promise.catch((err: unknown) => {
       assert.ok(err instanceof Error && err.message === "foobar");

@@ -343,8 +343,8 @@ const TrackedAsyncData = _TrackedAsyncData as new <T>(
 ) => TrackedAsyncData<T>;
 export default TrackedAsyncData;
 
-/** Utility type to check whether the string `key` is a proeprty on an object */
-function has<K extends PropertyKey, T>(
+/** Utility type to check whether the string `key` is a property on an object */
+function has<K extends PropertyKey, T extends object>(
   key: K,
   t: T
 ): t is T & Record<K, unknown> {

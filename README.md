@@ -481,7 +481,7 @@ import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
 import { render } from "@ember/test-helpers";
-import hbs from "htmlbars-inline-precompile";
+import { hbs } from "ember-cli-htmlbars";
 
 module('my very own tests', function (hooks) {
   setupRenderingTest(hooks);
@@ -515,7 +515,7 @@ import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
 import { render, waitFor } from "@ember/test-helpers";
-import hbs from "htmlbars-inline-precompile";
+import { hbs } from "ember-cli-htmlbars";
 
 module('my very own tests', function (hooks) {
   setupRenderingTest(hooks);

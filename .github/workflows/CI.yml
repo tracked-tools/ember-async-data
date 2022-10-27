@@ -61,6 +61,7 @@ jobs:
       matrix:
         ember-version:
           - "lts-3.28"
+          - "lts-4.4"
           - "release"
           - "beta"
           - "canary"

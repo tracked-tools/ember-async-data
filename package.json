@@ -19,7 +19,7 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "npm-run-all lint:* test:*",
-    "test:ember": "ember test",
+    "test:ember": "ember test --server",
     "test:ember-compatibility": "ember try:each",
     "prepack": "ember ts:precompile",
     "postpack": "ember ts:clean"
@@ -69,6 +69,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-ember": "^11.0.2",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-qunit": "^7.3.1",
     "expect-type": "^0.15.0",
     "loader.js": "^4.7.0",
     "npm-run-all": "^4.1.5",

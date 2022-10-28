@@ -58,5 +58,10 @@ module.exports = {
         "@typescript-eslint/no-var-requires": "off",
       },
     },
+    {
+      // test files
+      files: ["tests/**/*-test.{js,ts}"],
+      extends: ["plugin:qunit/recommended"],
+    },
   ],
 };

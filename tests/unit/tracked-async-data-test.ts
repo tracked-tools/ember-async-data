@@ -17,12 +17,12 @@ module("Unit | TrackedAsyncData", function () {
     const deferred = defer();
 
     const result = new TrackedAsyncData(deferred.promise, this);
-    assert.equal(result.state, "PENDING");
-    assert.equal(result.isPending, true);
-    assert.equal(result.isResolved, false);
-    assert.equal(result.isRejected, false);
-    assert.equal(result.value, null);
-    assert.equal(result.error, null);
+    assert.strictEqual(result.state, "PENDING");
+    assert.true(result.isPending);
+    assert.false(result.isResolved);
+    assert.false(result.isRejected);
+    assert.strictEqual(result.value, null);
+    assert.strictEqual(result.error, null);
 
     deferred.resolve();
     await deferred.promise;
@@ -37,12 +37,12 @@ module("Unit | TrackedAsyncData", function () {
     deferred.resolve("foobar");
     await settled();
 
-    assert.equal(result.state, "RESOLVED");
-    assert.equal(result.isPending, false);
-    assert.equal(result.isResolved, true);
-    assert.equal(result.isRejected, false);
-    assert.equal(result.value, "foobar");
-    assert.equal(result.error, undefined);
+    assert.strictEqual(result.state, "RESOLVED");
+    assert.false(result.isPending);
+    assert.true(result.isResolved);
+    assert.false(result.isRejected);
+    assert.strictEqual(result.value, "foobar");
+    assert.strictEqual(result.error, null);
   });
 
   module("it returns resolved state for non-thenable input", function () {
@@ -52,12 +52,12 @@ module("Unit | TrackedAsyncData", function () {
       const loadUndefined = new TrackedAsyncData(undefined, this);
       await settled();
 
-      assert.equal(loadUndefined.state, "RESOLVED");
-      assert.equal(loadUndefined.isPending, false);
-      assert.equal(loadUndefined.isResolved, true);
-      assert.equal(loadUndefined.isRejected, false);
-      assert.equal(loadUndefined.value, undefined);
-      assert.equal(loadUndefined.error, null);
+      assert.strictEqual(loadUndefined.state, "RESOLVED");
+      assert.false(loadUndefined.isPending);
+      assert.true(loadUndefined.isResolved);
+      assert.false(loadUndefined.isRejected);
+      assert.strictEqual(loadUndefined.value, undefined);
+      assert.strictEqual(loadUndefined.error, null);
     });
 
     test("null", async function (assert) {
@@ -66,12 +66,12 @@ module("Unit | TrackedAsyncData", function () {
       const loadNull = new TrackedAsyncData(null, this);
       await settled();
 
-      assert.equal(loadNull.state, "RESOLVED");
-      assert.equal(loadNull.isPending, false);
-      assert.equal(loadNull.isResolved, true);
-      assert.equal(loadNull.isRejected, false);
-      assert.equal(loadNull.value, null);
-      assert.equal(loadNull.error, null);
+      assert.strictEqual(loadNull.state, "RESOLVED");
+      assert.false(loadNull.isPending);
+      assert.true(loadNull.isResolved);
+      assert.false(loadNull.isRejected);
+      assert.strictEqual(loadNull.value, null);
+      assert.strictEqual(loadNull.error, null);
     });
 
     test("non-thenable object", async function (assert) {
@@ -81,12 +81,12 @@ module("Unit | TrackedAsyncData", function () {
       const loadObject = new TrackedAsyncData(notAThenableObject, this);
       await settled();
 
-      assert.equal(loadObject.state, "RESOLVED");
-      assert.equal(loadObject.isPending, false);
-      assert.equal(loadObject.isResolved, true);
-      assert.equal(loadObject.isRejected, false);
-      assert.equal(loadObject.value, notAThenableObject);
-      assert.equal(loadObject.error, null);
+      assert.strictEqual(loadObject.state, "RESOLVED");
+      assert.false(loadObject.isPending);
+      assert.true(loadObject.isResolved);
+      assert.false(loadObject.isRejected);
+      assert.strictEqual(loadObject.value, notAThenableObject);
+      assert.strictEqual(loadObject.error, null);
     });
 
     test("boolean: true", async function (assert) {
@@ -95,12 +95,12 @@ module("Unit | TrackedAsyncData", function () {
       const loadTrue = new TrackedAsyncData(true, this);
       await settled();
 
-      assert.equal(loadTrue.state, "RESOLVED");
-      assert.equal(loadTrue.isPending, false);
-      assert.equal(loadTrue.isResolved, true);
-      assert.equal(loadTrue.isRejected, false);
-      assert.equal(loadTrue.value, true);
-      assert.equal(loadTrue.error, null);
+      assert.strictEqual(loadTrue.state, "RESOLVED");
+      assert.false(loadTrue.isPending);
+      assert.true(loadTrue.isResolved);
+      assert.false(loadTrue.isRejected);
+      assert.true(loadTrue.value);
+      assert.strictEqual(loadTrue.error, null);
     });
 
     test("boolean: false", async function (assert) {
@@ -109,12 +109,12 @@ module("Unit | TrackedAsyncData", function () {
       const loadFalse = new TrackedAsyncData(false, this);
       await settled();
 
-      assert.equal(loadFalse.state, "RESOLVED");
-      assert.equal(loadFalse.isPending, false);
-      assert.equal(loadFalse.isResolved, true);
-      assert.equal(loadFalse.isRejected, false);
-      assert.equal(loadFalse.value, false);
-      assert.equal(loadFalse.error, null);
+      assert.strictEqual(loadFalse.state, "RESOLVED");
+      assert.false(loadFalse.isPending);
+      assert.true(loadFalse.isResolved);
+      assert.false(loadFalse.isRejected);
+      assert.false(loadFalse.value);
+      assert.strictEqual(loadFalse.error, null);
     });
 
     test("number", async function (assert) {
@@ -123,12 +123,12 @@ module("Unit | TrackedAsyncData", function () {
       const loadNumber = new TrackedAsyncData(5, this);
       await settled();
 
-      assert.equal(loadNumber.state, "RESOLVED");
-      assert.equal(loadNumber.isPending, false);
-      assert.equal(loadNumber.isResolved, true);
-      assert.equal(loadNumber.isRejected, false);
-      assert.equal(loadNumber.value, 5);
-      assert.equal(loadNumber.error, null);
+      assert.strictEqual(loadNumber.state, "RESOLVED");
+      assert.false(loadNumber.isPending);
+      assert.true(loadNumber.isResolved);
+      assert.false(loadNumber.isRejected);
+      assert.strictEqual(loadNumber.value, 5);
+      assert.strictEqual(loadNumber.error, null);
     });
 
     test("string", async function (assert) {
@@ -138,17 +138,17 @@ module("Unit | TrackedAsyncData", function () {
       await settled();
 
       // loadString
-      assert.equal(loadString.state, "RESOLVED");
-      assert.equal(loadString.isPending, false);
-      assert.equal(loadString.isResolved, true);
-      assert.equal(loadString.isRejected, false);
-      assert.equal(loadString.value, "js");
-      assert.equal(loadString.error, null);
+      assert.strictEqual(loadString.state, "RESOLVED");
+      assert.false(loadString.isPending);
+      assert.true(loadString.isResolved);
+      assert.false(loadString.isRejected);
+      assert.strictEqual(loadString.value, "js");
+      assert.strictEqual(loadString.error, null);
     });
   });
 
   test("it returns error state", async function (assert) {
-    assert.expect(7);
+    assert.expect(8);
 
     // This handles the error throw from rendering a rejected promise
     const deferred = defer();
@@ -157,18 +157,16 @@ module("Unit | TrackedAsyncData", function () {
     // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error("foobar"));
     await deferred.promise.catch((error) => {
-      assert.ok(
-        error instanceof Error && error.message === "foobar",
-        "thrown promise rejection"
-      );
+      assert.true(error instanceof Error);
+      assert.strictEqual(error.message, "foobar", "thrown promise rejection");
     });
 
-    assert.equal(result.state, "REJECTED");
-    assert.equal(result.isPending, false);
-    assert.equal(result.isResolved, false);
-    assert.equal(result.isRejected, true);
-    assert.equal(result.value, undefined);
-    assert.equal((result.error as Error).message, "foobar");
+    assert.strictEqual(result.state, "REJECTED");
+    assert.false(result.isPending);
+    assert.false(result.isResolved);
+    assert.true(result.isRejected);
+    assert.strictEqual(result.value, null);
+    assert.strictEqual((result.error as Error).message, "foobar");
   });
 
   test("it returns loading state and then loaded state", async function (assert) {
@@ -176,28 +174,29 @@ module("Unit | TrackedAsyncData", function () {
 
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise, this);
-    assert.equal(result.state, "PENDING");
+    assert.strictEqual(result.state, "PENDING");
 
     deferred.resolve();
     await deferred.promise;
 
-    assert.equal(result.state, "RESOLVED");
+    assert.strictEqual(result.state, "RESOLVED");
   });
 
   test("it returns loading state and then error state", async function (assert) {
-    assert.expect(3);
+    assert.expect(4);
 
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise, this);
-    assert.equal(result.state, "PENDING");
+    assert.strictEqual(result.state, "PENDING");
 
     // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error("foobar"));
-    await deferred.promise.catch((err: unknown) => {
-      assert.ok(err instanceof Error && err.message === "foobar");
+    await deferred.promise.catch((err: Error) => {
+      assert.true(err instanceof Error);
+      assert.strictEqual(err.message, "foobar");
     });
 
-    assert.equal(result.state, "REJECTED");
+    assert.strictEqual(result.state, "REJECTED");
   });
 
   test("it returns loaded state for already-resolved promises", async function (assert) {
@@ -206,20 +205,21 @@ module("Unit | TrackedAsyncData", function () {
     const promise = Promise.resolve("hello");
     const result = new TrackedAsyncData(promise, this);
     await promise;
-    assert.equal(result.state, "RESOLVED");
+    assert.strictEqual(result.state, "RESOLVED");
   });
 
   test("it returns error state for already-rejected promises", async function (assert) {
-    assert.expect(2);
+    assert.expect(3);
 
     const promise = Promise.reject(new Error("foobar"));
     const result = new TrackedAsyncData(promise, this);
 
     // This handles the error thrown *locally*.
-    await promise.catch((error: unknown) => {
-      assert.equal(error instanceof Error && error.message, "foobar");
+    await promise.catch((error: Error) => {
+      assert.true(error instanceof Error);
+      assert.strictEqual(error.message, "foobar");
     });
 
-    assert.equal(result.state, "REJECTED");
+    assert.strictEqual(result.state, "REJECTED");
   });
 });

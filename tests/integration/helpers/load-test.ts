@@ -69,13 +69,14 @@ module("Integration | Helper | load", function (hooks) {
   });
 
   test("it renders error state", async function (this: LocalTestContext, assert) {
-    assert.expect(2);
+    assert.expect(3);
 
     const { promise, reject } = defer();
 
     // This handles the error throw from rendering a rejected promise
-    promise.catch((error: unknown) => {
-      assert.ok(error instanceof Error && error.message === "foobar");
+    promise.catch((error: Error) => {
+      assert.ok(error instanceof Error);
+      assert.strictEqual(error.message, "foobar");
     });
 
     reject(new Error("foobar"));
@@ -169,14 +170,15 @@ module("Integration | Helper | load", function (hooks) {
   });
 
   test("it renders the state for the new promise if a new promise is sent and resolves before the old promise is done loading", async function (this: LocalTestContext, assert) {
-    assert.expect(3);
+    assert.expect(4);
 
     const { promise: oldPromise, reject: rejectOld } = defer();
     this.set("promise", oldPromise);
 
     // This handles the error throw from rendering a rejected promise
     oldPromise.catch((error) => {
-      assert.ok(error instanceof Error && error.message, "foobar");
+      assert.ok(error instanceof Error);
+      assert.strictEqual(error.message, "foobar");
     });
 
     const renderPromise = render(hbs`
@@ -248,14 +250,15 @@ module("Integration | Helper | load", function (hooks) {
   });
 
   test("it renders error state and then loading state for a retried promise", async function (this: LocalTestContext, assert) {
-    assert.expect(3);
+    assert.expect(4);
 
     const deferred = defer();
     this.set("promise", deferred.promise);
 
     // This handles the error throw from rendering a rejected promise
-    deferred.promise.catch((error: unknown) => {
-      assert.equal(error instanceof Error && error.message, "foobar");
+    deferred.promise.catch((error: Error) => {
+      assert.ok(error instanceof Error);
+      assert.strictEqual(error.message, "foobar");
     });
 
     // eslint-disable-next-line ember/no-array-prototype-extensions

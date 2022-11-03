@@ -16,8 +16,8 @@ jobs:
     name: "Linting"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn lint
 
@@ -30,8 +30,8 @@ jobs:
         node-version: ["14", "16", "18"]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile --non-interactive
@@ -47,8 +47,8 @@ jobs:
         os: [macOS, windows]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile --non-interactive
       - run: ./node_modules/.bin/ember test
 
@@ -66,8 +66,8 @@ jobs:
           - "canary"
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile --non-interactive
@@ -83,8 +83,8 @@ jobs:
         ts-version: ["4.5", "4.6", "4.7", "next"]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn add -D typescript@${{ matrix.ts-version }}
       - run: yarn tsc --noEmit

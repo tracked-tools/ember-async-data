@@ -1,5 +1,5 @@
-import Helper from "@ember/component/helper";
-import TrackedAsyncData from "ember-async-data/tracked-async-data";
+import Helper from '@ember/component/helper';
+import TrackedAsyncData from 'ember-async-data/tracked-async-data';
 
 /**
   Given a `Promise`, return a `TrackedAsyncData` object which exposes the state

@@ -1,13 +1,13 @@
-import { tracked } from "@glimmer/tracking";
-import { dependentKeyCompat } from "@ember/object/compat";
-import { assert, warn } from "@ember/debug";
-import { buildWaiter } from "@ember/test-waiters";
+import { tracked } from '@glimmer/tracking';
+import { dependentKeyCompat } from '@ember/object/compat';
+import { assert, warn } from '@ember/debug';
+import { buildWaiter } from '@ember/test-waiters';
 import {
   associateDestroyableChild,
   registerDestructor,
-} from "@ember/destroyable";
+} from '@ember/destroyable';
 
-const waiter = buildWaiter("ember-async-data");
+const waiter = buildWaiter('ember-async-data');
 
 // SAFETY: we are actually *narrowing* the type here, which would *not* be safe
 // except that we uphold the invariant that a given `Promise<T>` is always
@@ -29,13 +29,13 @@ const TRACKED_PROMISES = new WeakMap() as {
 
 /** A very cheap representation of the of a promise. */
 type StateRepr<T> =
-  | [tag: "PENDING"]
-  | [tag: "RESOLVED", value: T]
-  | [tag: "REJECTED", error: unknown];
+  | [tag: 'PENDING']
+  | [tag: 'RESOLVED', value: T]
+  | [tag: 'REJECTED', error: unknown];
 
 // We only need a single instance of the pending state in our system, since it
 // is otherwise unparameterized (unlike the resolved and rejected states).
-const PENDING = ["PENDING"] as [tag: "PENDING"];
+const PENDING = ['PENDING'] as [tag: 'PENDING'];
 
 // This class exists so that the state can be *wholly* private to outside
 // consumers, but its tracked internals can be both read and written directly by
@@ -65,12 +65,12 @@ class _TrackedAsyncData<T> {
    */
   constructor(data: T | Promise<T>, context: {}) {
     assert(
-      "You must pass a destroyable object as the context for TrackedAsyncData",
+      'You must pass a destroyable object as the context for TrackedAsyncData',
       !!context
     );
 
     if (this.constructor !== _TrackedAsyncData) {
-      throw new Error("tracked-async-data cannot be subclassed");
+      throw new Error('tracked-async-data cannot be subclassed');
     }
 
     const promise = isPromiseLike(data) ? data : Promise.resolve(data);
@@ -99,8 +99,8 @@ class _TrackedAsyncData<T> {
     // system, so we continue creating a new instance.
     promise
       .then(
-        (value) => (this.#state.data = ["RESOLVED", value]),
-        (error) => (this.#state.data = ["REJECTED", error])
+        (value) => (this.#state.data = ['RESOLVED', value]),
+        (error) => (this.#state.data = ['REJECTED', error])
       )
       .finally(() => {
         waiter.endAsync(this.#token);
@@ -130,7 +130,7 @@ class _TrackedAsyncData<T> {
    * The resolution state of the promise.
    */
   @dependentKeyCompat
-  get state(): State<T>["data"][0] {
+  get state(): State<T>['data'][0] {
     return this.#state.data[0];
   }
 
@@ -147,11 +147,11 @@ class _TrackedAsyncData<T> {
   get value(): T | null {
     warn(
       "Accessing `value` when TrackedAsyncData is not in the resolved state is not supported and will throw an error in the future. Always check that `.state` is `'RESOLVED'` or that `.isResolved` is `true` before accessing this property.",
-      this.#state.data[0] === "RESOLVED",
-      { id: "tracked-async-data::invalid-value-access" }
+      this.#state.data[0] === 'RESOLVED',
+      { id: 'tracked-async-data::invalid-value-access' }
     );
 
-    return this.#state.data[0] === "RESOLVED" ? this.#state.data[1] : null;
+    return this.#state.data[0] === 'RESOLVED' ? this.#state.data[1] : null;
   }
 
   /**
@@ -168,11 +168,11 @@ class _TrackedAsyncData<T> {
   get error(): unknown {
     warn(
       "Accessing `error` when TrackedAsyncData is not in the rejected state is not supported and will throw an error in the future. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.",
-      this.#state.data[0] === "REJECTED",
-      { id: "tracked-async-data::invalid-error-access" }
+      this.#state.data[0] === 'REJECTED',
+      { id: 'tracked-async-data::invalid-error-access' }
     );
 
-    return this.#state.data[0] === "REJECTED" ? this.#state.data[1] : null;
+    return this.#state.data[0] === 'REJECTED' ? this.#state.data[1] : null;
   }
 
   /**
@@ -180,19 +180,19 @@ class _TrackedAsyncData<T> {
    */
   @dependentKeyCompat
   get isPending(): boolean {
-    return this.state === "PENDING";
+    return this.state === 'PENDING';
   }
 
   /** Is the state `"RESOLVED"`? */
   @dependentKeyCompat
   get isResolved(): boolean {
-    return this.state === "RESOLVED";
+    return this.state === 'RESOLVED';
   }
 
   /** Is the state `"REJECTED"`? */
   @dependentKeyCompat
   get isRejected(): boolean {
-    return this.state === "REJECTED";
+    return this.state === 'REJECTED';
   }
 
   // SAFETY: casts are safe because we uphold these invariants elsewhere in the
@@ -264,7 +264,7 @@ export type JSONRepr<T> =
 //     automatically.
 
 interface Pending<T> extends _TrackedAsyncData<T> {
-  state: "PENDING";
+  state: 'PENDING';
   isPending: true;
   isResolved: false;
   isRejected: false;
@@ -273,7 +273,7 @@ interface Pending<T> extends _TrackedAsyncData<T> {
 }
 
 interface Resolved<T> extends _TrackedAsyncData<T> {
-  state: "RESOLVED";
+  state: 'RESOLVED';
   isPending: false;
   isResolved: true;
   isRejected: false;
@@ -282,7 +282,7 @@ interface Resolved<T> extends _TrackedAsyncData<T> {
 }
 
 interface Rejected<T> extends _TrackedAsyncData<T> {
-  state: "REJECTED";
+  state: 'REJECTED';
   isPending: false;
   isResolved: false;
   isRejected: true;
@@ -353,9 +353,9 @@ function has<K extends PropertyKey, T extends object>(
 
 function isPromiseLike(data: unknown): data is PromiseLike<unknown> {
   return (
-    typeof data === "object" &&
+    typeof data === 'object' &&
     data !== null &&
-    has("then", data) &&
-    typeof data.then === "function"
+    has('then', data) &&
+    typeof data.then === 'function'
   );
 }

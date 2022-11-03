@@ -1,23 +1,23 @@
-import { module, test } from "qunit";
-import { defer } from "../defer";
-import TrackedAsyncData from "ember-async-data/tracked-async-data";
-import { settled } from "@ember/test-helpers";
+import { module, test } from 'qunit';
+import { defer } from '../defer';
+import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import { settled } from '@ember/test-helpers';
 
-module("Unit | TrackedAsyncData", function () {
-  test("cannot be subclassed", function (assert) {
+module('Unit | TrackedAsyncData', function () {
+  test('cannot be subclassed', function (assert) {
     // @ts-expect-error: The type is not statically subclassable, either, so
     //   this fails both at the type-checking level and dynamically at runtime.
     class Subclass extends TrackedAsyncData<unknown> {}
 
-    assert.throws(() => new Subclass(Promise.resolve("nope"), this));
+    assert.throws(() => new Subclass(Promise.resolve('nope'), this));
   });
 
-  test("is initially PENDING", async function (assert) {
+  test('is initially PENDING', async function (assert) {
     assert.expect(6);
     const deferred = defer();
 
     const result = new TrackedAsyncData(deferred.promise, this);
-    assert.strictEqual(result.state, "PENDING");
+    assert.strictEqual(result.state, 'PENDING');
     assert.true(result.isPending);
     assert.false(result.isResolved);
     assert.false(result.isRejected);
@@ -28,31 +28,31 @@ module("Unit | TrackedAsyncData", function () {
     await deferred.promise;
   });
 
-  test("it updates to resolved state", async function (assert) {
+  test('it updates to resolved state', async function (assert) {
     assert.expect(6);
 
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise, this);
 
-    deferred.resolve("foobar");
+    deferred.resolve('foobar');
     await settled();
 
-    assert.strictEqual(result.state, "RESOLVED");
+    assert.strictEqual(result.state, 'RESOLVED');
     assert.false(result.isPending);
     assert.true(result.isResolved);
     assert.false(result.isRejected);
-    assert.strictEqual(result.value, "foobar");
+    assert.strictEqual(result.value, 'foobar');
     assert.strictEqual(result.error, null);
   });
 
-  module("it returns resolved state for non-thenable input", function () {
-    test("undefined", async function (assert) {
+  module('it returns resolved state for non-thenable input', function () {
+    test('undefined', async function (assert) {
       assert.expect(6);
 
       const loadUndefined = new TrackedAsyncData(undefined, this);
       await settled();
 
-      assert.strictEqual(loadUndefined.state, "RESOLVED");
+      assert.strictEqual(loadUndefined.state, 'RESOLVED');
       assert.false(loadUndefined.isPending);
       assert.true(loadUndefined.isResolved);
       assert.false(loadUndefined.isRejected);
@@ -60,13 +60,13 @@ module("Unit | TrackedAsyncData", function () {
       assert.strictEqual(loadUndefined.error, null);
     });
 
-    test("null", async function (assert) {
+    test('null', async function (assert) {
       assert.expect(6);
 
       const loadNull = new TrackedAsyncData(null, this);
       await settled();
 
-      assert.strictEqual(loadNull.state, "RESOLVED");
+      assert.strictEqual(loadNull.state, 'RESOLVED');
       assert.false(loadNull.isPending);
       assert.true(loadNull.isResolved);
       assert.false(loadNull.isRejected);
@@ -74,14 +74,14 @@ module("Unit | TrackedAsyncData", function () {
       assert.strictEqual(loadNull.error, null);
     });
 
-    test("non-thenable object", async function (assert) {
+    test('non-thenable object', async function (assert) {
       assert.expect(6);
 
       const notAThenableObject = { notAThenable: true };
       const loadObject = new TrackedAsyncData(notAThenableObject, this);
       await settled();
 
-      assert.strictEqual(loadObject.state, "RESOLVED");
+      assert.strictEqual(loadObject.state, 'RESOLVED');
       assert.false(loadObject.isPending);
       assert.true(loadObject.isResolved);
       assert.false(loadObject.isRejected);
@@ -89,13 +89,13 @@ module("Unit | TrackedAsyncData", function () {
       assert.strictEqual(loadObject.error, null);
     });
 
-    test("boolean: true", async function (assert) {
+    test('boolean: true', async function (assert) {
       assert.expect(6);
 
       const loadTrue = new TrackedAsyncData(true, this);
       await settled();
 
-      assert.strictEqual(loadTrue.state, "RESOLVED");
+      assert.strictEqual(loadTrue.state, 'RESOLVED');
       assert.false(loadTrue.isPending);
       assert.true(loadTrue.isResolved);
       assert.false(loadTrue.isRejected);
@@ -103,13 +103,13 @@ module("Unit | TrackedAsyncData", function () {
       assert.strictEqual(loadTrue.error, null);
     });
 
-    test("boolean: false", async function (assert) {
+    test('boolean: false', async function (assert) {
       assert.expect(6);
 
       const loadFalse = new TrackedAsyncData(false, this);
       await settled();
 
-      assert.strictEqual(loadFalse.state, "RESOLVED");
+      assert.strictEqual(loadFalse.state, 'RESOLVED');
       assert.false(loadFalse.isPending);
       assert.true(loadFalse.isResolved);
       assert.false(loadFalse.isRejected);
@@ -117,13 +117,13 @@ module("Unit | TrackedAsyncData", function () {
       assert.strictEqual(loadFalse.error, null);
     });
 
-    test("number", async function (assert) {
+    test('number', async function (assert) {
       assert.expect(6);
 
       const loadNumber = new TrackedAsyncData(5, this);
       await settled();
 
-      assert.strictEqual(loadNumber.state, "RESOLVED");
+      assert.strictEqual(loadNumber.state, 'RESOLVED');
       assert.false(loadNumber.isPending);
       assert.true(loadNumber.isResolved);
       assert.false(loadNumber.isRejected);
@@ -131,23 +131,23 @@ module("Unit | TrackedAsyncData", function () {
       assert.strictEqual(loadNumber.error, null);
     });
 
-    test("string", async function (assert) {
+    test('string', async function (assert) {
       assert.expect(6);
 
-      const loadString = new TrackedAsyncData("js", this);
+      const loadString = new TrackedAsyncData('js', this);
       await settled();
 
       // loadString
-      assert.strictEqual(loadString.state, "RESOLVED");
+      assert.strictEqual(loadString.state, 'RESOLVED');
       assert.false(loadString.isPending);
       assert.true(loadString.isResolved);
       assert.false(loadString.isRejected);
-      assert.strictEqual(loadString.value, "js");
+      assert.strictEqual(loadString.value, 'js');
       assert.strictEqual(loadString.error, null);
     });
   });
 
-  test("it returns error state", async function (assert) {
+  test('it returns error state', async function (assert) {
     assert.expect(8);
 
     // This handles the error throw from rendering a rejected promise
@@ -155,71 +155,71 @@ module("Unit | TrackedAsyncData", function () {
     const result = new TrackedAsyncData(deferred.promise, this);
 
     // eslint-disable-next-line ember/no-array-prototype-extensions
-    deferred.reject(new Error("foobar"));
+    deferred.reject(new Error('foobar'));
     await deferred.promise.catch((error) => {
       assert.true(error instanceof Error);
-      assert.strictEqual(error.message, "foobar", "thrown promise rejection");
+      assert.strictEqual(error.message, 'foobar', 'thrown promise rejection');
     });
 
-    assert.strictEqual(result.state, "REJECTED");
+    assert.strictEqual(result.state, 'REJECTED');
     assert.false(result.isPending);
     assert.false(result.isResolved);
     assert.true(result.isRejected);
     assert.strictEqual(result.value, null);
-    assert.strictEqual((result.error as Error).message, "foobar");
+    assert.strictEqual((result.error as Error).message, 'foobar');
   });
 
-  test("it returns loading state and then loaded state", async function (assert) {
+  test('it returns loading state and then loaded state', async function (assert) {
     assert.expect(2);
 
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise, this);
-    assert.strictEqual(result.state, "PENDING");
+    assert.strictEqual(result.state, 'PENDING');
 
     deferred.resolve();
     await deferred.promise;
 
-    assert.strictEqual(result.state, "RESOLVED");
+    assert.strictEqual(result.state, 'RESOLVED');
   });
 
-  test("it returns loading state and then error state", async function (assert) {
+  test('it returns loading state and then error state', async function (assert) {
     assert.expect(4);
 
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise, this);
-    assert.strictEqual(result.state, "PENDING");
+    assert.strictEqual(result.state, 'PENDING');
 
     // eslint-disable-next-line ember/no-array-prototype-extensions
-    deferred.reject(new Error("foobar"));
+    deferred.reject(new Error('foobar'));
     await deferred.promise.catch((err: Error) => {
       assert.true(err instanceof Error);
-      assert.strictEqual(err.message, "foobar");
+      assert.strictEqual(err.message, 'foobar');
     });
 
-    assert.strictEqual(result.state, "REJECTED");
+    assert.strictEqual(result.state, 'REJECTED');
   });
 
-  test("it returns loaded state for already-resolved promises", async function (assert) {
+  test('it returns loaded state for already-resolved promises', async function (assert) {
     assert.expect(1);
 
-    const promise = Promise.resolve("hello");
+    const promise = Promise.resolve('hello');
     const result = new TrackedAsyncData(promise, this);
     await promise;
-    assert.strictEqual(result.state, "RESOLVED");
+    assert.strictEqual(result.state, 'RESOLVED');
   });
 
-  test("it returns error state for already-rejected promises", async function (assert) {
+  test('it returns error state for already-rejected promises', async function (assert) {
     assert.expect(3);
 
-    const promise = Promise.reject(new Error("foobar"));
+    const promise = Promise.reject(new Error('foobar'));
     const result = new TrackedAsyncData(promise, this);
 
     // This handles the error thrown *locally*.
     await promise.catch((error: Error) => {
       assert.true(error instanceof Error);
-      assert.strictEqual(error.message, "foobar");
+      assert.strictEqual(error.message, 'foobar');
     });
 
-    assert.strictEqual(result.state, "REJECTED");
+    assert.strictEqual(result.state, 'REJECTED');
   });
 });

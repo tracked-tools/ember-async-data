@@ -1,7 +1,7 @@
-import Helper from "@ember/component/helper";
-import TrackedAsyncData from "ember-async-data/tracked-async-data";
-import Load, { load } from "ember-async-data/helpers/load";
-import { expectTypeOf } from "expect-type";
+import Helper from '@ember/component/helper';
+import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+import Load, { load } from 'ember-async-data/helpers/load';
+import { expectTypeOf } from 'expect-type';
 
 expectTypeOf(load).toEqualTypeOf<
   <T>(data: T | Promise<T>, context: {}) => TrackedAsyncData<T>

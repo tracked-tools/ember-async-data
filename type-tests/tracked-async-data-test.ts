@@ -1,13 +1,13 @@
 import TrackedAsyncData, {
   JSONRepr,
-} from "ember-async-data/tracked-async-data";
-import { expectTypeOf } from "expect-type";
+} from 'ember-async-data/tracked-async-data';
+import { expectTypeOf } from 'expect-type';
 
 declare function unreachable(x: never): never;
 
 declare class PublicAPI<T> {
   constructor(data: T | Promise<T>);
-  get state(): "PENDING" | "RESOLVED" | "REJECTED";
+  get state(): 'PENDING' | 'RESOLVED' | 'REJECTED';
   get value(): T | null;
   get error(): unknown;
   get isPending(): boolean;
@@ -21,16 +21,16 @@ declare class PublicAPI<T> {
 }
 
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(12, {});
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith("hello", {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith('hello', {});
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(true, {});
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(null, {});
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(undefined, {});
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith({ cool: "story" }, {});
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(["neat"], {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith({ cool: 'story' }, {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(['neat'], {});
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve(), {});
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve(12), {});
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject(), {});
-expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject("gah"), {});
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject('gah'), {});
 
 // We use `toMatchTypeOf` here to confirm the union type which makes up
 // `TrackedAsyncData` is structurally compatible with the desired public
@@ -41,7 +41,7 @@ declare let data: TrackedAsyncData<string>;
 declare let expected: PublicAPI<string>;
 expectTypeOf(data).toMatchTypeOf(expected);
 
-expectTypeOf(data.state).toEqualTypeOf<"PENDING" | "RESOLVED" | "REJECTED">();
+expectTypeOf(data.state).toEqualTypeOf<'PENDING' | 'RESOLVED' | 'REJECTED'>();
 expectTypeOf(data.value).toEqualTypeOf<string | null>();
 expectTypeOf(data.error).toEqualTypeOf<unknown>();
 expectTypeOf(data.isPending).toEqualTypeOf<boolean>();
@@ -65,13 +65,13 @@ if (data.isPending) {
   unreachable(data);
 }
 
-if (data.state === "PENDING") {
+if (data.state === 'PENDING') {
   expectTypeOf(data.value).toEqualTypeOf(null);
   expectTypeOf(data.error).toEqualTypeOf(null);
-} else if (data.state === "RESOLVED") {
+} else if (data.state === 'RESOLVED') {
   expectTypeOf(data.value).toEqualTypeOf<string>();
   expectTypeOf(data.error).toEqualTypeOf(null);
-} else if (data.state === "REJECTED") {
+} else if (data.state === 'REJECTED') {
   expectTypeOf(data.value).toEqualTypeOf(null);
   expectTypeOf(data.error).toEqualTypeOf<unknown>();
 } else {

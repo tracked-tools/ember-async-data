@@ -1,1 +1,1 @@
-export { default } from "ember-async-data/tracked-async-data";
+export { default } from 'ember-async-data/tracked-async-data';

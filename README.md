@@ -109,14 +109,14 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 ## Compatibility
 
 * Ember.js v3.28 or above (requires Octane Edition)
-* Ember CLI v2.13 or above
+* Ember CLI v3.28 or above
 * Node.js v14 or above
 
 ### TypeScript
 
 This project follows the current draft of [the Semantic Versioning for TypeScript Types][semver] proposal.
 
-- **Currently supported TypeScript versions:** v4.5, v4.6, v4.7
+- **Currently supported TypeScript versions:** v4.5, v4.6, v4.7, v4.8
 - **Compiler support policy:** [simple majors][sm]
 - **Public API:** all published types not in a `-private` module are public
 

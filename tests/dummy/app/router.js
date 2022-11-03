@@ -7,5 +7,5 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  /* intentionall empty: nothing to do in this test! */
+  /* intentionally empty: nothing to do in this test! */
 });

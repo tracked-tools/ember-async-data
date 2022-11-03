@@ -112,11 +112,11 @@ module('Integration | Helper | load', function (hooks) {
       <div data-test-load-helper>
         {{#let (load this.promise) as |result|}}
           {{#if result.isResolved}}
-            <div data-test-state="RESOLVED">RESOLVED {{result.value}}</div>
+            <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
           {{else if result.isPending}}
-            <div data-test-state="PENDING">PENDING</div>
+            <div data-test-state='PENDING'>PENDING</div>
           {{else if result.isRejected}}
-            <div data-test-state="REJECTED">REJECTED</div>
+            <div data-test-state='REJECTED'>REJECTED</div>
           {{/if}}
         {{/let}}
       </div>
@@ -127,7 +127,7 @@ module('Integration | Helper | load', function (hooks) {
 
     resolve();
 
-    await waitFor("[data-test-state='RESOLVED']");
+    await waitFor('[data-test-state="RESOLVED"]');
     assert.dom('[data-test-load-helper]').hasText('RESOLVED');
 
     await renderPromise;
@@ -143,11 +143,11 @@ module('Integration | Helper | load', function (hooks) {
       <div data-test-load-helper>
         {{#let (load this.promise) as |result|}}
           {{#if result.isResolved}}
-            <div data-test-state="RESOLVED">RESOLVED {{result.value}}</div>
+            <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
           {{else if result.isPending}}
-            <div data-test-state="PENDING">PENDING</div>
+            <div data-test-state='PENDING'>PENDING</div>
           {{else if result.isRejected}}
-            <div data-test-state="REJECTED">REJECTED</div>
+            <div data-test-state='REJECTED'>REJECTED</div>
           {{/if}}
         {{/let}}
       </div>
@@ -163,7 +163,7 @@ module('Integration | Helper | load', function (hooks) {
       assert.ok(true, 'things are neat!');
     });
 
-    await waitFor("[data-test-state='REJECTED']");
+    await waitFor('[data-test-state="REJECTED"]');
     assert.dom('[data-test-load-helper]').hasText('REJECTED', 'rejected');
 
     await renderPromise;
@@ -185,11 +185,11 @@ module('Integration | Helper | load', function (hooks) {
       <div data-test-load-helper>
         {{#let (load this.promise) as |result|}}
             {{#if result.isResolved}}
-              <div data-test-state="RESOLVED">RESOLVED {{result.value}}</div>
+              <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
             {{else if result.isPending}}
-              <div data-test-state="PENDING">PENDING</div>
+              <div data-test-state='PENDING'>PENDING</div>
             {{else if result.isRejected}}
-              <div data-test-state="REJECTED">REJECTED</div>
+              <div data-test-state='REJECTED'>REJECTED</div>
             {{/if}}
           {{/let}}
         </div>
@@ -221,11 +221,11 @@ module('Integration | Helper | load', function (hooks) {
         <div data-test-load-helper>
           {{#let (load this.promise) as |result|}}
             {{#if result.isResolved}}
-              <div data-test-state="RESOLVED">RESOLVED {{result.value}}</div>
+              <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
             {{else if result.isPending}}
-              <div data-test-state="PENDING">PENDING</div>
+              <div data-test-state='PENDING'>PENDING</div>
             {{else if result.isRejected}}
-              <div data-test-state="REJECTED">REJECTED</div>
+              <div data-test-state='REJECTED'>REJECTED</div>
             {{/if}}
           {{/let}}
         </div>
@@ -268,11 +268,11 @@ module('Integration | Helper | load', function (hooks) {
         <div data-test-load-helper>
           {{#let (load this.promise) as |result|}}
             {{#if result.isResolved}}
-              <div data-test-state="RESOLVED">RESOLVED {{result.value}}</div>
+              <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
             {{else if result.isPending}}
-              <div data-test-state="PENDING">PENDING</div>
+              <div data-test-state='PENDING'>PENDING</div>
             {{else if result.isRejected}}
-              <div data-test-state="REJECTED">REJECTED</div>
+              <div data-test-state='REJECTED'>REJECTED</div>
             {{/if}}
           {{/let}}
         </div>

@@ -59,7 +59,7 @@
     "@types/htmlbars-inline-precompile": "~3.0.0",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
-    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.4.3",

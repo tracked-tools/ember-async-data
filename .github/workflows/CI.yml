@@ -106,10 +106,10 @@ jobs:
       - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn add -D typescript@${{ matrix.ts-version }}
-        working-directory: addon
+        working-directory: ember-async-data
 
       - run: yarn tsc --noEmit
-        working-directory: addon
+        working-directory: ember-async-data
 
       - run: yarn tsc --noEmit --project type-tests
-        working-directory: addon
+        working-directory: ember-async-data

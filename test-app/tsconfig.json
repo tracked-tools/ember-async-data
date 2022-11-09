@@ -20,13 +20,13 @@
     "useDefineForClassFields": true,
     "experimentalDecorators": true,
     "paths": {
-      "dummy/tests/*": ["tests/*"],
-      "dummy/*": ["tests/dummy/app/*", "app/*"],
-      "ember-async-data": ["addon"],
-      "ember-async-data/*": ["addon/*"],
-      "ember-async-data/test-support": ["addon-test-support"],
-      "ember-async-data/test-support/*": ["addon-test-support/*"],
-      "@ember/destroyable": ["node_modules/ember-destroyable-polyfill"],
+      "test-app/tests/*": ["tests/*"],
+      "test-app/*": ["app/*"],
+      "ember-async-data": ["../ember-async-data/addon"],
+      "ember-async-data/*": ["../ember-async-data/addon/*"],
+      "ember-async-data/test-support": ["a../ember-async-data/ddon-test-support"],
+      "ember-async-data/test-support/*": ["../ember-async-data/addon-test-support/*"],
+      "@ember/destroyable": ["../node_modules/ember-destroyable-polyfill"],
       "*": ["types/*"]
     }
   },

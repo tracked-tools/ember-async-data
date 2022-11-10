@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  pull_request:
   push:
     # filtering branches here prevents duplicate builds from pull_request and push
     branches:
@@ -10,22 +9,37 @@ on:
     # always run CI for tags
     tags:
       - "*"
+  pull_request: {}
+
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
-    name: "Linting"
+    name: "Lint"
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
       - uses: actions/checkout@v3
       - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile --non-interactive
-      - run: yarn lint
+
+      - name: Lint Addon
+        run: yarn lint
+        working-directory: ember-async-data
+
+      - name: Lint Test App
+        run: yarn lint
         working-directory: test-app
 
   tests_linux:
     needs: lint
     name: "Tests: ubuntu (node@${{ matrix.node-version }})"
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     strategy:
       matrix:
         node-version: ["14", "16", "18"]
@@ -43,6 +57,7 @@ jobs:
     needs: lint
     name: "Tests: ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}-latest"
+    timeout-minutes: 10
 
     strategy:
       matrix:
@@ -59,6 +74,8 @@ jobs:
     needs: tests_linux
     name: "Tests: Ember compatibility (ember-source@${{ matrix.ember-version }})"
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     strategy:
       matrix:
         ember-version:
@@ -71,8 +88,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: volta-cli/action@v4
-        with:
-          node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile --non-interactive
       - run: "./node_modules/.bin/ember try:one ember-${{ matrix.ember-version }}"
         working-directory: test-app
@@ -91,8 +106,10 @@ jobs:
       - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn add -D typescript@${{ matrix.ts-version }}
-        working-directory: test-app
+        working-directory: ember-async-data
+
       - run: yarn tsc --noEmit
-        working-directory: test-app
+        working-directory: ember-async-data
+
       - run: yarn tsc --noEmit --project type-tests
-        working-directory: test-app
+        working-directory: ember-async-data

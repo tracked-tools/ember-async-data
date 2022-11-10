@@ -10,9 +10,16 @@
     "url": "https://v5.chriskrycho.com/"
   },
   "workspaces": [
+    "ember-async-data",
     "test-app"
   ],
-  "scripts": {},
+  "scripts": {
+    "lint": "yarn workspaces run lint",
+    "lint:fix": "yarn workspaces run lint:fix",
+    "prepare": "cd ember-async-data && yarn build",
+    "release": "release-it",
+    "test": "cd test-app && yarn test:ember"
+  },
   "devDependencies": {
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "@release-it-plugins/workspaces": "^3.2.0",
@@ -23,11 +30,24 @@
     "yarn": "1.22.19"
   },
   "release-it": {
+    "hooks": {
+      "before:init": "cp README.md LICENSE.md addon/"
+    },
     "plugins": {
       "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md"
       },
-      "@release-it-plugins/workspaces": true
+      "@release-it-plugins/workspaces": {
+        "publish": true,
+        "workspaces": [
+          "ember-async-data"
+        ],
+        "additionalManifests": {
+          "dependencyUpdates": [
+            "test-app/package.json"
+          ]
+        }
+      }
     },
     "git": {
       "tagName": "v${version}"

@@ -31,7 +31,7 @@
   },
   "release-it": {
     "hooks": {
-      "before:init": "cp README.md LICENSE.md addon/"
+      "before:init": "cp README.md LICENSE.md ember-async-data/"
     },
     "plugins": {
       "@release-it-plugins/lerna-changelog": {
@@ -45,7 +45,8 @@
         "additionalManifests": {
           "dependencyUpdates": [
             "test-app/package.json"
-          ]
+          ],
+          "versionUpdates": []
         }
       }
     },

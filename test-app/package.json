@@ -5,6 +5,7 @@
   "keywords": [],
   "repository": "https://github.com/chriskrycho/ember-async-data",
   "license": "MIT",
+  "private": true,
   "author": "",
   "directories": {
     "doc": "doc",

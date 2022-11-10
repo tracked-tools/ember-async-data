@@ -29,6 +29,9 @@
     "node": "14.21.0",
     "yarn": "1.22.19"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "release-it": {
     "hooks": {
       "before:init": "cp README.md LICENSE.md ember-async-data/"

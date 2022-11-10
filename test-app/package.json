@@ -60,7 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "broccoli-asset-rev": "^3.0.0",
-    "ember-async-data": "0.6.0",
+    "ember-async-data": "0.7.0",
     "ember-auto-import": "^2.4.3",
     "ember-cli": "~4.8.0",
     "ember-cli-babel": "^7.26.11",

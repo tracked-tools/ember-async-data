@@ -6,6 +6,39 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 
 
+
+## v0.7.0 (2022-11-10)
+
+#### :boom: Breaking Change
+* [#384](https://github.com/chriskrycho/ember-async-data/pull/384) convert addon to v2 format ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#300](https://github.com/chriskrycho/ember-async-data/pull/300) Set minimum Ember version to 3.28 ([@chriskrycho](https://github.com/chriskrycho))
+* [#301](https://github.com/chriskrycho/ember-async-data/pull/301) Require Node 14, support Node 16 and 18 ([@chriskrycho](https://github.com/chriskrycho))
+* [#298](https://github.com/chriskrycho/ember-async-data/pull/298) Set minimum TS version to 4.5, use Ember v4 types ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :rocket: Enhancement
+* [#301](https://github.com/chriskrycho/ember-async-data/pull/301) Require Node 14, support Node 16 and 18 ([@chriskrycho](https://github.com/chriskrycho))
+* [#299](https://github.com/chriskrycho/ember-async-data/pull/299) Add support for TS 4.6 and 4.7 ([@chriskrycho](https://github.com/chriskrycho))
+* [#213](https://github.com/chriskrycho/ember-async-data/pull/213) Add support for TS 4.5 ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :bug: Bug Fix
+* [#183](https://github.com/chriskrycho/ember-async-data/pull/183) Fix `paths` location in type tests tsconfig.json ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :memo: Documentation
+* [#359](https://github.com/chriskrycho/ember-async-data/pull/359) update hbs import from ember-cli-htmlbars ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#213](https://github.com/chriskrycho/ember-async-data/pull/213) Add support for TS 4.5 ([@chriskrycho](https://github.com/chriskrycho))
+* [#153](https://github.com/chriskrycho/ember-async-data/pull/153) Docs: improve and fix issues in the README ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :house: Internal
+* [#382](https://github.com/chriskrycho/ember-async-data/pull/382) convert to monorepo ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#364](https://github.com/chriskrycho/ember-async-data/pull/364) run `npx ember-cli-update --to=4.8.0` to align with the latest blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#380](https://github.com/chriskrycho/ember-async-data/pull/380) Update prettier setup per latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#243](https://github.com/chriskrycho/ember-async-data/pull/243) Use `finally` for `waiter.endAsync` ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 3
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v0.6.0 (2021-09-04)
 
 #### :boom: Breaking Change

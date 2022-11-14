@@ -32,8 +32,6 @@ module.exports = {
         './.eslintrc.js',
         './.prettierrc.js',
         './addon-main.js',
-        './config/**/*.js',
-        './rollup.config.js',
       ],
       parserOptions: {
         sourceType: 'script',

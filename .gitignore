@@ -1,12 +1,12 @@
-# dependencies
-/node_modules/
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# *.md copies from release
-/addon/README.md
-/addon/LICENSE.md
+# compiled output
+dist/
+
+# dependencies
+node_modules/
 
 # misc
-/.env*
-/.pnp*
-/npm-debug.log*
-/yarn-error.log
+.env*
+.eslintcache
+yarn-error.log

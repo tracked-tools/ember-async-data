@@ -2,8 +2,8 @@
 /node_modules/
 
 # *.md copies from release
-/addon/README.md
-/addon/LICENSE.md
+/ember-async-data/README.md
+/ember-async-data/LICENSE.md
 
 # misc
 /.env*

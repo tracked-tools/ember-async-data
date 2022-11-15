@@ -28,13 +28,7 @@ module.exports = {
   overrides: [
     // node files
     {
-      files: [
-        './.eslintrc.js',
-        './.prettierrc.js',
-        './addon-main.js',
-        './config/**/*.js',
-        './rollup.config.js',
-      ],
+      files: ['./.eslintrc.js', './.prettierrc.js', './addon-main.js'],
       parserOptions: {
         sourceType: 'script',
       },

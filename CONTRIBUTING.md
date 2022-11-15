@@ -26,7 +26,7 @@ This repo is divided into multiple packages using Yarn workspaces:
 During development, if you'd like test app to pick up changes in the addon, make sure to run both
 `cd ember-async-data && yarn start` and `cd test-app && ember test --server` in different terminals.
 
-## Running the dummy application
+## Running the test application
 
 * `cd test-app && ember serve`
 * Visit the dummy application at [http://localhost:4200](http://localhost:4200).

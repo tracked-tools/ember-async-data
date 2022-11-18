@@ -1,16 +1,16 @@
 <p align="center">
   
-  <a href="https://github.com/chriskrycho/ember-async-data/actions/workflows/CI.yml">
-    <img src="https://github.com/chriskrycho/ember-async-data/actions/workflows/CI.yml/badge.svg" alt="CI" style="max-width:100%;">
+  <a href="https://github.com/chriskrycho/ember-async-data/actions/workflows/ci.yml">
+    <img src="https://github.com/chriskrycho/ember-async-data/actions/workflows/ci.yml/badge.svg" alt="CI" style="max-width:100%;">
   </a>
   <a href='https://www.npmjs.com/package/ember-async-data'>
     <img src='https://img.shields.io/npm/v/ember-async-data.svg' alt='npm'>
   </a>
-  <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L29'>
+  <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/ci.yml#L29'>
     <img src='https://img.shields.io/badge/Node-14%20LTS%20%7C%2016%20LTS%20%7C%2018-darkgreen' alt='supported Node versions'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/CI.yml#L61'>
-    <img src='https://img.shields.io/badge/TypeScript-4.5%20%7C%204.6%20%7C%204.7%20%7C%20next-3178c6' alt='supported TypeScript versions'>
+    <img src='https://img.shields.io/badge/TypeScript-4.3%20%7C%204.4%20%7C%204.5%20%7C%204.6%20%7C%204.7%20%7C%204.8%20%7C%204.9%20%7C%20next-3178c6' alt='supported TypeScript versions'>
   </a>
   <a href='https://github.com/chriskrycho/ember-async-data/blob/main/.github/workflows/Nightly.yml'>
     <img src='https://github.com/chriskrycho/ember-async-data/workflows/Nightly%20TypeScript%20Run/badge.svg' alt='Nightly TypeScript Run'>
@@ -276,7 +276,7 @@ This library provides full type safety for `TrackedAsyncData`; see [**API**](#ap
 
 #### Note on Usage with API Calls
 
-When using `TrackedAsyncData` with an API call in a getter, it is important to use `@cached` (via the [ember-cached-decorator-polyfill](https://github.com/ember-polyfills/ember-cached-decorator-polyfill)) with the getter. Otherwise, you can end up triggering the creation of multiple API calls. For example, given a backing class like this:
+When using `TrackedAsyncData` with an API call in a getter, it is important to use [`@cached`](https://api.emberjs.com/ember/release/functions/@glimmer%2Ftracking/cached) (for Ember.js < 4.5 via the [ember-cached-decorator-polyfill](https://github.com/ember-polyfills/ember-cached-decorator-polyfill)) with the getter. Otherwise, you can end up triggering the creation of multiple API calls. For example, given a backing class like this:
 
 ```ts
 import Component from '@glimmer/component';

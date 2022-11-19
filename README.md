@@ -418,10 +418,10 @@ from somewhere in your app. When using Glint already, you will likely have a fil
 
 ```ts
 import '@glint/environment-ember-loose';
-import type SimpleTrackHelperRegistry from 'ember-async-data/template-registry';
+import type EmberAsyncDataRegistry from 'ember-async-data/template-registry';
 
 declare module '@glint/environment-ember-loose/registry' {
-  export default interface Registry extends SimpleTrackHelperRegistry, /* other addon registries */ {
+  export default interface Registry extends EmberAsyncDataRegistry, /* other addon registries */ {
     // local entries
   }
 }

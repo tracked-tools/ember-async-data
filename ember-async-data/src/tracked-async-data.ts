@@ -1,5 +1,4 @@
 import { tracked } from '@glimmer/tracking';
-import { dependentKeyCompat } from '@ember/object/compat';
 import { assert, warn } from '@ember/debug';
 import { buildWaiter } from '@ember/test-waiters';
 import {
@@ -129,7 +128,6 @@ class _TrackedAsyncData<T> {
   /**
    * The resolution state of the promise.
    */
-  @dependentKeyCompat
   get state(): State<T>['data'][0] {
     return this.#state.data[0];
   }
@@ -143,7 +141,6 @@ class _TrackedAsyncData<T> {
       breaking change which drops support for pre-Octane idioms, it will *only*
       return `T` and will *throw* if you access it when the state is wrong.
    */
-  @dependentKeyCompat
   get value(): T | null {
     warn(
       "Accessing `value` when TrackedAsyncData is not in the resolved state is not supported and will throw an error in the future. Always check that `.state` is `'RESOLVED'` or that `.isResolved` is `true` before accessing this property.",
@@ -164,7 +161,6 @@ class _TrackedAsyncData<T> {
       idioms, it will *only* return `E` and will *throw* if you access it when
       the state is wrong.
    */
-  @dependentKeyCompat
   get error(): unknown {
     warn(
       "Accessing `error` when TrackedAsyncData is not in the rejected state is not supported and will throw an error in the future. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.",
@@ -178,19 +174,16 @@ class _TrackedAsyncData<T> {
   /**
     Is the state `"PENDING"`.
    */
-  @dependentKeyCompat
   get isPending(): boolean {
     return this.state === 'PENDING';
   }
 
   /** Is the state `"RESOLVED"`? */
-  @dependentKeyCompat
   get isResolved(): boolean {
     return this.state === 'RESOLVED';
   }
 
   /** Is the state `"REJECTED"`? */
-  @dependentKeyCompat
   get isRejected(): boolean {
     return this.state === 'REJECTED';
   }
@@ -316,25 +309,25 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
     @cached
     get someData() {
       let recordPromise = this.store.findRecord('user', this.args.id);
-      return new TrackedAsyncData(recordPromise);
+      return new TrackedAsyncData(recordPromise, this);
     }
+
+    <template>
+      {{#if this.someData.isResolved}}
+        <PresentTheData @data={{this.someData.data}} />
+      {{else if this.someData.isPending}}
+        <LoadingSpinner />
+      {{else if this.someData.isRejected}}
+        <p>
+          Whoops! Looks like something went wrong!
+          {{this.someData.error.message}}
+        </p>
+      {{/endif}}
+    </template>
   }
   ```
 
   And a corresponding template:
-
-  ```hbs
-  {{#if this.someData.isResolved}}
-    <PresentTheData @data={{this.someData.data}} />
-  {{else if this.someData.isPending}}
-    <LoadingSpinner />
-  {{else if this.someData.isRejected}}
-    <p>
-      Whoops! Looks like something went wrong!
-      {{this.someData.error.message}}
-    </p>
-  {{/endif}}
-  ```
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
 const TrackedAsyncData = _TrackedAsyncData as new <T>(

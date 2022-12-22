@@ -70,7 +70,14 @@ export function load<T>(
   return new TrackedAsyncData(data, context);
 }
 
-export default class Load<T> extends Helper {
+export interface LoadSignature<T> {
+  Args: {
+    Positional: [Promise<T>];
+  };
+  Return: TrackedAsyncData<T>;
+}
+
+export default class Load<T> extends Helper<LoadSignature<T>> {
   compute([data]: [T | Promise<T>]): TrackedAsyncData<T> {
     return new TrackedAsyncData(data, this);
   }

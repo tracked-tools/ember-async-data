@@ -56,7 +56,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
       @cached
       get someData() {
         let recordPromise = this.store.findRecord('user', this.args.id);
-        return new TrackedAsyncData(recordPromise);
+        return new TrackedAsyncData(recordPromise, this);
       }
     }
     ```

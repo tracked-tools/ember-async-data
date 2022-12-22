@@ -1303,50 +1303,29 @@
   dependencies:
     babel-plugin-debug-macros "^0.3.4"
 
-"@glint/config@^0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@glint/config/-/config-0.9.7.tgz#43077e9cd2743d3bb66f6c4670681c49644ac139"
-  integrity sha512-XkWIZ3fuOlcofUJUaJmRS57mVVNi+Af2HtrZkBXEOCh4+BNz2wclxv2WKvkhmtvLhEUOhHb5eU3gwI58SuwgXQ==
+"@glint/core@^1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@glint/core/-/core-1.0.0-beta.2.tgz#68682d4663e2ae3eebfd0682b9f9505e4a33bb6f"
+  integrity sha512-LmQ7I0BXGzL5FhtaXXUCNUfGnqK6s+WKbcT0VcL3vxfMYW4btCzcWMOrBOhczI1+yYbPdVe++Rb+l0ovWURPzQ==
   dependencies:
+    "@glimmer/syntax" "^0.84.2"
     escape-string-regexp "^4.0.0"
-    minimatch "^3.0.4"
-    resolve "^1.17.0"
     silent-error "^1.1.1"
-
-"@glint/core@^0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@glint/core/-/core-0.9.7.tgz#887dbdfa10d89702549de36197cc2eb0783a5c86"
-  integrity sha512-1YLHNRnuYI1dDUKWq/ue4JqiBt6TVR8e7VQJWy37CKB0tiBhWw/FPvr7/S7XbUxCt6KHO0Kl0x/eqLunu3WiQw==
-  dependencies:
-    "@glint/config" "^0.9.7"
-    "@glint/transform" "^0.9.7"
-    resolve "^1.17.0"
     uuid "^8.3.2"
     vscode-languageserver "^8.0.1"
     vscode-languageserver-textdocument "^1.0.5"
     vscode-uri "^3.0.2"
     yargs "^17.5.1"
 
-"@glint/environment-ember-loose@^0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@glint/environment-ember-loose/-/environment-ember-loose-0.9.7.tgz#8d27e93d6bd3afd59c46acad27a2c3130045dee0"
-  integrity sha512-MlCGZtB1Clp4vQWIm2APSnCm7nL8wVhFMOhVy2qzpV0nfLyg3pcN9CQHNpfdJvCydBB72cA4/ahPj7VEFL6xsg==
-  dependencies:
-    "@glint/config" "^0.9.7"
-    "@glint/template" "^0.9.7"
+"@glint/environment-ember-loose@^1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@glint/environment-ember-loose/-/environment-ember-loose-1.0.0-beta.2.tgz#a189f7454a8404b5a5062c3bef554cf1043bfeff"
+  integrity sha512-WIsccams5kKvv8ECXQgrT1iySYYXWa+k5B4+1HFowr51ojkizFYrG5skAjIKX/7+ChuqpSLCAPquEOAp24Zhhw==
 
-"@glint/template@^0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@glint/template/-/template-0.9.7.tgz#8736f357482841962bc66e75831f189f33677165"
-  integrity sha512-MCp8GxQDIbH8ZzfNxHhVqCSKlydBgQfBEwJLDpN81lgFRCldSDPueIbk8sz3EhpGiZJVdNQbpGeYIDsUXe1ocg==
-
-"@glint/transform@^0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@glint/transform/-/transform-0.9.7.tgz#01c60249c1fe6663955d2acd2cf7625a551fb3f3"
-  integrity sha512-vd0th+Zo4cirYepASpC0fE0ZCqAcI9Y6qHYE0xi4+MY05bFRxBr7Q9ggDoWk+slynTyUrVgzCCeazAYOlZsYcg==
-  dependencies:
-    "@glimmer/syntax" "^0.84.2"
-    "@glint/config" "^0.9.7"
+"@glint/template@^1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@glint/template/-/template-1.0.0-beta.2.tgz#ed13ca4f0e6c616579d9eb9c6b11eac49899c742"
+  integrity sha512-gaWiWAjvmgOTmHUqXt+fACINMSnOxKcPYEwb6A6DNYpCaKWxhxqIjIrQLdrumULLK9+MbxMrIa3Od05FcIDQFQ==
 
 "@handlebars/parser@~2.0.0":
   version "2.0.0"

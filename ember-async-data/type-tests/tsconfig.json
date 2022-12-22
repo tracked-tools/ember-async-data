@@ -1,4 +1,4 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./tracked-async-data-test.ts", "./load-test.ts"]
+  "include": ["**/*.ts"]
 }

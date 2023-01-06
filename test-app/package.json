@@ -31,7 +31,7 @@
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
-    "@types/qunit": "^2.19.3",
+    "@types/qunit": "^2.19.4",
     "@types/rsvp": "^4.0.4",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",

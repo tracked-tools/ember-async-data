@@ -1,5 +1,5 @@
 <p align="center">
-  
+
   <a href="https://github.com/tracked-tools/ember-async-data/actions/workflows/ci.yml">
     <img src="https://github.com/tracked-tools/ember-async-data/actions/workflows/ci.yml/badge.svg" alt="CI" style="max-width:100%;">
   </a>
@@ -38,7 +38,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
           Whoops! Looks like something went wrong!
           {{result.error.message}}
         </p>
-      {{/endif}}
+      {{/if}}
     {{/let}}
     ```
 
@@ -60,7 +60,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
       }
     }
     ```
-    
+
     (See the guide [below](#in-javascript) for why this uses `@cached`!)
 
     ```hbs
@@ -73,7 +73,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
         Whoops! Looks like something went wrong!
         {{this.someData.error.message}}
       </p>
-    {{/endif}}
+    {{/if}}
     ```
 
 
@@ -206,7 +206,7 @@ TrackedAsyncData: {
   "isResolved": true,
   "value": "potato",
   "isRejected": false
-} 
+}
 */
 
 // create another promise, this time to reject
@@ -219,7 +219,7 @@ TrackedAsyncData: {
   "isPending": true,
   "isResolved": false,
   "isRejected": false
-} 
+}
 */
 
 await secondDeferred.reject('wat');
@@ -255,7 +255,7 @@ This library provides full type safety for `TrackedAsyncData`; see [**API**](#ap
         console.log(example.error);             // 🛑 WARN
         break;
       case 'RESOLVED':
-        console.log(example.value?.theAnswer);  // 🛑 WARN; type is `number | 
+        console.log(example.value?.theAnswer);  // 🛑 WARN; type is `number |
         console.log(example.error);             // ✅
         break;
       default:
@@ -571,7 +571,7 @@ module('my very own tests', function (hooks) {
      // Then to clean up the test, we need the original promise to resolve
      // so the test waiter system isn't just stuck waiting for it forever.
      resolve();
-     // Finally, we 
+     // Finally, we
      await renderPromise;
   });
 });

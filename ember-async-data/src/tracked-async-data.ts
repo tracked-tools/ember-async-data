@@ -333,7 +333,7 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
       Whoops! Looks like something went wrong!
       {{this.someData.error.message}}
     </p>
-  {{/endif}}
+  {{/if}}
   ```
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;

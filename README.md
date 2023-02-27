@@ -321,7 +321,7 @@ _**Note:** in the future, we will make a set of [Resources](https://www.pzuraq.c
 
 #### `load` function
 
-For symmetry with templates, you can also use `load` in JavaScript; it has the exact same semantics as calling `new TrackedPromise`. Using `load`, the example from the top of the README would look like this:
+For symmetry with templates, you can also use `load` in JavaScript; it has the exact same semantics as calling `new TrackedAsyncData`. Using `load`, the example from the top of the README would look like this:
 
 ```ts
 import Component from '@glimmer/component';

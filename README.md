@@ -249,7 +249,7 @@ This library provides full type safety for `TrackedAsyncData`; see [**API**](#ap
         console.log(example.value.theAnswer);   // ✅
         console.log(example.error);             // 🛑 WARN
         break;
-      case 'RESOLVED':
+      case 'REJECTED':
         console.log(example.value?.theAnswer);  // 🛑 WARN; type is `number |
         console.log(example.error);             // ✅
         break;

@@ -283,7 +283,7 @@ export default class Profile extends Component<{ userId: string }> {
   @service store: Store;
 
   get fullProfile() {
-    return new TrackedAsyncData(this.store.findRecord('user', userId), this);
+    return new TrackedAsyncData(this.store.findRecord('user', userId));
   }
 }
 ```
@@ -334,7 +334,7 @@ export default class SmartProfile extends Component {
 
   @cached
   get someData() {
-    return load(this.store.findRecord('user', this.args.id), this);
+    return load(this.store.findRecord('user', this.args.id));
   }
 }
 ```

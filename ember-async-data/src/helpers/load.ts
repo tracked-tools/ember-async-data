@@ -1,4 +1,4 @@
-import Helper from '@ember/component/helper';
+import { helper } from '@ember/component/helper';
 import TrackedAsyncData from '../tracked-async-data';
 
 /**
@@ -63,15 +63,16 @@ import TrackedAsyncData from '../tracked-async-data';
   @note Prefer to use `TrackedAsyncData` directly! This function is provided
     simply for symmetry with the helper and backwards compatibility.
  */
-export function load<T>(
-  data: T | Promise<T>,
-  context: {}
-): TrackedAsyncData<T> {
-  return new TrackedAsyncData(data, context);
+export function load<T>(data: T | Promise<T>): TrackedAsyncData<T> {
+  return new TrackedAsyncData(data);
 }
 
-export default class Load<T> extends Helper {
-  compute([data]: [T | Promise<T>]): TrackedAsyncData<T> {
-    return new TrackedAsyncData(data, this);
-  }
-}
+// TODO: in v2.0.0, switch this to simply using the function above. (It needs to
+// be in a breaking change because of the change in the call signature.)
+const loadHelper = helper(function loadHelper<T>([data]: [
+  T | Promise<T>
+]): TrackedAsyncData<T> {
+  return new TrackedAsyncData(data);
+});
+
+export default loadHelper;

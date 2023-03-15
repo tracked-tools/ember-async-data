@@ -20,7 +20,7 @@
     "prepare": "yarn build",
     "release": "release-it",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
-    "start:addon": "yarn workspace ember-async-data1 run start",
+    "start:addon": "yarn workspace ember-async-data run start",
     "start:test-app": "yarn workspace test-app run start",
     "test": "yarn workspaces run test"
   },

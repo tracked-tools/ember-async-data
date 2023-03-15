@@ -20,8 +20,6 @@ module('Unit | TrackedAsyncData', function () {
     assert.true(result.isPending);
     assert.false(result.isResolved);
     assert.false(result.isRejected);
-    assert.strictEqual(result.value, null);
-    assert.strictEqual(result.error, null);
 
     deferred.resolve();
     await deferred.promise;

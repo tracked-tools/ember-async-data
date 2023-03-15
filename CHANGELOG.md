@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 
 
+
+## v1.0.1 (2023-03-15)
+
+**Note:** This is a significant bug fix which *does* (very mildly) break the public API, but necessarily so for the sake of fixing a bug.
+
+#### :bug: Bug Fix
+* [#578](https://github.com/tracked-tools/ember-async-data/pull/578) Bugfix: drop `context` and stop caching `TrackedAsyncData` ([@chriskrycho](https://github.com/chriskrycho))
+
+    Previously, `TrackedAsyncData` and the `load` function accepted a `context` parameter as their second argument, to use with Ember's destroyables API. However, that was (a) unnecessary and (b) could actually cause memory leaks, literally the opposite of what it was designed to do. To account for this change, simply remove that call from all call sites.
+
+    Additionally, note that this means that you will no longer get a single instance of `TrackedAsyncData` for the same promise. In most cases, this is irrelevant, and it is likely that removing our cache which attempted to be helpful that way will *improve* your performance.
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v1.0.0 (2023-03-15)
 
 #### :boom: Breaking Change

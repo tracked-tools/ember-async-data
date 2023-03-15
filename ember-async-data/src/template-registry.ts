@@ -3,7 +3,9 @@
 // See https://typed-ember.gitbook.io/glint/using-glint/ember/authoring-addons
 
 import type Load from './helpers/load';
+import type Async from './components/async';
 
 export default interface Registry {
   load: typeof Load;
+  Async: typeof Async;
 }

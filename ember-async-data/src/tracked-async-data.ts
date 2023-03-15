@@ -63,11 +63,12 @@ class _TrackedAsyncData<T> {
       parameter, and you have a test failure which causes async code to not get
       cleaned up you may see all following tests fail.
    */
-  constructor(data: T | Promise<T>, context: {}) {
-    assert(
-      'You must pass a destroyable object as the context for TrackedAsyncData',
-      !!context
-    );
+  constructor(data: T | Promise<T>, context: object) {
+    if (typeof context !== 'object' || context == null) {
+      throw new Error(
+        'You must pass a destroyable object as the context for TrackedAsyncData'
+      );
+    }
 
     if (this.constructor !== _TrackedAsyncData) {
       throw new Error('tracked-async-data cannot be subclassed');

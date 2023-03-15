@@ -314,7 +314,7 @@ This code would invoke the getter twice on first render, which would therefore t
 This is the *correct* default behavior, even though it might be surprising at first:
 
 - For getters and templates: in Octane, caching is something we layer onto getters where it makes sense to pay for them, rather than paying for them *everywhere* (as in Ember classic) even when that's far more costly than just rerunning the getter a couple times. For API calls, it always makes sense!
-- For the `TrackedAsyncData` API, this similarly means we don't pay for extra caching of arguments in the many cases we don't need it. (We *do* guarantee we only ever have a single `TrackedAsyncData` per `Promise`, as described elsewhere in the docs, so we don't pay *more* than we need to.)
+- For the `TrackedAsyncData` API, this similarly means we don't pay for extra caching of arguments in the many cases we don't need it.
 
 _**Note:** in the future, we will make a set of [Resources](https://www.pzuraq.com/introducing-use/) layered on top of the core data types here, which will allow us to build in caching for API calls._
 

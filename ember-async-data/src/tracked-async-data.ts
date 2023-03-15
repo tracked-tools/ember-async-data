@@ -1,31 +1,9 @@
 import { tracked } from '@glimmer/tracking';
 import { dependentKeyCompat } from '@ember/object/compat';
-import { assert, deprecate } from '@ember/debug';
+import { deprecate } from '@ember/debug';
 import { buildWaiter } from '@ember/test-waiters';
-import {
-  associateDestroyableChild,
-  registerDestructor,
-} from '@ember/destroyable';
 
 const waiter = buildWaiter('ember-async-data');
-
-// SAFETY: we are actually *narrowing* the type here, which would *not* be safe
-// except that we uphold the invariant that a given `Promise<T>` is always
-// directly mapped to a single corresponding `TrackedAsyncData<T>` in `load`
-// below.
-//
-// This approach is roughly as if we had higher-kinded types and accordingly
-// could simply write something like `forall T : WeakMap<Promise<T>,
-// TrackedAsyncData<T>>`. Since we cannot, we provide a type-level override
-// *only* for the `get` and `set` method (the only methods we use, but also the
-// only methods for which this narrowing is relevant).
-const TRACKED_PROMISES = new WeakMap() as {
-  get<T>(key: Promise<T>): _TrackedAsyncData<T> | null;
-  set<T>(
-    key: Promise<T>,
-    value: _TrackedAsyncData<T>
-  ): WeakMap<Promise<T>, _TrackedAsyncData<T>>;
-};
 
 /** A very cheap representation of the of a promise. */
 type StateRepr<T> =
@@ -55,67 +33,32 @@ class _TrackedAsyncData<T> {
 
   /**
     @param promise The promise to load.
-    @param context The (destroyable) context to use in constructing the object.
-      An optional, but highly recommended, context object to use for managing
-      the destruction of the resulting `TrackedAsyncData`, which can be any
-      object which participates in Ember's normal destruction lifecycle
-      (components, helpers, modifiers, etc.). If you do not supply this
-      parameter, and you have a test failure which causes async code to not get
-      cleaned up you may see all following tests fail.
    */
-  constructor(data: T | Promise<T>, context: object) {
-    if (typeof context !== 'object' || context == null) {
-      throw new Error(
-        'You must pass a destroyable object as the context for TrackedAsyncData'
-      );
-    }
-
+  constructor(data: T | Promise<T>) {
     if (this.constructor !== _TrackedAsyncData) {
       throw new Error('tracked-async-data cannot be subclassed');
     }
 
-    const promise = isPromiseLike(data) ? data : Promise.resolve(data);
-    this.#token = waiter.beginAsync();
-
-    // We cache a map from each `Promise` we "load" to a corresponding
-    // `TrackedAsyncData` so that if multiple callers pass in the same `Promise`,
-    // they get identical results *and* do not pay extra overhead for it. So, if
-    // we have already created a `TrackedAsyncData` for this particular promise,
-    // return it!
-    //
-    // Note that this does *not* handle the case where users passed in a value
-    // rather than a `Promise` of the value: we eagerly create a new `Promise` and
-    // therefore `TrackedAsyncData` for each of those above. This is an acceptable
-    // tradeoff because you should not normally `load` a known constant value: we
-    // support it solely to enable users to treat this similarly to `Promise`
-    // itself, so that at the site of *use*, callers can simply call` load` and
-    // trust it to do the "right thing" rather than needing to conditionally check
-    // and wrap data handed to *them*.
-    const existingTrackedAsyncData = TRACKED_PROMISES.get(promise);
-    if (existingTrackedAsyncData) {
-      return existingTrackedAsyncData;
+    if (!isPromiseLike(data)) {
+      this.#state.data = ['RESOLVED', data];
+      return;
     }
+
+    const promise = data;
+    this.#token = waiter.beginAsync();
 
     // Otherwise, we know that haven't yet handled that promise anywhere in the
     // system, so we continue creating a new instance.
-    promise
-      .then(
-        (value) => (this.#state.data = ['RESOLVED', value]),
-        (error) => (this.#state.data = ['REJECTED', error])
-      )
-      .finally(() => {
+    promise.then(
+      (value) => {
+        this.#state.data = ['RESOLVED', value];
         waiter.endAsync(this.#token);
-      });
-
-    TRACKED_PROMISES.set(promise, this);
-
-    // Handle teardown safely so that (a) we don't try to do destroyable
-    // teardown if we don't have a context and (b) if we are able to set it up,
-    // we don't leak async state!
-    associateDestroyableChild(context, this);
-    registerDestructor(this, () => {
-      waiter.endAsync(this.#token);
-    });
+      },
+      (error) => {
+        this.#state.data = ['REJECTED', error];
+        waiter.endAsync(this.#token);
+      }
+    );
   }
 
   /**

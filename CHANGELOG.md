@@ -7,6 +7,44 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 
 
+
+## v1.0.0 (2023-03-15)
+
+#### :boom: Breaking Change
+* [#527](https://github.com/tracked-tools/ember-async-data/pull/527) Drop TypeScript support for <= 4.7 ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#575](https://github.com/tracked-tools/ember-async-data/pull/575) Add hard error and deprecations for 1.0 ([@chriskrycho](https://github.com/chriskrycho))
+* [#473](https://github.com/tracked-tools/ember-async-data/pull/473) Use the types published from Ember itself ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :rocket: Enhancement
+* [#575](https://github.com/tracked-tools/ember-async-data/pull/575) Add hard error and deprecations for 1.0 ([@chriskrycho](https://github.com/chriskrycho))
+* [#473](https://github.com/tracked-tools/ember-async-data/pull/473) Use the types published from Ember itself ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :memo: Documentation
+* [#546](https://github.com/tracked-tools/ember-async-data/pull/546) Fix wrong Readme example ([@simonihmig](https://github.com/simonihmig))
+* [#545](https://github.com/tracked-tools/ember-async-data/pull/545) Fix reference to non-existing `TrackedPromise` in Readme ([@simonihmig](https://github.com/simonihmig))
+* [#528](https://github.com/tracked-tools/ember-async-data/pull/528) Fix typo in docs ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#508](https://github.com/tracked-tools/ember-async-data/pull/508) Replace /endif with /if ([@kennstenicht](https://github.com/kennstenicht))
+* [#456](https://github.com/tracked-tools/ember-async-data/pull/456) Update links in README.md after migration to tracked-tools org ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#404](https://github.com/tracked-tools/ember-async-data/pull/404) Add Glint usage docs ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#407](https://github.com/tracked-tools/ember-async-data/pull/407) Add note about TypeScript 4.9 support ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#406](https://github.com/tracked-tools/ember-async-data/pull/406) Minor tweaks in README.md ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#576](https://github.com/tracked-tools/ember-async-data/pull/576) Use `16 || >= 18` in test app engines ([@chriskrycho](https://github.com/chriskrycho))
+* [#572](https://github.com/tracked-tools/ember-async-data/pull/572) [BREAKING] Drop support for non-active versions of Node ([@nlfurniss](https://github.com/nlfurniss))
+* [#547](https://github.com/tracked-tools/ember-async-data/pull/547) Disable publish-unstable workflow ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#474](https://github.com/tracked-tools/ember-async-data/pull/474) Skip publish-unstable for dependabot PRs ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#401](https://github.com/tracked-tools/ember-async-data/pull/401) add publish-unstable workflow ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#397](https://github.com/tracked-tools/ember-async-data/pull/397) update v2 addon setup ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#396](https://github.com/tracked-tools/ember-async-data/pull/396) Remove eslint-plugin-qunit from addon .eslintrc.js ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 5
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Christoph Wiedenmann ([@kennstenicht](https://github.com/kennstenicht))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v0.7.0 (2022-11-10)
 
 #### :boom: Breaking Change

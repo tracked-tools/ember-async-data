@@ -1,6 +1,6 @@
 import { tracked } from '@glimmer/tracking';
 import { dependentKeyCompat } from '@ember/object/compat';
-import { assert, warn } from '@ember/debug';
+import { assert, deprecate } from '@ember/debug';
 import { buildWaiter } from '@ember/test-waiters';
 import {
   associateDestroyableChild,
@@ -146,10 +146,18 @@ class _TrackedAsyncData<T> {
    */
   @dependentKeyCompat
   get value(): T | null {
-    warn(
+    deprecate(
       "Accessing `value` when TrackedAsyncData is not in the resolved state is not supported and will throw an error in the future. Always check that `.state` is `'RESOLVED'` or that `.isResolved` is `true` before accessing this property.",
       this.#state.data[0] === 'RESOLVED',
-      { id: 'tracked-async-data::invalid-value-access' }
+      {
+        id: 'tracked-async-data::invalid-value-access',
+        for: 'ember-async-data',
+        since: {
+          available: '1.0.0',
+          enabled: '1.0.0',
+        },
+        until: '2.0.0',
+      }
     );
 
     return this.#state.data[0] === 'RESOLVED' ? this.#state.data[1] : null;
@@ -167,10 +175,18 @@ class _TrackedAsyncData<T> {
    */
   @dependentKeyCompat
   get error(): unknown {
-    warn(
+    deprecate(
       "Accessing `error` when TrackedAsyncData is not in the rejected state is not supported and will throw an error in the future. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.",
       this.#state.data[0] === 'REJECTED',
-      { id: 'tracked-async-data::invalid-error-access' }
+      {
+        id: 'tracked-async-data::invalid-error-access',
+        for: 'ember-async-data',
+        since: {
+          available: '1.0.0',
+          enabled: '1.0.0',
+        },
+        until: '2.0.0',
+      }
     );
 
     return this.#state.data[0] === 'REJECTED' ? this.#state.data[1] : null;

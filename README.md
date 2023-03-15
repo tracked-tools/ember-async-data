@@ -613,7 +613,7 @@ The public API for `TrackedAsyncData`:
 
 ```ts
 class TrackedAsyncData<T> {
-  constructor(data: T | Promise<T>, context?: object);
+  constructor(data: T | Promise<T>);
 
   get state(): "PENDING" | "RESOLVED" | "REJECTED";
   get isPending(): boolean;
@@ -632,7 +632,6 @@ class TrackedAsyncData<T> {
 #### Notes
 
 - `value` is `T | null` today, but only for the sake of safe interop with Ember Classic computed properties (which eagerly evaluate getters for the sake of). You *should not* rely on the `null` fallback, as accessing `value` when `isResolved` is false will become a hard error at the 1.0 release. The same is true of `error`.
-- The `context` argument is currently optional but will become mandatory at the 1.0 release. This allows the type to be torn down correctly as part of Ember's "destroyables" API.
 - The class is *not* intended for subclassing, and will in fact throw in the constructor if you try to subclass it!
 - The `value` and `error` getters will *warn* if you access them and the underlying promise is in the wrong state. In the future, this will be converted to throwing an error. (It currently only warns because classic computed properties actively lookup and cache the values returned from their dependent keys.)
 
@@ -642,7 +641,7 @@ class TrackedAsyncData<T> {
 The `load` helper function is basically just a static constructor for `TrackedAsyncData`:
 
 ```ts
-function load<T>(data: T | Promise<T>, context?: object): TrackedAsyncData<T>;
+function load<T>(data: T | Promise<T>): TrackedAsyncData<T>;
 ```
 
 

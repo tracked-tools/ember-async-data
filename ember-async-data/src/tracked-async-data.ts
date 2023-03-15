@@ -298,8 +298,7 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
 const TrackedAsyncData = _TrackedAsyncData as new <T>(
-  data: T | Promise<T>,
-  context: {}
+  data: T | Promise<T>
 ) => TrackedAsyncData<T>;
 export default TrackedAsyncData;
 

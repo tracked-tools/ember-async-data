@@ -53,25 +53,16 @@ import TrackedAsyncData from "ember-async-data/tracked-async-data";
 
   @param data The (async) data we want to operate on: a value or a `Promise` of
     a value.
-  @param context An optional, but highly recommended, context object to use for
-    managing the destruction of the resulting `TrackedAsyncData`, which can be
-    any object which participates in Ember's normal destruction lifecycle
-    (components, helpers, modifiers, etc.). If you do not supply this parameter,
-    and you have a test failure which causes async code to not get cleaned up
-    you may see all following tests fail.
   @returns An object containing the state(, value, and error).
   @note Prefer to use `TrackedAsyncData` directly! This function is provided
     simply for symmetry with the helper and backwards compatibility.
  */
-export function load<T>(
-  data: T | Promise<T>,
-  context?: object
-): TrackedAsyncData<T> {
-  return new TrackedAsyncData(data, context);
+export function load<T>(data: T | Promise<T>): TrackedAsyncData<T> {
+  return new TrackedAsyncData(data);
 }
 
 export default class Load<T> extends Helper {
   compute([data]: [T | Promise<T>]): TrackedAsyncData<T> {
-    return new TrackedAsyncData(data, this);
+    return new TrackedAsyncData(data);
   }
 }

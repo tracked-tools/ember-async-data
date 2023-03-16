@@ -202,7 +202,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(1);
 
     const promise = Promise.resolve("hello");
-    const result = new TrackedAsyncData(promise, this);
+    const result = new TrackedAsyncData(promise);
     await promise;
     assert.equal(result.state, "RESOLVED");
   });
@@ -211,7 +211,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(2);
 
     const promise = Promise.reject(new Error("foobar"));
-    const result = new TrackedAsyncData(promise, this);
+    const result = new TrackedAsyncData(promise);
 
     // This handles the error thrown *locally*.
     await promise.catch((error: unknown) => {

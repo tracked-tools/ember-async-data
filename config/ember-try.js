@@ -1,12 +1,6 @@
 "use strict";
 
 const getChannelURL = require("ember-source-channel-url");
-const typeTests = require("./ember-try-typescript");
-
-const typeScriptScenarios = typeTests.scenarios.map((s) => ({
-  ...s,
-  command: typeTests.command,
-}));
 
 module.exports = async function () {
   return {
@@ -37,36 +31,13 @@ module.exports = async function () {
         },
       },
       {
-        name: "ember-release",
+        name: "ember-lts-3.28",
         npm: {
           devDependencies: {
-            "ember-source": await getChannelURL("release"),
+            "ember-source": "~3.28.0",
           },
         },
       },
-      {
-        name: "ember-beta",
-        allowedToFail: true,
-        npm: {
-          devDependencies: {
-            "ember-source": await getChannelURL("beta"),
-          },
-        },
-      },
-      {
-        name: "ember-canary",
-        allowedToFail: true,
-        npm: {
-          devDependencies: {
-            "ember-source": await getChannelURL("canary"),
-          },
-        },
-      },
-
-      // Include the type tests, while still leaving them in their own file so
-      // they can be run independently, for example to run all the type tests but
-      // *only* the type tests locally.
-      ...typeScriptScenarios,
     ],
   };
 };

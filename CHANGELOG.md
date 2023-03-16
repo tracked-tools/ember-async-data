@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+
+## v0.5.2 (2023-03-16)
+
+#### :bug: Bug Fix
+* [#581](https://github.com/tracked-tools/ember-async-data/pull/581) Backport context bug fix to 0.5.x ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v0.5.1 (2021-09-04)
 
 #### :house: Internal

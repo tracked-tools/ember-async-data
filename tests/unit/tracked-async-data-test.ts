@@ -9,14 +9,14 @@ module("Unit | TrackedAsyncData", function () {
     //   this fails both at the type-checking level and dynamically at runtime.
     class Subclass extends TrackedAsyncData<unknown> {}
 
-    assert.throws(() => new Subclass(Promise.resolve("nope"), this));
+    assert.throws(() => new Subclass(Promise.resolve("nope")));
   });
 
   test("is initially PENDING", async function (assert) {
     assert.expect(6);
     const deferred = defer();
 
-    const result = new TrackedAsyncData(deferred.promise, this);
+    const result = new TrackedAsyncData(deferred.promise);
     assert.equal(result.state, "PENDING");
     assert.equal(result.isPending, true);
     assert.equal(result.isResolved, false);
@@ -32,7 +32,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(6);
 
     const deferred = defer();
-    const result = new TrackedAsyncData(deferred.promise, this);
+    const result = new TrackedAsyncData(deferred.promise);
 
     deferred.resolve("foobar");
     await settled();
@@ -49,7 +49,7 @@ module("Unit | TrackedAsyncData", function () {
     test("undefined", async function (assert) {
       assert.expect(6);
 
-      const loadUndefined = new TrackedAsyncData(undefined, this);
+      const loadUndefined = new TrackedAsyncData(undefined);
       await settled();
 
       assert.equal(loadUndefined.state, "RESOLVED");
@@ -63,7 +63,7 @@ module("Unit | TrackedAsyncData", function () {
     test("null", async function (assert) {
       assert.expect(6);
 
-      const loadNull = new TrackedAsyncData(null, this);
+      const loadNull = new TrackedAsyncData(null);
       await settled();
 
       assert.equal(loadNull.state, "RESOLVED");
@@ -78,7 +78,7 @@ module("Unit | TrackedAsyncData", function () {
       assert.expect(6);
 
       const notAThenableObject = { notAThenable: true };
-      const loadObject = new TrackedAsyncData(notAThenableObject, this);
+      const loadObject = new TrackedAsyncData(notAThenableObject);
       await settled();
 
       assert.equal(loadObject.state, "RESOLVED");
@@ -92,7 +92,7 @@ module("Unit | TrackedAsyncData", function () {
     test("boolean: true", async function (assert) {
       assert.expect(6);
 
-      const loadTrue = new TrackedAsyncData(true, this);
+      const loadTrue = new TrackedAsyncData(true);
       await settled();
 
       assert.equal(loadTrue.state, "RESOLVED");
@@ -106,7 +106,7 @@ module("Unit | TrackedAsyncData", function () {
     test("boolean: false", async function (assert) {
       assert.expect(6);
 
-      const loadFalse = new TrackedAsyncData(false, this);
+      const loadFalse = new TrackedAsyncData(false);
       await settled();
 
       assert.equal(loadFalse.state, "RESOLVED");
@@ -120,7 +120,7 @@ module("Unit | TrackedAsyncData", function () {
     test("number", async function (assert) {
       assert.expect(6);
 
-      const loadNumber = new TrackedAsyncData(5, this);
+      const loadNumber = new TrackedAsyncData(5);
       await settled();
 
       assert.equal(loadNumber.state, "RESOLVED");
@@ -134,7 +134,7 @@ module("Unit | TrackedAsyncData", function () {
     test("string", async function (assert) {
       assert.expect(6);
 
-      const loadString = new TrackedAsyncData("js", this);
+      const loadString = new TrackedAsyncData("js");
       await settled();
 
       // loadString
@@ -152,7 +152,7 @@ module("Unit | TrackedAsyncData", function () {
 
     // This handles the error throw from rendering a rejected promise
     const deferred = defer();
-    const result = new TrackedAsyncData(deferred.promise, this);
+    const result = new TrackedAsyncData(deferred.promise);
 
     deferred.reject(new Error("foobar"));
     await deferred.promise.catch((error) => {
@@ -174,7 +174,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(2);
 
     const deferred = defer();
-    const result = new TrackedAsyncData(deferred.promise, this);
+    const result = new TrackedAsyncData(deferred.promise);
     assert.equal(result.state, "PENDING");
 
     deferred.resolve();
@@ -187,7 +187,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(3);
 
     const deferred = defer();
-    const result = new TrackedAsyncData(deferred.promise, this);
+    const result = new TrackedAsyncData(deferred.promise);
     assert.equal(result.state, "PENDING");
 
     deferred.reject(new Error("foobar"));
@@ -202,7 +202,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(1);
 
     const promise = Promise.resolve("hello");
-    const result = new TrackedAsyncData(promise, this);
+    const result = new TrackedAsyncData(promise);
     await promise;
     assert.equal(result.state, "RESOLVED");
   });
@@ -211,7 +211,7 @@ module("Unit | TrackedAsyncData", function () {
     assert.expect(2);
 
     const promise = Promise.reject(new Error("foobar"));
-    const result = new TrackedAsyncData(promise, this);
+    const result = new TrackedAsyncData(promise);
 
     // This handles the error thrown *locally*.
     await promise.catch((error: unknown) => {

@@ -9,7 +9,7 @@ module("Unit | load", function (hooks) {
 
   test("given a promise", async function (assert) {
     const { promise, resolve } = defer();
-    const result = load(promise, this);
+    const result = load(promise);
     assert.ok(
       result instanceof TrackedAsyncData,
       "it returns a TrackedAsyncData instance"
@@ -19,7 +19,7 @@ module("Unit | load", function (hooks) {
   });
 
   test("given a plain value", async function (assert) {
-    const result = load(12, this);
+    const result = load(12);
     assert.ok(
       result instanceof TrackedAsyncData,
       "it returns a TrackedAsyncData instance"

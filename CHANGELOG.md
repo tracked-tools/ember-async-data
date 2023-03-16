@@ -7,6 +7,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 
 
+
+## v0.7.1 (2023-03-16)
+
+#### :bug: Bug Fix
+* [#583](https://github.com/tracked-tools/ember-async-data/pull/583) Backport context bug fix to 0.7.x ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v0.7.0 (2022-11-10)
 
 #### :boom: Breaking Change

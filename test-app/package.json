@@ -24,7 +24,7 @@
     "test:watch": "ember test --server"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
+    "@babel/core": "^7.21.4",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.9.3",
     "@embroider/test-setup": "^2.1.1",

@@ -56,7 +56,7 @@
     "@glint/core": "^0.9.7",
     "@glint/environment-ember-loose": "^0.9.7",
     "@tsconfig/ember": "^2.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "concurrently": "^8.0.1",
     "ember-cli-htmlbars": "^6.2.0",

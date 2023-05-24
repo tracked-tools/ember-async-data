@@ -560,7 +560,7 @@ module('my very own tests', function (hooks) {
      // Here we waits for the *result* of rendering, rather than the render
      // promise itself. Once we have rendered, we can make assertions about
      // what rendered:
-     await waitFor('data-test-data');
+     await waitFor('[data-test-data]');
      assert.dom('[data-test-data]').hasText('Loading...');
 
      // Then to clean up the test, we need the original promise to resolve

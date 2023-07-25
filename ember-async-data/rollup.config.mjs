@@ -1,10 +1,14 @@
-import typescript from 'rollup-plugin-ts';
+import { babel } from '@rollup/plugin-babel';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { Addon } from '@embroider/addon-dev/rollup';
 
 const addon = new Addon({
   srcDir: 'src',
   destDir: 'dist',
 });
+
+// Add extensions here, such as ts, gjs, etc that you may import
+const extensions = ['.js', '.ts'];
 
 export default {
   // This provides defaults that work well alongside `publicEntrypoints` below.
@@ -17,8 +21,8 @@ export default {
     addon.publicEntrypoints([
       'helpers/**/*.js',
       'index.js',
-      'tracked-async-data.js',
       'template-registry.js',
+      'tracked-async-data.js',
     ]),
 
     // These are the modules that should get reexported into the traditional
@@ -26,17 +30,24 @@ export default {
     // not everything in publicEntrypoints necessarily needs to go here.
     addon.appReexports(['helpers/**/*.js']),
 
-    // compile TypeScript to the latest JavaScript, including Babel transpilation
-    typescript({
-      transpiler: 'babel',
-      browserslist: false,
-      transpileOnly: false,
-    }),
-
     // Follow the V2 Addon rules about dependencies. Your code can import from
     // `dependencies` and `peerDependencies` as well as standard Ember-provided
     // package names.
     addon.dependencies(),
+
+    // This babel config should *not* apply presets or compile away ES modules.
+    // It exists only to provide development niceties for you, like automatic
+    // template colocation.
+    //
+    // By default, this will load the actual babel config from the file
+    // babel.config.json.
+    babel({
+      extensions,
+      babelHelpers: 'bundled',
+    }),
+
+    // Allows rollup to resolve imports of files with the specified extensions
+    nodeResolve({ extensions }),
 
     // Ensure that standalone .hbs files are properly integrated as Javascript.
     addon.hbs(),

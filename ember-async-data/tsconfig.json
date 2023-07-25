@@ -6,5 +6,8 @@
   ],
   "glint": {
     "environment": "ember-loose"
+  },
+  "compilerOptions": {
+    "declarationDir": "declarations"
   }
 }

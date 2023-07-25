@@ -2,18 +2,18 @@
   "schemaVersion": "1.0.0",
   "packages": [
     {
-      "name": "ember-cli",
-      "version": "4.8.0",
+      "name": "@embroider/addon-blueprint",
+      "version": "2.0.0",
       "blueprints": [
         {
-          "name": "app",
-          "outputRepo": "https://github.com/ember-cli/ember-new-output",
-          "codemodsSource": "ember-app-codemods-manifest@1",
+          "name": "@embroider/addon-blueprint",
           "isBaseBlueprint": true,
           "options": [
             "--yarn",
-            "--no-welcome",
             "--ci-provider=github",
+            "--addon-location=ember-async-data",
+            "--test-app-location=test-app",
+            "--release-it",
             "--typescript"
           ]
         }

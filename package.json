@@ -14,16 +14,21 @@
     "test-app"
   ],
   "scripts": {
+    "build": "yarn workspace ember-async-data run build",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
-    "prepare": "cd ember-async-data && yarn build",
+    "prepare": "yarn build",
     "release": "release-it",
-    "test": "cd test-app && yarn test:ember"
+    "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
+    "start:addon": "yarn workspace ember-async-data1 run start",
+    "start:test-app": "yarn workspace test-app run start",
+    "test": "yarn workspaces run test"
   },
   "devDependencies": {
-    "@release-it-plugins/lerna-changelog": "^5.0.0",
-    "@release-it-plugins/workspaces": "^3.2.0",
-    "release-it": "^15.10.3"
+    "@release-it-plugins/lerna-changelog": "^6.0.0",
+    "@release-it-plugins/workspaces": "^4.0.0",
+    "concurrently": "^8.2.0",
+    "release-it": "^16.1.3"
   },
   "volta": {
     "node": "18.15.0",

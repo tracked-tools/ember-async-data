@@ -13,7 +13,6 @@ module('Unit | TrackedAsyncData', function () {
   });
 
   test('is initially PENDING', async function (assert) {
-    assert.expect(6);
     const deferred = defer();
 
     const result = new TrackedAsyncData(deferred.promise);
@@ -29,8 +28,6 @@ module('Unit | TrackedAsyncData', function () {
   });
 
   test('it updates to resolved state', async function (assert) {
-    assert.expect(6);
-
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise);
 
@@ -47,8 +44,6 @@ module('Unit | TrackedAsyncData', function () {
 
   module('it returns resolved state for non-thenable input', function () {
     test('undefined', async function (assert) {
-      assert.expect(6);
-
       const loadUndefined = new TrackedAsyncData(undefined);
       await settled();
 
@@ -61,8 +56,6 @@ module('Unit | TrackedAsyncData', function () {
     });
 
     test('null', async function (assert) {
-      assert.expect(6);
-
       const loadNull = new TrackedAsyncData(null);
       await settled();
 
@@ -75,8 +68,6 @@ module('Unit | TrackedAsyncData', function () {
     });
 
     test('non-thenable object', async function (assert) {
-      assert.expect(6);
-
       const notAThenableObject = { notAThenable: true };
       const loadObject = new TrackedAsyncData(notAThenableObject);
       await settled();
@@ -90,8 +81,6 @@ module('Unit | TrackedAsyncData', function () {
     });
 
     test('boolean: true', async function (assert) {
-      assert.expect(6);
-
       const loadTrue = new TrackedAsyncData(true);
       await settled();
 
@@ -104,8 +93,6 @@ module('Unit | TrackedAsyncData', function () {
     });
 
     test('boolean: false', async function (assert) {
-      assert.expect(6);
-
       const loadFalse = new TrackedAsyncData(false);
       await settled();
 
@@ -118,8 +105,6 @@ module('Unit | TrackedAsyncData', function () {
     });
 
     test('number', async function (assert) {
-      assert.expect(6);
-
       const loadNumber = new TrackedAsyncData(5);
       await settled();
 
@@ -132,8 +117,6 @@ module('Unit | TrackedAsyncData', function () {
     });
 
     test('string', async function (assert) {
-      assert.expect(6);
-
       const loadString = new TrackedAsyncData('js');
       await settled();
 
@@ -170,8 +153,6 @@ module('Unit | TrackedAsyncData', function () {
   });
 
   test('it returns loading state and then loaded state', async function (assert) {
-    assert.expect(2);
-
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise);
     assert.strictEqual(result.state, 'PENDING');
@@ -200,8 +181,6 @@ module('Unit | TrackedAsyncData', function () {
   });
 
   test('it returns loaded state for already-resolved promises', async function (assert) {
-    assert.expect(1);
-
     const promise = Promise.resolve('hello');
     const result = new TrackedAsyncData(promise);
     await promise;

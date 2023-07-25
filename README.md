@@ -1,5 +1,4 @@
 <p align="center">
-
   <a href="https://github.com/tracked-tools/ember-async-data/actions/workflows/ci.yml">
     <img src="https://github.com/tracked-tools/ember-async-data/actions/workflows/ci.yml/badge.svg" alt="CI" style="max-width:100%;">
   </a>
@@ -105,8 +104,8 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
 ## Compatibility
 
-* Ember.js v3.28 or above (requires Octane Edition)
-* Embroider or ember-auto-import v2.0.0 or above (this is [v2 addon](https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html))
+- Ember.js v3.28 or above (requires Octane Edition)
+- Embroider or ember-auto-import v2.0.0 or above (this is [v2 addon](https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html)
 
 ### TypeScript
 

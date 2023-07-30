@@ -12,8 +12,6 @@ module('Integration | Helper | load', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders loading state', async function (this: LocalTestContext, assert) {
-    assert.expect(1);
-
     const { promise, resolve } = defer();
     this.set('promise', promise);
 
@@ -40,8 +38,6 @@ module('Integration | Helper | load', function (hooks) {
   });
 
   test('it renders loaded state', async function (this: LocalTestContext, assert) {
-    assert.expect(2);
-
     const deferred = defer();
     deferred.resolve('foobar');
     await deferred.promise;
@@ -103,8 +99,6 @@ module('Integration | Helper | load', function (hooks) {
   });
 
   test('it renders loading state and then loaded state', async function (this: LocalTestContext, assert) {
-    assert.expect(2);
-
     const { promise, resolve } = defer();
     this.set('promise', promise);
 
@@ -212,8 +206,6 @@ module('Integration | Helper | load', function (hooks) {
   });
 
   test('it renders the state and value for the new promise if a new promise with a different value is sent before the old promise is done loading', async function (this: LocalTestContext, assert) {
-    assert.expect(3);
-
     const { promise: oldPromise, resolve: resolveOld } = defer();
     this.set('promise', oldPromise);
 

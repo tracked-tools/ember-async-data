@@ -2,11 +2,17 @@
 
 # compiled output
 dist/
+declarations/
+
+# npm/pnpm/yarn pack output
+*.tgz
 
 # dependencies
 node_modules/
 
 # misc
-.env*
+/.env*
+/.pnpm-debug.log
 .eslintcache
-yarn-error.log
+/npm-debug.log*
+/yarn-error.log

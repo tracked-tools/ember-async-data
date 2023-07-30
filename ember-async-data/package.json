@@ -12,63 +12,60 @@
     "email": "hello@chriskrycho.com",
     "url": "https://v5.chriskrycho.com/"
   },
-  "exports": {
-    ".": "./dist/index.js",
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
-    },
-    "./addon-main.js": "./addon-main.js"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/*"
-      ]
-    }
-  },
   "files": [
-    "addon-main.js",
+    "addon-main.cjs",
+    "declarations",
     "dist"
   ],
   "scripts": {
-    "build": "rollup --config",
+    "build": "concurrently 'npm:build:*'",
+    "build:js": "rollup --config",
+    "build:types": "glint --declaration",
     "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
     "lint:fix": "concurrently 'npm:lint:*:fix' --names 'fix:'",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
     "lint:js": "eslint . --cache",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
-    "prepack": "rollup --config",
-    "start": "rollup --config --watch",
-    "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
+    "start": "concurrently 'npm:start:*'",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'",
+    "prepack": "rollup --config"
   },
   "dependencies": {
     "@ember/test-waiters": "^3.0.0",
     "@embroider/addon-shim": "^1.8.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.8",
+    "@babel/core": "^7.22.9",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-decorators": "^7.21.0",
-    "@babel/preset-typescript": "^7.21.5",
-    "@embroider/addon-dev": "^3.0.0",
+    "@babel/plugin-proposal-decorators": "^7.22.7",
+    "@babel/preset-typescript": "^7.22.5",
+    "@babel/runtime": "^7.22.6",
+    "@embroider/addon-dev": "^3.2.0",
     "@glimmer/component": "^1.1.2",
-    "@glint/core": "^0.9.7",
-    "@glint/environment-ember-loose": "^0.9.7",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.0.2",
+    "@glint/environment-ember-loose": "^1.0.2",
+    "@glint/template": "^1.0.2",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "@tsconfig/ember": "^2.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.59.5",
-    "@typescript-eslint/parser": "^5.59.7",
-    "concurrently": "^8.0.1",
-    "ember-cli-htmlbars": "^6.2.0",
-    "eslint": "^8.40.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "concurrently": "^8.2.0",
+    "ember-source": "^4.12.3",
+    "ember-template-lint": "^5.11.1",
+    "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-ember": "^11.5.2",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-ember": "^11.10.0",
+    "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "expect-type": "^0.15.0",
+    "expect-type": "^0.16.0",
     "prettier": "^2.8.8",
-    "rollup": "^3.23.0",
-    "rollup-plugin-ts": "^3.2.0",
+    "rollup": "^3.26.3",
     "typescript": "~5.0.4"
   },
   "peerDependencies": {
@@ -86,12 +83,30 @@
   "ember-addon": {
     "version": 2,
     "type": "addon",
-    "main": "addon-main.js",
+    "main": "addon-main.cjs",
     "versionCompatibility": {
       "ember": "3.28 || >=4.0"
     },
     "app-js": {
       "./helpers/load.js": "./dist/_app_/helpers/load.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
     }
   }
 }

@@ -23,5 +23,5 @@ jobs:
       - uses: kategengler/put-built-npm-package-contents-on-branch@v1.0.0
         with:
           branch: ${{ github.head_ref || github.ref_name }}-dist
-          working-directory: packages/ember-async-data
+          working-directory: ember-async-data
           token: ${{ secrets.GITHUB_TOKEN }}

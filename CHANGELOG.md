@@ -9,6 +9,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 
 
+## v1.0.2 (2023-08-02)
+
+#### :rocket: Enhancement
+* [#625](https://github.com/tracked-tools/ember-async-data/pull/625) Add ember v5 to peerDependencies ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :memo: Documentation
+* [#666](https://github.com/tracked-tools/ember-async-data/pull/666) Add brackets for test selector ([@jrjohnson](https://github.com/jrjohnson))
+
+#### :house: Internal
+* [#679](https://github.com/tracked-tools/ember-async-data/pull/679) Sync with embroider-addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Jon Johnson ([@jrjohnson](https://github.com/jrjohnson))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+
 ## v1.0.1 (2023-03-15)
 
 **Note:** This is a significant bug fix which *does* (very mildly) break the public API, but necessarily so for the sake of fixing a bug.

@@ -1,6 +1,6 @@
 {
   "name": "test-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Test app for ember-async-data addon",
   "repository": "https://github.com/chriskrycho/ember-async-data",
@@ -42,7 +42,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.0",
-    "ember-async-data": "1.0.1",
+    "ember-async-data": "1.0.2",
     "ember-auto-import": "^2.6.3",
     "ember-cli": "~4.12.1",
     "ember-cli-app-version": "^6.0.1",

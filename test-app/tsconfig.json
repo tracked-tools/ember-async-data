@@ -10,5 +10,8 @@
       "test-app/*": ["app/*"],
       "*": ["types/*"]
     }
+  },
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"]
   }
 }

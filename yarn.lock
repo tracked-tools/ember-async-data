@@ -33,7 +33,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.22.9.tgz#71cdb00a1ce3a329ce4cbec3a44f9fef35669730"
   integrity sha512-5UamI7xkUcJ3i9qVDS+KFDEK8/7oJ55/sJMB1Ge7IEapr7KfdfV/HErR+koZwOfd+SgtFKOKRhRakdg++DcJpQ==
 
-"@babel/core@^7.12.0", "@babel/core@^7.14.5", "@babel/core@^7.16.10", "@babel/core@^7.16.7", "@babel/core@^7.21.0", "@babel/core@^7.22.10", "@babel/core@^7.3.4":
+"@babel/core@^7.12.0", "@babel/core@^7.14.5", "@babel/core@^7.16.10", "@babel/core@^7.16.7", "@babel/core@^7.20.12", "@babel/core@^7.21.0", "@babel/core@^7.22.10", "@babel/core@^7.3.4":
   version "7.22.10"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.22.10.tgz#aad442c7bcd1582252cb4576747ace35bc122f35"
   integrity sha512-fTmqbbUBAwCcre6zPzNngvsI0aNrPZe77AeqvDxWM9Nm+04RrJ3CAmGHA9f7lJQY6ZMhRztNemy4uslDxTX4Qw==
@@ -1551,6 +1551,11 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@glint/environment-ember-loose/-/environment-ember-loose-1.0.2.tgz#701d084625707e9ba9ca2cf5269bbea443b15d62"
   integrity sha512-tVLYzAx6c/4vcSaijiAubwR27/+K2tujuozArxeNud58MTwncGxhUkCHSM9xl+wn4VJjsjkzI6+nmzjEdkszSg==
+
+"@glint/environment-ember-template-imports@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@glint/environment-ember-template-imports/-/environment-ember-template-imports-1.0.2.tgz#5763088ded269efa0f5ad9daf2fca19912d77108"
+  integrity sha512-PAH7obVGXPFU7gLb04JVlqiNtz/j7Q29BBTAyhS7EVy99Hc6CPe+nV6+xhUPKu/S5GOVn3MWehVt/6gXPJ+cnA==
 
 "@glint/template@^1.0.2":
   version "1.0.2"
@@ -4367,6 +4372,11 @@ core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
+core-js@^3.4.1:
+  version "3.32.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.0.tgz#7643d353d899747ab1f8b03d2803b0312a0fb3b6"
+  integrity sha512-rd4rYZNlF3WuoYuRIDEmbR/ga9CeuWX9U05umAvgrrZoHY4Z++cp/xwPQMvUpBB4Ag6J8KfD80G0zwCyaSxDww==
+
 core-object@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/core-object/-/core-object-3.1.5.tgz#fa627b87502adc98045e44678e9a8ec3b9c0d2a9"
@@ -5383,7 +5393,7 @@ ember-source@^4.12.3:
     semver "^7.3.8"
     silent-error "^1.1.1"
 
-ember-template-imports@^3.4.2:
+ember-template-imports@^3.4.1, ember-template-imports@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/ember-template-imports/-/ember-template-imports-3.4.2.tgz#6cf7de7d4b8348a0fddf3aaec4947aa1211289e6"
   integrity sha512-OS8TUVG2kQYYwP3netunLVfeijPoOKIs1SvPQRTNOQX4Pu8xGGBEZmrv0U1YTnQn12Eg+p6w/0UdGbUnITjyzw==
@@ -10255,7 +10265,19 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@^2.5.1, prettier@^2.8.8:
+prettier-plugin-ember-template-tag@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-ember-template-tag/-/prettier-plugin-ember-template-tag-0.3.2.tgz#dcf4e402951d6766a9880308ea6a405c9ea5a5f1"
+  integrity sha512-L/15ujsvuOpuIB9y9XJJs/QOPgdot76T0U1Q34C19igS1lsaL/cdRw8rXIVC5Z2x362yZI33Qodo//7kK7ItkA==
+  dependencies:
+    "@babel/core" "^7.20.12"
+    "@glimmer/syntax" "^0.84.2"
+    ember-cli-htmlbars "^6.2.0"
+    ember-template-imports "^3.4.1"
+    prettier "^2.8.3"
+    ts-replace-all "^1.0.0"
+
+prettier@^2.5.1, prettier@^2.8.3, prettier@^2.8.8:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
@@ -12231,6 +12253,13 @@ ts-api-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.0.1.tgz#8144e811d44c749cd65b2da305a032510774452d"
   integrity sha512-lC/RGlPmwdrIBFTX59wwNzqh7aR2otPNPR/5brHZm/XKFYKsfqxihXUe9pU3JI+3vGkl+vyCoNNnPhJn3aLK1A==
+
+ts-replace-all@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ts-replace-all/-/ts-replace-all-1.0.0.tgz#ef28283ccdb4da7d69fb03cf543e09e51711659b"
+  integrity sha512-6uBtdkw3jHXkPtx/e9xB/5vcngMm17CyJYsS2YZeQ+9FdRnt6Ev5g931Sg2p+dxbtMGoCm13m3ax/obicTZIkQ==
+  dependencies:
+    core-js "^3.4.1"
 
 tslib@^1.9.0:
   version "1.14.1"

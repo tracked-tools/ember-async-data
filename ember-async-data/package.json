@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/chriskrycho/ember-async-data",
+  "repository": "https://github.com/tracked-tools/ember-async-data",
   "license": "MIT",
   "author": {
     "name": "Chris Krycho",

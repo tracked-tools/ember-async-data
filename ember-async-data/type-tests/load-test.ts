@@ -12,6 +12,4 @@ expectTypeOf<ReturnType<typeof loadHelper<number>>>().toEqualTypeOf<
   TrackedAsyncData<number>
 >();
 
-expectTypeOf<ReturnType<typeof loadHelper<string>>>().toEqualTypeOf<
-  TrackedAsyncData<string>
->();
+expectTypeOf(load("hello")).returns.toEqualTypeOf<TrackedAsyncData<string>>();

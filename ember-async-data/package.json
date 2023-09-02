@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "@ember/test-waiters": "^3.0.0",
-    "@embroider/addon-shim": "^1.8.6",
-    "ember-functions-as-helper-polyfill": "^2.1.2"
+    "@embroider/addon-shim": "^1.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",

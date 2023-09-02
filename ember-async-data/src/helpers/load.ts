@@ -56,6 +56,7 @@ import TrackedAsyncData from '../tracked-async-data';
   @note Prefer to use `TrackedAsyncData` directly! This function is provided
     simply for symmetry with the helper and backwards compatibility.
  */
-export default function load<T>(data: T | Promise<T>): TrackedAsyncData<T> {
+function load<T>(data: T | Promise<T>): TrackedAsyncData<T> {
   return new TrackedAsyncData(data);
 }
+export { load, load as default };

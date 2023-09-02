@@ -44,7 +44,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 #### :boom: Breaking Change
 * [#527](https://github.com/tracked-tools/ember-async-data/pull/527) Drop TypeScript support for <= 4.7 ([@SergeAstapov](https://github.com/SergeAstapov))
 * [#575](https://github.com/tracked-tools/ember-async-data/pull/575) Add hard error and deprecations for 1.0 ([@chriskrycho](https://github.com/chriskrycho))
-* [#473](https://github.com/tracked-tools/ember-async-data/pull/473) Use the types published from Ember itself ([@chriskrycho](https://github.com/chriskrycho))
+* [#473](https://github.com/tracked-tools/ember-async-data/pull/473) Use the types published from Ember itself; require Ember.js v4.8.4 or above ([@chriskrycho](https://github.com/chriskrycho))
 
 #### :rocket: Enhancement
 * [#575](https://github.com/tracked-tools/ember-async-data/pull/575) Add hard error and deprecations for 1.0 ([@chriskrycho](https://github.com/chriskrycho))

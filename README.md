@@ -104,7 +104,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
 ## Compatibility
 
-- Ember.js v3.28 or above (requires Octane Edition)
+- Ember.js v4.8.4 or above (requires Octane Edition)
 - Embroider or ember-auto-import v2.0.0 or above (this is [v2 addon](https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html)
 
 ### TypeScript

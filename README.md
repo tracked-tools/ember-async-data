@@ -6,7 +6,7 @@
     <img src='https://img.shields.io/npm/v/ember-async-data.svg' alt='npm'>
   </a>
   <a href='https://github.com/tracked-tools/ember-async-data/blob/main/.github/workflows/CI.yml#L98'>
-    <img src='https://img.shields.io/badge/TypeScript-4.8%20%7C%204.9%20%7C%20next-3178c6' alt='supported TypeScript versions'>
+    <img src='https://img.shields.io/badge/TypeScript-4.8%20%7C%204.9%20%7C%205.0%20%7C%205.1%20%7C%205.2%20%7C%20next-3178c6' alt='supported TypeScript versions'>
   </a>
   <a href='https://github.com/tracked-tools/ember-async-data/blob/main/.github/workflows/Nightly.yml'>
     <img src='https://github.com/tracked-tools/ember-async-data/workflows/Nightly%20TypeScript%20Run/badge.svg' alt='Nightly TypeScript Run'>

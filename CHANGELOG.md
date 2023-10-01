@@ -9,6 +9,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 
 
+
+## v1.0.3 (2023-10-01)
+
+#### :bug: Bug Fix
+* [#704](https://github.com/tracked-tools/ember-async-data/pull/704) Fix triple-slash reference in complied output, breaking TS consumers ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#707](https://github.com/tracked-tools/ember-async-data/pull/707) Update minimum supported Ember.js version in README.md ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#693](https://github.com/tracked-tools/ember-async-data/pull/693) Update repository field in package.json ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#681](https://github.com/tracked-tools/ember-async-data/pull/681) Replace publish-unstable workflow with push-dist ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v1.0.2 (2023-08-02)
 
 #### :rocket: Enhancement

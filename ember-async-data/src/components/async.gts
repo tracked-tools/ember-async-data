@@ -4,7 +4,7 @@ import TrackedAsyncData from '../tracked-async-data';
 
 export interface AsyncSignature<T> {
   Args: {
-    /** The `TrackedAsyncData` to render. */
+    /** The data to `await`. */
     data: T | Promise<T>;
   };
   Blocks: {

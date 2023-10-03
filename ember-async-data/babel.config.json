@@ -1,9 +1,5 @@
 {
-  "presets": [
-    [
-      "@babel/preset-typescript"
-    ]
-  ],
+  "presets": [["@babel/preset-typescript"]],
   "plugins": [
     "ember-template-imports/src/babel-plugin",
     "@embroider/addon-dev/template-colocation-plugin",

@@ -1,7 +1,7 @@
-import { babel } from '@rollup/plugin-babel';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { Addon } from '@embroider/addon-dev/rollup';
-import templateTag from './rollup-plugin-template-tag.mjs';
+import { babel } from "@rollup/plugin-babel";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { Addon } from "@embroider/addon-dev/rollup";
+import templateTag from "./rollup-plugin-template-tag.mjs";
 
 const addon = new Addon({
   srcDir: "src",
@@ -9,7 +9,7 @@ const addon = new Addon({
 });
 
 // Add extensions here, such as ts, gjs, etc that you may import
-const extensions = ['.js', '.ts', '.gjs', '.gts'];
+const extensions = [".js", ".ts", ".gjs", ".gts"];
 
 export default {
   // This provides defaults that work well alongside `publicEntrypoints` below.
@@ -20,10 +20,10 @@ export default {
     // These are the modules that users should be able to import from your
     // addon. Anything not listed here may get optimized away.
     addon.publicEntrypoints([
-      'helpers/**/*.js',
-      'index.js',
-      'template-registry.js',
-      'tracked-async-data.js',
+      "helpers/**/*.js",
+      "index.js",
+      "template-registry.js",
+      "tracked-async-data.js",
     ]),
 
     // These are the modules that should get reexported into the traditional
@@ -46,7 +46,7 @@ export default {
     // babel.config.json.
     babel({
       extensions,
-      babelHelpers: 'bundled',
+      babelHelpers: "bundled",
     }),
 
     // Allows rollup to resolve imports of files with the specified extensions

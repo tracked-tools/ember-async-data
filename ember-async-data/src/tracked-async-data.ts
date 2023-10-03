@@ -57,7 +57,7 @@ class _TrackedAsyncData<T> {
       (error) => {
         this.#state.data = ['REJECTED', error];
         waiter.endAsync(this.#token);
-      }
+      },
     );
   }
 
@@ -100,7 +100,7 @@ class _TrackedAsyncData<T> {
           enabled: '1.0.0',
         },
         until: '2.0.0',
-      }
+      },
     );
 
     return this.#state.data[0] === 'RESOLVED' ? this.#state.data[1] : null;
@@ -129,7 +129,7 @@ class _TrackedAsyncData<T> {
           enabled: '1.0.0',
         },
         until: '2.0.0',
-      }
+      },
     );
 
     return this.#state.data[0] === 'REJECTED' ? this.#state.data[1] : null;
@@ -182,6 +182,21 @@ class _TrackedAsyncData<T> {
   toString(): string {
     return JSON.stringify(this.toJSON(), null, 2);
   }
+
+  match<V>(matcher: {
+    pending: () => V;
+    resolved: (value: T) => V;
+    rejected: (reason: unknown) => V;
+  }) {
+    switch (this.#state.data[0]) {
+      case 'PENDING':
+        return matcher.pending();
+      case 'RESOLVED':
+        return matcher.resolved(this.#state.data[1]);
+      case 'REJECTED':
+        return matcher.rejected(this.#state.data[1]);
+    }
+  }
 }
 
 /**
@@ -223,30 +238,38 @@ export type JSONRepr<T> =
 //     shared implementations (i.e. `.toJSON()` and `.toString()`) are shared
 //     automatically.
 
-interface Pending<T> extends _TrackedAsyncData<T> {
+/**
+  A `TrackedAsyncData` whose wrapped promise is still pending, and which
+  therefore does not have a `value` or an `error` property.
+ */
+interface Pending<T> extends Omit<_TrackedAsyncData<T>, 'value' | 'error'> {
   state: 'PENDING';
   isPending: true;
   isResolved: false;
   isRejected: false;
-  value: null;
-  error: null;
 }
 
-interface Resolved<T> extends _TrackedAsyncData<T> {
+/**
+  A `TrackedAsyncData` whose wrapped promise has resolved, and which therefore
+  has a `value` property with the value the promise resolved to.
+ */
+interface Resolved<T> extends Omit<_TrackedAsyncData<T>, 'error'> {
   state: 'RESOLVED';
   isPending: false;
   isResolved: true;
   isRejected: false;
   value: T;
-  error: null;
 }
 
-interface Rejected<T> extends _TrackedAsyncData<T> {
+/**
+  A `TrackedAsyncData` whose wrapped promise has rejected, and which therefore
+  has an `error` property with the rejection value of the promise (if any).
+ */
+interface Rejected<T> extends Omit<_TrackedAsyncData<T>, 'value'> {
   state: 'REJECTED';
   isPending: false;
   isResolved: false;
   isRejected: true;
-  value: null;
   error: unknown;
 }
 
@@ -268,44 +291,51 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
   import Component from '@glimmer/component';
   import { cached } from '@glimmer/tracking';
   import { inject as service } from '@ember/service';
-  import TrackedAsyncData from 'ember-async-data/tracked-async-data';
+  import type Store from '@ember-data/store';
+  import { TrackedAsyncData, Match } from 'ember-async-data';
+  import LoadingSpinner from './loading-spinner';
+  import PresentTheData from './present-the-data';
 
-  export default class SmartProfile extends Component<{ id: number }> {
-    @service store;
+  interface ProfileSignature {
+    Args: {
+      id: number;
+    };
+  }
 
-    @cached
-    get someData() {
+  export default class SmartProfile extends Component<ProfileSignature> {
+    @service declare store: Store;
+
+    @cached get someData() {
       let recordPromise = this.store.findRecord('user', this.args.id);
       return new TrackedAsyncData(recordPromise);
     }
+
+    <template>
+      <Match this.someData>
+        <:pending>
+          <LoadingSpinner />
+        </:pending>
+        <:resolved as |value|>
+          <PresentTheData @data={{value}} />
+        </:resolved>
+        <:rejected>
+          <p>Whoops! Looks like something went wrong!</p>
+        </:rejected>
+      </Match>
+    </template>
   }
-  ```
-
-  And a corresponding template:
-
-  ```hbs
-  {{#if this.someData.isResolved}}
-    <PresentTheData @data={{this.someData.data}} />
-  {{else if this.someData.isPending}}
-    <LoadingSpinner />
-  {{else if this.someData.isRejected}}
-    <p>
-      Whoops! Looks like something went wrong!
-      {{this.someData.error.message}}
-    </p>
-  {{/if}}
   ```
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
 const TrackedAsyncData = _TrackedAsyncData as new <T>(
-  data: T | Promise<T>
+  data: T | Promise<T>,
 ) => TrackedAsyncData<T>;
 export default TrackedAsyncData;
 
 /** Utility type to check whether the string `key` is a property on an object */
 function has<K extends PropertyKey, T extends object>(
   key: K,
-  t: T
+  t: T,
 ): t is T & Record<K, unknown> {
   return key in t;
 }

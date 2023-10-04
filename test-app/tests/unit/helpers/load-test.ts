@@ -21,7 +21,7 @@ module.skip('Unit | load', function (hooks) {
     const result = load(promise);
     assert.ok(
       result instanceof TrackedAsyncData,
-      'it returns a TrackedAsyncData instance'
+      'it returns a TrackedAsyncData instance',
     );
     resolve();
     await promise;
@@ -31,7 +31,7 @@ module.skip('Unit | load', function (hooks) {
     const result = load(12);
     assert.ok(
       result instanceof TrackedAsyncData,
-      'it returns a TrackedAsyncData instance'
+      'it returns a TrackedAsyncData instance',
     );
   });
 });

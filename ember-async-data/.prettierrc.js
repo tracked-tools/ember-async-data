@@ -3,10 +3,11 @@
 module.exports = {
   overrides: [
     {
-      files: '*.{js,cjs,ts}',
+      files: '*.{js,mjs,cjs,ts}',
       options: {
         singleQuote: true,
       },
     },
   ],
+  plugins: ['prettier-plugin-ember-template-tag'],
 };

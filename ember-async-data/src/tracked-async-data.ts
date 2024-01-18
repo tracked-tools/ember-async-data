@@ -57,7 +57,7 @@ class _TrackedAsyncData<T> {
       (error) => {
         this.#state.data = ['REJECTED', error];
         waiter.endAsync(this.#token);
-      }
+      },
     );
   }
 
@@ -100,7 +100,7 @@ class _TrackedAsyncData<T> {
           enabled: '1.0.0',
         },
         until: '2.0.0',
-      }
+      },
     );
 
     return this.#state.data[0] === 'RESOLVED' ? this.#state.data[1] : null;
@@ -129,7 +129,7 @@ class _TrackedAsyncData<T> {
           enabled: '1.0.0',
         },
         until: '2.0.0',
-      }
+      },
     );
 
     return this.#state.data[0] === 'REJECTED' ? this.#state.data[1] : null;
@@ -298,14 +298,14 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
 const TrackedAsyncData = _TrackedAsyncData as new <T>(
-  data: T | Promise<T>
+  data: T | Promise<T>,
 ) => TrackedAsyncData<T>;
 export default TrackedAsyncData;
 
 /** Utility type to check whether the string `key` is a property on an object */
 function has<K extends PropertyKey, T extends object>(
   key: K,
-  t: T
+  t: T,
 ): t is T & Record<K, unknown> {
   return key in t;
 }

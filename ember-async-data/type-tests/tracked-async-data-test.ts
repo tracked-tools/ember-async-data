@@ -1,5 +1,5 @@
 import TrackedAsyncData, {
-  JSONRepr,
+  type JSONRepr,
 } from 'ember-async-data/tracked-async-data';
 import { expectTypeOf } from 'expect-type';
 

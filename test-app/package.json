@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "broccoli-asset-rev": "^3.0.0",
-    "concurrently": "^8.2.0",
+    "concurrently": "^8.2.2",
     "ember-async-data": "1.0.3",
     "ember-auto-import": "^2.6.3",
     "ember-cli": "~4.12.1",

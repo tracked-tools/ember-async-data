@@ -25,7 +25,7 @@
     "test": "yarn workspaces run test"
   },
   "devDependencies": {
-    "@release-it-plugins/lerna-changelog": "^6.0.0",
+    "@release-it-plugins/lerna-changelog": "^6.1.0",
     "@release-it-plugins/workspaces": "^4.0.0",
     "concurrently": "^8.2.2",
     "release-it": "^16.3.0"

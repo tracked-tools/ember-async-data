@@ -35,7 +35,7 @@
     "prepack": "rollup --config"
   },
   "dependencies": {
-    "@ember/test-waiters": "^3.0.0",
+    "@ember/test-waiters": "^3.1.0",
     "@embroider/addon-shim": "^1.8.6"
   },
   "devDependencies": {

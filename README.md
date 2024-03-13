@@ -356,7 +356,7 @@ You could use this to build a component which uses named blocks to provide a nic
   {{#let (load @promise) as |result|}}
     {{#if result.isPending}}
       <div class='loader__pending'>
-        {{if (has-block "pending")}}
+        {{#if (has-block "pending")}}
           {{yield to="pending"}}
         {{else}}
           Loading...
@@ -364,7 +364,7 @@ You could use this to build a component which uses named blocks to provide a nic
       </div>
     {{else if result.isResolved}}
       <div class='loader__resolved'>
-        {{if (has-block "resolved")}}
+        {{#if (has-block "resolved")}}
           {{yield result.value to="resolved"}}
         {{else}}
           {{result.value}}
@@ -372,7 +372,7 @@ You could use this to build a component which uses named blocks to provide a nic
       </div>
     {{else if result.isRejected}}
       <div class='loader__rejected'>
-        {{if (has-block "rejected")}}
+        {{#if (has-block "rejected")}}
           {{yield result.error to="rejected"}}
         {{else}}
           {{result.error}}

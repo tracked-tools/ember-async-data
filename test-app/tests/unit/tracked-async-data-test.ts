@@ -201,4 +201,47 @@ module('Unit | TrackedAsyncData', function () {
 
     assert.strictEqual(result.state, 'REJECTED');
   });
+
+  module(
+    'it calls input and uses return value when input is a function',
+    function () {
+      test('function returning a value', async function (assert) {
+        const result = new TrackedAsyncData(() => 'hello');
+        await settled();
+
+        assert.strictEqual(result.state, 'RESOLVED');
+        assert.strictEqual(result.value, 'hello');
+      });
+
+      test('function returning a promise', async function (assert) {
+        const deferred = defer();
+        const result = new TrackedAsyncData(() => deferred.promise);
+
+        deferred.resolve('hello');
+        await settled();
+
+        assert.strictEqual(result.state, 'RESOLVED');
+        assert.strictEqual(result.value, 'hello');
+      });
+
+      test('function throwing an error', async function (assert) {
+        const result = new TrackedAsyncData(() => {
+          throw new Error('foobar');
+        });
+
+        assert.strictEqual(result.state, 'REJECTED');
+        assert.strictEqual((result.error as Error).message, 'foobar');
+      });
+
+      test('function returning a rejected promise', async function (assert) {
+        const result = new TrackedAsyncData(() =>
+          Promise.reject(new Error('foobar')),
+        );
+        await settled();
+
+        assert.strictEqual(result.state, 'REJECTED');
+        assert.strictEqual((result.error as Error).message, 'foobar');
+      });
+    },
+  );
 });

@@ -13,7 +13,7 @@ jobs:
     name: Push dist
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Node
         uses: volta-cli/action@v4
 

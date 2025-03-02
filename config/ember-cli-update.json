@@ -9,11 +9,10 @@
           "name": "@embroider/addon-blueprint",
           "isBaseBlueprint": true,
           "options": [
-            "--yarn",
+            "--pnpm",
             "--ci-provider=github",
             "--addon-location=ember-async-data",
             "--test-app-location=test-app",
-            "--release-it",
             "--typescript"
           ]
         }

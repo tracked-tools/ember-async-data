@@ -1,6 +1,4 @@
-import TrackedAsyncData, {
-  JSONRepr,
-} from 'ember-async-data/tracked-async-data';
+import TrackedAsyncData, { JSONRepr } from '../src/tracked-async-data';
 import { expectTypeOf } from 'expect-type';
 
 declare function unreachable(x: never): never;

@@ -1,5 +1,48 @@
 # Changelog
 
+## Release (2025-03-02)
+
+ember-async-data 2.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-async-data`, `test-app`
+  * [#819](https://github.com/tracked-tools/ember-async-data/pull/819) Throw an error when accessing `.value` or `.error` unsafely ([@SergeAstapov](https://github.com/SergeAstapov))
+* `ember-async-data`
+  * [#818](https://github.com/tracked-tools/ember-async-data/pull/818) Drop @dependentKeyCompat from addon ([@SergeAstapov](https://github.com/SergeAstapov))
+* Other
+  * [#816](https://github.com/tracked-tools/ember-async-data/pull/816) Drop support for TypeScript < 5.5 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :rocket: Enhancement
+* `ember-async-data`
+  * [#814](https://github.com/tracked-tools/ember-async-data/pull/814) Expand @ember/test-waiters dependency range to allow v4 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :memo: Documentation
+* `ember-async-data`, `test-app`
+  * [#820](https://github.com/tracked-tools/ember-async-data/pull/820) Update documentation and tests to use template tag ([@SergeAstapov](https://github.com/SergeAstapov))
+* Other
+  * [#773](https://github.com/tracked-tools/ember-async-data/pull/773) Fix Loader Example ([@devotox](https://github.com/devotox))
+
+#### :house: Internal
+* `ember-async-data`, `test-app`
+  * [#815](https://github.com/tracked-tools/ember-async-data/pull/815) Sync addon with latest addon-blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#809](https://github.com/tracked-tools/ember-async-data/pull/809) Switch from yarn to pnpm ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#715](https://github.com/tracked-tools/ember-async-data/pull/715) Add TypeScript 5.1 and 5.2 to support matrix ([@SergeAstapov](https://github.com/SergeAstapov))
+* `ember-async-data`
+  * [#813](https://github.com/tracked-tools/ember-async-data/pull/813) Replace release-it with release-plan ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#806](https://github.com/tracked-tools/ember-async-data/pull/806) chore(deps-dev): Bump actions/checkout from v3 to v4 ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#735](https://github.com/tracked-tools/ember-async-data/pull/735) Bump prettier and eslint-plugin-prettier ([@nlfurniss](https://github.com/nlfurniss))
+* Other
+  * [#812](https://github.com/tracked-tools/ember-async-data/pull/812) Update TypeScript testing matrix to include >=5.0 ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#810](https://github.com/tracked-tools/ember-async-data/pull/810) Print tsc version to ensure proper TypeScript version usage ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#736](https://github.com/tracked-tools/ember-async-data/pull/736) Bump browserlist ([@nlfurniss](https://github.com/nlfurniss))
+* `test-app`
+  * [#808](https://github.com/tracked-tools/ember-async-data/pull/808) Bump ember-cli from 5.7 to 5.12 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 3
+- Devonte ([@devotox](https://github.com/devotox))
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).

@@ -1,5 +1,6 @@
 import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import copy from 'rollup-plugin-copy';
 import { Addon } from '@embroider/addon-dev/rollup';
 
 const addon = new Addon({
@@ -28,7 +29,7 @@ export default {
     // These are the modules that should get reexported into the traditional
     // "app" tree. Things in here should also be in publicEntrypoints above, but
     // not everything in publicEntrypoints necessarily needs to go here.
-    addon.appReexports(['helpers/**/*.js']),
+    addon.appReexports(["helpers/**/*.js"]),
 
     // Follow the V2 Addon rules about dependencies. Your code can import from
     // `dependencies` and `peerDependencies` as well as standard Ember-provided
@@ -58,5 +59,13 @@ export default {
 
     // Remove leftover build artifacts when starting a new build.
     addon.clean(),
+
+    // Copy Readme and License into published package
+    copy({
+      targets: [
+        { src: '../LICENSE.md', dest: '.' },
+        { src: '../README.md', dest: '.' },
+      ],
+    }),
   ],
 };

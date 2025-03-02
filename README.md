@@ -40,10 +40,10 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
 - Create declarative data fetches based on arguments to a component in a backing class:
 
-    ```js
+    ```gjs
     import Component from '@glimmer/component';
     import { cached } from '@glimmer/tracking';
-    import { inject as service } from '@ember/service';
+    import { service } from '@ember/service';
     import { TrackedAsyncData } from 'ember-async-data';
 
     export default class SmartProfile extends Component {
@@ -54,23 +54,23 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
         let recordPromise = this.store.findRecord('user', this.args.id);
         return new TrackedAsyncData(recordPromise);
       }
+
+      <template>
+        {{#if this.someData.isResolved}}
+          <PresentTheData @data={{this.someData.value}} />
+        {{else if this.someData.isPending}}
+          <LoadingSpinner />
+        {{else if this.someData.isRejected}}
+          <p>
+            Whoops! Looks like something went wrong!
+            {{this.someData.error.message}}
+          </p>
+        {{/if}}
+      </template>
     }
     ```
 
     (See the guide [below](#in-javascript) for why this uses `@cached`!)
-
-    ```hbs
-    {{#if this.someData.isResolved}}
-      <PresentTheData @data={{this.someData.value}} />
-    {{else if this.someData.isPending}}
-      <LoadingSpinner />
-    {{else if this.someData.isRejected}}
-      <p>
-        Whoops! Looks like something went wrong!
-        {{this.someData.error.message}}
-      </p>
-    {{/if}}
-    ```
 
 
 ## Contents <!-- omit in toc -->
@@ -270,43 +270,50 @@ This library provides full type safety for `TrackedAsyncData`; see [**API**](#ap
 
 #### Note on Usage with API Calls
 
-When using `TrackedAsyncData` with an API call in a getter, it is important to use [`@cached`](https://api.emberjs.com/ember/release/functions/@glimmer%2Ftracking/cached) (for Ember.js < 4.5 via the [ember-cached-decorator-polyfill](https://github.com/ember-polyfills/ember-cached-decorator-polyfill)) with the getter. Otherwise, you can end up triggering the creation of multiple API calls. For example, given a backing class like this:
+When using `TrackedAsyncData` with an API call in a getter, it is important to use [`@cached`](https://api.emberjs.com/ember/release/functions/@glimmer%2Ftracking/cached) (for Ember.js < 4.5 via the [ember-cached-decorator-polyfill](https://github.com/ember-polyfills/ember-cached-decorator-polyfill)) with the getter. Otherwise, you can end up triggering the creation of multiple API calls. For example, given a component like this:
 
-```ts
+```gts
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
-import type Store from '@ember-data/store';
+import { service } from '@ember/service';
 import { TrackedAsyncData } from 'ember-async-data';
 
-export default class Profile extends Component<{ userId: string }> {
+import type Store from '@ember-data/store';
+
+interface ProfileSignature {
+  Args: {
+    userId: string;
+  };
+}
+
+export default class Profile extends Component<ProfileSignature> {
   @service store: Store;
 
   get fullProfile() {
-    return new TrackedAsyncData(this.store.findRecord('user', userId));
+    return new TrackedAsyncData(this.store.findRecord('user', this.args.userId));
   }
+
+  <template>
+    {{#if this.fullProfile.isPending}}
+      <LoadingSpinner />
+    {{/if}}
+
+    <div class='profile {{if this.fullProfile.isPending "pending"}}'>
+      {{#if this.fullProfile.isResolved}}
+        {{#let this.fullProfile.value as |profile|}}
+          <p>{{profile.name}} ({{profile.description}})</p>
+
+          <img
+            src={{profile.avatar}}
+            alt="avatar for {{profile.name}}"
+          />
+        {{/let}}
+      {{/if}}
+    </div>
+  </template>
 }
 ```
 
-Then if the template checks the `fullProfile` state in multiple places, it will invoke the getter multiple times per render:
-
-```hbs
-{{#if this.fullProfile.isPending}}
-  <LoadingSpinner />
-{{/if}}
-
-<div class='profile {{if (not this.fullProfile.isResolved) "pending"}}'>
-  {{#if this.fullProfile.isResolved}}
-    {{#let this.fullProfile.value as |profile|}}
-      <p>{{profile.name}} ({{profile.description}})</p>
-
-      <img
-        src={{profile.avatar}}
-        alt="avatar for {{profile.name}}"
-      />
-    {{/let}}
-  {{/if}}
-</div>
-```
+If the template checks the `fullProfile` state in multiple places, it will invoke the getter multiple times per render:
 
 This code would invoke the getter twice on first render, which would therefore trigger two separate calls to the store, one of which would effectively be thrown away. Then, once the second call *did* resolve, it would invoke the getter multiple *more* times, and the result would be a sort of ping-ponging back and forth between pending and resolved states as a cascade of new API calls are triggered by each invocation of the getter.
 
@@ -473,7 +480,7 @@ module('my very own tests', function (hooks) {
 Handling errors is slightly more complicated: `TrackedAsyncData` “re-throws” the promises it works with when they have errors, to avoid silently swallowing them in a way that prevents you from using them with logging infrastructure or otherwise dealing with them in your app’s infrastructure. However, this means you must also account for them in your testing:
 
 ```js
-  test('it handles errors', function (assert) {
+  test('it handles errors', async function (assert) {
     assert.expect(2);
 
     let { promise, reject } = defer();
@@ -495,31 +502,32 @@ Integration/render tests are similar to those with unit testing, but with an add
 
 So this code, which you might write if you haven’t dealt with this before, ***WILL NOT WORK***:
 
-```js
+```gjs
 import { TrackedAsyncData } from 'ember-async-data';
 import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
 import { render } from "@ember/test-helpers";
-import { hbs } from "ember-cli-htmlbars";
 
 module('my very own tests', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('THIS DOES NOT WORK', function (assert) {
-    let { promise, resolve } = defer();
-    this.data = new TrackedAsyncData(promise);
+  test('THIS DOES NOT WORK', async function (assert) {
+    const { promise, resolve } = defer();
+    const data = new TrackedAsyncData(promise);
 
-    await render(hbs`
-      <div data-test-data>
-        {{#if this.data.isPending}}
-          Loading...
-        {{else if this.data.isResolved}}
-          Loaded: {{this.data.value}}
-        {{else if this.data.isRejected}}
-          Error: {{this.data.error.message}}
-        {{/if}}
-      </div>
+    await render(
+      <template>
+        <div data-test-data>
+          {{#if data.isPending}}
+            Loading...
+          {{else if data.isResolved}}
+            Loaded: {{data.value}}
+          {{else if data.isRejected}}
+            Error: {{data.error.message}}
+          {{/if}}
+        </div>
+      </template>
     `);
 
      assert.dom('[data-test-data]').hasText('Loading...');
@@ -535,26 +543,27 @@ import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
 import { render, waitFor } from "@ember/test-helpers";
-import { hbs } from "ember-cli-htmlbars";
 
 module('my very own tests', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('this actually works', function (assert) {
-    let { promise, resolve } = defer();
-    this.data = new TrackedAsyncData(promise);
+  test('this actually works', async function (assert) {
+    const { promise, resolve } = defer();
+    const data = new TrackedAsyncData(promise);
 
-    const renderPromise = render(hbs`
-      <div data-test-data>
-        {{#if this.data.isPending}}
-          Loading...
-        {{else if this.data.isResolved}}
-          Loaded: {{this.data.value}}
-        {{else if this.data.isRejected}}
-          Error: {{this.data.error.message}}
-        {{/if}}
-      </div>
-    `);
+    const renderPromise = render(
+      <template>
+        <div data-test-data>
+          {{#if data.isPending}}
+            Loading...
+          {{else if data.isResolved}}
+            Loaded: {{data.value}}
+          {{else if data.isRejected}}
+            Error: {{data.error.message}}
+          {{/if}}
+        </div>
+      </template>
+    );
 
      // Here we waits for the *result* of rendering, rather than the render
      // promise itself. Once we have rendered, we can make assertions about
@@ -575,21 +584,23 @@ While this might seem a bit annoying, it means that we actually *can* control al
 
 For that happy path, you can use a *resolved* `TrackedAsyncData` and everything will always “just work” as you’d expect:
 
-```js
+```gjs
   test('the "happy path" works easily', async function (assert) {
-    this.data = new TrackedAsyncData(Promise.resolve("a value"));
+    const data = new TrackedAsyncData(Promise.resolve("a value"));
 
-    await render(hbs`
-      <div data-test-data>
-        {{#if this.data.isPending}}
-          Loading...
-        {{else if this.data.isResolved}}
-          Loaded: {{this.data.value}}
-        {{else if this.data.isRejected}}
-          Error: {{this.data.error.message}}
-        {{/if}}
-      </div>
-    `);
+    await render(
+      <template>
+        <div data-test-data>
+          {{#if data.isPending}}
+            Loading...
+          {{else if data.isResolved}}
+            Loaded: {{data.value}}
+          {{else if data.isRejected}}
+            Error: {{data.error.message}}
+          {{/if}}
+        </div>
+      </template>
+    );
 
      assert.dom('[data-test-data]').hasText('Loaded: a value');
   });

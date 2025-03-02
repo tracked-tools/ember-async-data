@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { defer } from '../defer';
 import TrackedAsyncData from 'ember-async-data/tracked-async-data';
 import { settled } from '@ember/test-helpers';
-import { setupTest } from 'ember-qunit';
+import { setupTest } from 'test-app/tests/helpers';
 
 const ERROR_NOT_REJECTED_STATE =
   "Error: Assertion Failed: Accessing `error` when TrackedAsyncData is not in the rejected state is not supported. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.";
@@ -13,7 +13,7 @@ const VALUE_NOT_RESOLVED_STATE =
 module('Unit | TrackedAsyncData', function (hooks) {
   setupTest(hooks);
 
-  test('cannot be subclassed', function (assert) {
+  test('it cannot be subclassed', function (assert) {
     // @ts-expect-error: The type is not statically subclassable, either, so
     //   this fails both at the type-checking level and dynamically at runtime.
     class Subclass extends TrackedAsyncData<unknown> {}

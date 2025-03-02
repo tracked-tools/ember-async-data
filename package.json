@@ -1,0 +1,113 @@
+{
+  "name": "ember-async-data",
+  "version": "1.0.3",
+  "description": "A utility/helper and data structure for representing a `Promise` in a declarative, reactive way in Glimmer.js and Ember Octane.",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": "https://github.com/tracked-tools/ember-async-data",
+  "license": "MIT",
+  "author": {
+    "name": "Chris Krycho",
+    "email": "hello@chriskrycho.com",
+    "url": "https://v5.chriskrycho.com/"
+  },
+  "exports": {
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./addon-main.js": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
+  },
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist"
+  ],
+  "scripts": {
+    "build": "concurrently 'pnpm:build:*'",
+    "build:js": "rollup --config",
+    "build:types": "glint --declaration",
+    "lint": "concurrently 'pnpm:lint:*(!fix)' --names 'lint:'",
+    "lint:fix": "concurrently 'pnpm:lint:*:fix' --names 'fix:'",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:types": "glint",
+    "start": "concurrently 'pnpm:start:*'",
+    "start:js": "rollup --config --watch --no-watch.clearScreen",
+    "start:types": "glint --declaration --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
+  },
+  "dependencies": {
+    "@ember/test-waiters": "^3.1.0 || ^4.0.0",
+    "@embroider/addon-shim": "^1.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.24.0",
+    "@babel/preset-typescript": "^7.23.3",
+    "@babel/runtime": "^7.24.0",
+    "@embroider/addon-dev": "^4.2.1",
+    "@glimmer/component": "^1.1.2",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.5.2",
+    "@glint/environment-ember-loose": "^1.5.2",
+    "@glint/template": "^1.5.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@tsconfig/ember": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "concurrently": "^8.2.2",
+    "ember-source": "^4.12.3",
+    "ember-template-lint": "^5.11.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-ember": "^12.0.2",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-prettier": "^5.1.3",
+    "expect-type": "^0.18.0",
+    "prettier": "^3.2.5",
+    "rollup": "^3.28.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "typescript": "~5.8.2",
+    "webpack": "^5.90.3"
+  },
+  "peerDependencies": {
+    "ember-source": ">=4.8.4"
+  },
+  "volta": {
+    "extends": "../package.json"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.cjs",
+    "versionCompatibility": {
+      "ember": "3.28 || >=4.0"
+    },
+    "app-js": {
+      "./helpers/load.js": "./dist/_app_/helpers/load.js"
+    }
+  }
+}

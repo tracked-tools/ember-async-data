@@ -172,7 +172,7 @@ module('Integration | Helper | load', function (hooks) {
     // This handles the error throw from rendering a rejected promise
     oldPromise.catch((error) => {
       assert.ok(error instanceof Error);
-      assert.strictEqual(error.message, 'foobar');
+      assert.strictEqual((error as Error).message, 'foobar');
     });
 
     const renderPromise = render(hbs`
@@ -253,7 +253,6 @@ module('Integration | Helper | load', function (hooks) {
       assert.strictEqual(error.message, 'foobar');
     });
 
-    // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error('foobar'));
 
     const renderPromise = render(hbs`

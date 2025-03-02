@@ -1,6 +1,4 @@
 {
-  "name": "ember-async-data",
-  "version": "1.0.3",
   "private": true,
   "repository": "https://github.com/tracked-tools/ember-async-data",
   "license": "MIT",
@@ -18,16 +16,19 @@
     "lint": "pnpm run --filter=\"*\" lint",
     "lint:fix": "pnpm run --filter=\"*\" lint:fix",
     "prepare": "pnpm run build",
-    "start": "concurrently 'pnpm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
+    "start": "concurrently 'pnpm:start:*' --restart-after 5000 --prefixColors auto",
     "start:addon": "pnpm run --filter=ember-async-data start",
     "start:test-app": "pnpm run --filter=test-app start",
-    "test": "pnpm run --filter=test-app test"
+    "test": "pnpm run --filter=test-app test",
+    "test:ember": "pnpm --filter=test-app test:ember"
   },
+  "packageManager": "pnpm@10.0.0",
   "devDependencies": {
-    "concurrently": "^8.2.2",
+    "@glint/core": "^1.2.1",
+    "concurrently": "^9.1.2",
+    "prettier-plugin-ember-template-tag": "^2.0.2",
     "release-plan": "^0.13.1"
   },
-  "packageManager": "pnpm@10.5.2",
   "volta": {
     "node": "18.20.7",
     "pnpm": "10.5.2"

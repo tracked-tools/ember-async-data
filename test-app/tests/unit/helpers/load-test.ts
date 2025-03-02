@@ -27,7 +27,7 @@ module.skip('Unit | load', function (hooks) {
     await promise;
   });
 
-  test('given a plain value', async function (assert) {
+  test('given a plain value', function (assert) {
     const result = load(12);
     assert.ok(
       result instanceof TrackedAsyncData,

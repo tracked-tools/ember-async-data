@@ -84,6 +84,7 @@
     "expect-type": "^0.18.0",
     "prettier": "^3.2.5",
     "rollup": "^3.28.0",
+    "rollup-plugin-copy": "^3.5.0",
     "typescript": "~5.8.2",
     "webpack": "^5.90.3"
   },

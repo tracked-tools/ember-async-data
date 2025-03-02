@@ -32,11 +32,23 @@ class _TrackedAsyncData<T> {
   #token: unknown;
 
   /**
-    @param promise The promise to load.
+    @param promise The promise to load or function to call to load the promise.
    */
-  constructor(data: T | Promise<T>) {
+  constructor(data: T | Promise<T> | (() => T | Promise<T>)) {
     if (this.constructor !== _TrackedAsyncData) {
       throw new Error('tracked-async-data cannot be subclassed');
+    }
+
+    // If the data is a function, we call it to get the actual data.
+    if (isFunction(data)) {
+      try {
+        data = data();
+      } catch (error) {
+        // If the function throws an error instead of returning a promise, we conclude the state as rejected.
+        // This is not called if the returned promise rejects, as that is handled later.
+        this.#state.data = ['REJECTED', error];
+        return;
+      }
     }
 
     if (!isPromiseLike(data)) {
@@ -298,7 +310,7 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
  */
 type TrackedAsyncData<T> = Pending<T> | Resolved<T> | Rejected<T>;
 const TrackedAsyncData = _TrackedAsyncData as new <T>(
-  data: T | Promise<T>,
+  data: T | Promise<T> | (() => T | Promise<T>),
 ) => TrackedAsyncData<T>;
 export default TrackedAsyncData;
 
@@ -317,4 +329,8 @@ function isPromiseLike(data: unknown): data is PromiseLike<unknown> {
     has('then', data) &&
     typeof data.then === 'function'
   );
+}
+
+function isFunction<T>(data: unknown): data is () => T | Promise<T> {
+  return typeof data === 'function';
 }

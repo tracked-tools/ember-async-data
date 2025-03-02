@@ -4,7 +4,7 @@ import { expectTypeOf } from 'expect-type';
 declare function unreachable(x: never): never;
 
 declare class PublicAPI<T> {
-  constructor(data: T | Promise<T>);
+  constructor(data: T | Promise<T> | (() => T | Promise<T>));
   get state(): 'PENDING' | 'RESOLVED' | 'REJECTED';
   get value(): T | null;
   get error(): unknown;
@@ -29,6 +29,19 @@ expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve());
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.resolve(12));
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject());
 expectTypeOf(TrackedAsyncData).toBeConstructibleWith(Promise.reject('gah'));
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => 12);
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => 'hello');
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => true);
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => null);
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => undefined);
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => ({ cool: 'story' }));
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => ['neat']);
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => Promise.resolve());
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => Promise.resolve(12));
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() => Promise.reject());
+expectTypeOf(TrackedAsyncData).toBeConstructibleWith(() =>
+  Promise.reject('gah'),
+);
 
 // We use `toMatchTypeOf` here to confirm the union type which makes up
 // `TrackedAsyncData` is structurally compatible with the desired public

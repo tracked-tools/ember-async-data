@@ -1,4 +1,4 @@
-import TrackedAsyncData from '../tracked-async-data';
+import TrackedAsyncData from '../tracked-async-data.ts';
 
 /**
   Given a `Promise`, return a `TrackedAsyncData` object which exposes the state

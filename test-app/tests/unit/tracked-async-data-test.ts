@@ -137,11 +137,14 @@ module('Unit | TrackedAsyncData', function () {
     const deferred = defer();
     const result = new TrackedAsyncData(deferred.promise);
 
-    // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error('foobar'));
     await deferred.promise.catch((error) => {
       assert.true(error instanceof Error);
-      assert.strictEqual(error.message, 'foobar', 'thrown promise rejection');
+      assert.strictEqual(
+        (error as Error).message,
+        'foobar',
+        'thrown promise rejection',
+      );
     });
 
     assert.strictEqual(result.state, 'REJECTED');
@@ -170,7 +173,6 @@ module('Unit | TrackedAsyncData', function () {
     const result = new TrackedAsyncData(deferred.promise);
     assert.strictEqual(result.state, 'PENDING');
 
-    // eslint-disable-next-line ember/no-array-prototype-extensions
     deferred.reject(new Error('foobar'));
     await deferred.promise.catch((err: Error) => {
       assert.true(err instanceof Error);

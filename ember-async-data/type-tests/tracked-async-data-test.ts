@@ -1,4 +1,5 @@
-import TrackedAsyncData, { JSONRepr } from '../src/tracked-async-data';
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors,@typescript-eslint/unbound-method */
+import TrackedAsyncData, { type JSONRepr } from '../src/tracked-async-data.ts';
 import { expectTypeOf } from 'expect-type';
 
 declare function unreachable(x: never): never;

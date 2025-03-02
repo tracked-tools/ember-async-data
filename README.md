@@ -111,7 +111,7 @@ A utility/helper and data structure for representing a `Promise` in a declarativ
 
 This project follows the current draft of [the Semantic Versioning for TypeScript Types][semver] proposal.
 
-- **Currently supported TypeScript versions:** v5.0 - v5.8
+- **Currently supported TypeScript versions:** v5.5 - v5.8
 - **Compiler support policy:** [simple majors][sm]
 - **Public API:** all published types not in a `-private` module are public
 

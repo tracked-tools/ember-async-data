@@ -1,23 +1,27 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, waitFor, type TestContext } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import { render, waitFor } from '@ember/test-helpers';
+import { tracked } from '@glimmer/tracking';
+import load from 'ember-async-data/helpers/load';
 import { defer } from '../../defer';
 
-interface LocalTestContext extends TestContext {
-  promise: Promise<unknown>;
+class LocalState {
+  @tracked promise: Promise<unknown>;
+
+  constructor(promise: Promise<unknown>) {
+    this.promise = promise;
+  }
 }
 
 module('Integration | Helper | load', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders loading state', async function (this: LocalTestContext, assert) {
+  test('it renders loading state', async function (assert) {
     const { promise, resolve } = defer();
-    this.set('promise', promise);
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
       <div data-test-load-helper>
-        {{#let (load this.promise) as |result|}}
+        {{#let (load promise) as |result|}}
           {{#if result.isResolved}}
             RESOLVED {{result.value}}
           {{else if result.isPending}}
@@ -27,7 +31,7 @@ module('Integration | Helper | load', function (hooks) {
           {{/if}}
         {{/let}}
       </div>
-    `);
+    </template>);
 
     await waitFor('[data-test-load-helper]');
 
@@ -37,15 +41,14 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders loaded state', async function (this: LocalTestContext, assert) {
+  test('it renders loaded state', async function (assert) {
     const deferred = defer();
     deferred.resolve('foobar');
     await deferred.promise;
-    this.set('promise', deferred.promise);
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
       <div data-test-load-helper>
-        {{#let (load this.promise) as |result|}}
+        {{#let (load deferred.promise) as |result|}}
           {{#if result.isResolved}}
             RESOLVED {{result.value}}
           {{else if result.isPending}}
@@ -55,7 +58,7 @@ module('Integration | Helper | load', function (hooks) {
           {{/if}}
         {{/let}}
       </div>
-    `);
+    </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').containsText('RESOLVED');
@@ -64,7 +67,7 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders error state', async function (this: LocalTestContext, assert) {
+  test('it renders error state', async function (assert) {
     assert.expect(3);
 
     const { promise, reject } = defer();
@@ -76,11 +79,10 @@ module('Integration | Helper | load', function (hooks) {
     });
 
     reject(new Error('foobar'));
-    this.set('promise', promise);
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
       <div data-test-load-helper>
-        {{#let (load this.promise) as |result|}}
+        {{#let (load promise) as |result|}}
           {{#if result.isResolved}}
             RESOLVED {{result.value}}
           {{else if result.isPending}}
@@ -90,7 +92,7 @@ module('Integration | Helper | load', function (hooks) {
           {{/if}}
         {{/let}}
       </div>
-    `);
+    </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').hasText('REJECTED');
@@ -98,13 +100,12 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders loading state and then loaded state', async function (this: LocalTestContext, assert) {
+  test('it renders loading state and then loaded state', async function (assert) {
     const { promise, resolve } = defer();
-    this.set('promise', promise);
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
       <div data-test-load-helper>
-        {{#let (load this.promise) as |result|}}
+        {{#let (load promise) as |result|}}
           {{#if result.isResolved}}
             <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
           {{else if result.isPending}}
@@ -114,7 +115,7 @@ module('Integration | Helper | load', function (hooks) {
           {{/if}}
         {{/let}}
       </div>
-    `);
+    </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').hasText('PENDING');
@@ -127,15 +128,14 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders loading state and then error state', async function (this: LocalTestContext, assert) {
+  test('it renders loading state and then error state', async function (assert) {
     assert.expect(3);
 
     const { promise, reject } = defer();
-    this.set('promise', promise);
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
       <div data-test-load-helper>
-        {{#let (load this.promise) as |result|}}
+        {{#let (load promise) as |result|}}
           {{#if result.isResolved}}
             <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
           {{else if result.isPending}}
@@ -145,7 +145,7 @@ module('Integration | Helper | load', function (hooks) {
           {{/if}}
         {{/let}}
       </div>
-    `);
+    </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').hasText('PENDING');
@@ -163,11 +163,11 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders the state for the new promise if a new promise is sent and resolves before the old promise is done loading', async function (this: LocalTestContext, assert) {
+  test('it renders the state for the new promise if a new promise is sent and resolves before the old promise is done loading', async function (assert) {
     assert.expect(4);
 
     const { promise: oldPromise, reject: rejectOld } = defer();
-    this.set('promise', oldPromise);
+    const localState = new LocalState(oldPromise);
 
     // This handles the error throw from rendering a rejected promise
     oldPromise.catch((error) => {
@@ -175,9 +175,9 @@ module('Integration | Helper | load', function (hooks) {
       assert.strictEqual((error as Error).message, 'foobar');
     });
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
       <div data-test-load-helper>
-        {{#let (load this.promise) as |result|}}
+        {{#let (load localState.promise) as |result|}}
             {{#if result.isResolved}}
               <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
             {{else if result.isPending}}
@@ -187,13 +187,13 @@ module('Integration | Helper | load', function (hooks) {
             {{/if}}
           {{/let}}
         </div>
-      `);
+      </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').hasText('PENDING');
 
     const { promise: newPromise, resolve: resolveNew } = defer();
-    this.set('promise', newPromise);
+   localState.promise = newPromise;
 
     resolveNew();
     await newPromise;
@@ -205,13 +205,13 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders the state and value for the new promise if a new promise with a different value is sent before the old promise is done loading', async function (this: LocalTestContext, assert) {
+  test('it renders the state and value for the new promise if a new promise with a different value is sent before the old promise is done loading', async function (assert) {
     const { promise: oldPromise, resolve: resolveOld } = defer();
-    this.set('promise', oldPromise);
+    const localState = new LocalState(oldPromise);
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
         <div data-test-load-helper>
-          {{#let (load this.promise) as |result|}}
+          {{#let (load localState.promise) as |result|}}
             {{#if result.isResolved}}
               <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
             {{else if result.isPending}}
@@ -221,13 +221,13 @@ module('Integration | Helper | load', function (hooks) {
             {{/if}}
           {{/let}}
         </div>
-      `);
+      </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').hasText('PENDING');
 
     const { promise: newPromise, resolve: resolveNew } = defer();
-    this.set('promise', newPromise);
+    localState.promise = newPromise;
 
     resolveNew('New');
     await newPromise;
@@ -241,11 +241,12 @@ module('Integration | Helper | load', function (hooks) {
     await renderPromise;
   });
 
-  test('it renders error state and then loading state for a retried promise', async function (this: LocalTestContext, assert) {
+  test('it renders error state and then loading state for a retried promise', async function (assert) {
     assert.expect(4);
 
     const deferred = defer();
-    this.set('promise', deferred.promise);
+    const promise = deferred.promise;
+    const localState = new LocalState(promise);
 
     // This handles the error throw from rendering a rejected promise
     deferred.promise.catch((error: Error) => {
@@ -255,9 +256,9 @@ module('Integration | Helper | load', function (hooks) {
 
     deferred.reject(new Error('foobar'));
 
-    const renderPromise = render(hbs`
+    const renderPromise = render(<template>
         <div data-test-load-helper>
-          {{#let (load this.promise) as |result|}}
+          {{#let (load localState.promise) as |result|}}
             {{#if result.isResolved}}
               <div data-test-state='RESOLVED'>RESOLVED {{result.value}}</div>
             {{else if result.isPending}}
@@ -267,13 +268,13 @@ module('Integration | Helper | load', function (hooks) {
             {{/if}}
           {{/let}}
         </div>
-      `);
+      </template>);
 
     await waitFor('[data-test-load-helper]');
     assert.dom('[data-test-load-helper]').hasText('REJECTED');
 
     const retryDeferred = defer();
-    this.set('promise', retryDeferred.promise);
+    localState.promise = retryDeferred.promise;
 
     await waitFor('[data-test-state="PENDING"]');
     assert.dom('[data-test-load-helper]').hasText('PENDING');

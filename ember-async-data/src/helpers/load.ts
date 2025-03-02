@@ -10,30 +10,29 @@ import TrackedAsyncData from '../tracked-async-data.ts';
 
   ## Example
 
-  Given a backing class like this:
+  Given a component class like this, you can use the result in your template:
 
-  ```js
+  ```gjs
   import Component from '@glimmer/component';
   import { cached } from 'ember-cached-decorator-polyfill';
   import { load } from 'ember-tracked-data/helpers/load';
 
   export default class ExtraInfo extends Component {
     @cached
-    get someData() {return load(fetch('some-url', this.args.someArg));
+    get someData() {
+      return load(fetch('some-url', this.args.someArg));
     }
+
+    <template>
+      {{#if this.someData.isLoading}}
+        loading...
+      {{else if this.someData.isLoaded}}
+        {{this.someData.value}}
+      {{else if this.someData.isError}}
+        Whoops! Something went wrong: {{this.someData.error}}
+      {{/if}}
+    </template>
   }
-  ```
-
-  You can use the result in your template like this:
-
-  ```hbs
-  {{#if this.someData.isLoading}}
-    loading...
-  {{else if this.someData.isLoaded}}
-    {{this.someData.value}}
-  {{else if this.someData.isError}}
-    Whoops! Something went wrong: {{this.someData.error}}
-  {{/if}}
   ```
 
   You can also use the helper directly in your template:

@@ -18,7 +18,6 @@
     "lint": "pnpm run --filter=\"*\" lint",
     "lint:fix": "pnpm run --filter=\"*\" lint:fix",
     "prepare": "pnpm run build",
-    "release": "release-it",
     "start": "concurrently 'pnpm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
     "start:addon": "pnpm run --filter=ember-async-data start",
     "start:test-app": "pnpm run --filter=test-app start",

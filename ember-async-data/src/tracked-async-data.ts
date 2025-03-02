@@ -1,5 +1,5 @@
 import { tracked } from '@glimmer/tracking';
-import { deprecate } from '@ember/debug';
+import { assert } from '@ember/debug';
 import { buildWaiter } from '@ember/test-waiters';
 
 const waiter = buildWaiter('ember-async-data');
@@ -81,23 +81,12 @@ class _TrackedAsyncData<T> {
 
     @note It is only valid to access `error` when `.isError` is true, that is,
       when `TrackedAsyncData.state` is `"ERROR"`.
-    @warning You should not rely on this returning `T | null`! In a future
-      breaking change which drops support for pre-Octane idioms, it will *only*
-      return `T` and will *throw* if you access it when the state is wrong.
+    @warning You should not rely on this returning `T | null`!
    */
   get value(): T | null {
-    deprecate(
-      "Accessing `value` when TrackedAsyncData is not in the resolved state is not supported and will throw an error in the future. Always check that `.state` is `'RESOLVED'` or that `.isResolved` is `true` before accessing this property.",
+    assert(
+      "Accessing `value` when TrackedAsyncData is not in the resolved state is not supported. Always check that `.state` is `'RESOLVED'` or that `.isResolved` is `true` before accessing this property.",
       this.#state.data[0] === 'RESOLVED',
-      {
-        id: 'tracked-async-data::invalid-value-access',
-        for: 'ember-async-data',
-        since: {
-          available: '1.0.0',
-          enabled: '1.0.0',
-        },
-        until: '2.0.0',
-      },
     );
 
     return this.#state.data[0] === 'RESOLVED' ? this.#state.data[1] : null;
@@ -109,23 +98,12 @@ class _TrackedAsyncData<T> {
     @note It is only valid to access `error` when `.isError` is true, that is,
       when `TrackedAsyncData.state` is `"ERROR"`.
     @warning You should not rely on this returning `null` when the state is not
-      `"ERROR"`! In a future breaking change which drops support for pre-Octane
-      idioms, it will *only* return `E` and will *throw* if you access it when
-      the state is wrong.
+      `"ERROR"`!
    */
   get error(): unknown {
-    deprecate(
-      "Accessing `error` when TrackedAsyncData is not in the rejected state is not supported and will throw an error in the future. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.",
+    assert(
+      "Accessing `error` when TrackedAsyncData is not in the rejected state is not supported. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.",
       this.#state.data[0] === 'REJECTED',
-      {
-        id: 'tracked-async-data::invalid-error-access',
-        for: 'ember-async-data',
-        since: {
-          available: '1.0.0',
-          enabled: '1.0.0',
-        },
-        until: '2.0.0',
-      },
     );
 
     return this.#state.data[0] === 'REJECTED' ? this.#state.data[1] : null;

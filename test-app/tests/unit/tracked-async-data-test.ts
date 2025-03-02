@@ -2,8 +2,17 @@ import { module, test } from 'qunit';
 import { defer } from '../defer';
 import TrackedAsyncData from 'ember-async-data/tracked-async-data';
 import { settled } from '@ember/test-helpers';
+import { setupTest } from 'ember-qunit';
 
-module('Unit | TrackedAsyncData', function () {
+const ERROR_NOT_REJECTED_STATE =
+  "Error: Assertion Failed: Accessing `error` when TrackedAsyncData is not in the rejected state is not supported. Always check that `.state` is `'REJECTED'` or that `.isRejected` is `true` before accessing this property.";
+
+const VALUE_NOT_RESOLVED_STATE =
+  "Error: Assertion Failed: Accessing `value` when TrackedAsyncData is not in the resolved state is not supported. Always check that `.state` is `'RESOLVED'` or that `.isResolved` is `true` before accessing this property.";
+
+module('Unit | TrackedAsyncData', function (hooks) {
+  setupTest(hooks);
+
   test('cannot be subclassed', function (assert) {
     // @ts-expect-error: The type is not statically subclassable, either, so
     //   this fails both at the type-checking level and dynamically at runtime.
@@ -20,8 +29,14 @@ module('Unit | TrackedAsyncData', function () {
     assert.true(result.isPending);
     assert.false(result.isResolved);
     assert.false(result.isRejected);
-    assert.strictEqual(result.value, null);
-    assert.strictEqual(result.error, null);
+    assert.throws(
+      () => result.value === null,
+      (err: Error) => err.toString() === VALUE_NOT_RESOLVED_STATE,
+    );
+    assert.throws(
+      () => result.error === null,
+      (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+    );
 
     deferred.resolve();
     await deferred.promise;
@@ -39,7 +54,10 @@ module('Unit | TrackedAsyncData', function () {
     assert.true(result.isResolved);
     assert.false(result.isRejected);
     assert.strictEqual(result.value, 'foobar');
-    assert.strictEqual(result.error, null);
+    assert.throws(
+      () => result.error === null,
+      (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+    );
   });
 
   module('it returns resolved state for non-thenable input', function () {
@@ -52,7 +70,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadUndefined.isResolved);
       assert.false(loadUndefined.isRejected);
       assert.strictEqual(loadUndefined.value, undefined);
-      assert.strictEqual(loadUndefined.error, null);
+      assert.throws(
+        () => loadUndefined.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
 
     test('null', async function (assert) {
@@ -64,7 +85,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadNull.isResolved);
       assert.false(loadNull.isRejected);
       assert.strictEqual(loadNull.value, null);
-      assert.strictEqual(loadNull.error, null);
+      assert.throws(
+        () => loadNull.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
 
     test('non-thenable object', async function (assert) {
@@ -77,7 +101,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadObject.isResolved);
       assert.false(loadObject.isRejected);
       assert.strictEqual(loadObject.value, notAThenableObject);
-      assert.strictEqual(loadObject.error, null);
+      assert.throws(
+        () => loadObject.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
 
     test('boolean: true', async function (assert) {
@@ -89,7 +116,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadTrue.isResolved);
       assert.false(loadTrue.isRejected);
       assert.true(loadTrue.value);
-      assert.strictEqual(loadTrue.error, null);
+      assert.throws(
+        () => loadTrue.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
 
     test('boolean: false', async function (assert) {
@@ -101,7 +131,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadFalse.isResolved);
       assert.false(loadFalse.isRejected);
       assert.false(loadFalse.value);
-      assert.strictEqual(loadFalse.error, null);
+      assert.throws(
+        () => loadFalse.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
 
     test('number', async function (assert) {
@@ -113,7 +146,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadNumber.isResolved);
       assert.false(loadNumber.isRejected);
       assert.strictEqual(loadNumber.value, 5);
-      assert.strictEqual(loadNumber.error, null);
+      assert.throws(
+        () => loadNumber.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
 
     test('string', async function (assert) {
@@ -126,7 +162,10 @@ module('Unit | TrackedAsyncData', function () {
       assert.true(loadString.isResolved);
       assert.false(loadString.isRejected);
       assert.strictEqual(loadString.value, 'js');
-      assert.strictEqual(loadString.error, null);
+      assert.throws(
+        () => loadString.error === null,
+        (err: Error) => err.toString() === ERROR_NOT_REJECTED_STATE,
+      );
     });
   });
 
@@ -151,7 +190,10 @@ module('Unit | TrackedAsyncData', function () {
     assert.false(result.isPending);
     assert.false(result.isResolved);
     assert.true(result.isRejected);
-    assert.strictEqual(result.value, null);
+    assert.throws(
+      () => result.value === null,
+      (err: Error) => err.toString() === VALUE_NOT_RESOLVED_STATE,
+    );
     assert.strictEqual((result.error as Error).message, 'foobar');
   });
 

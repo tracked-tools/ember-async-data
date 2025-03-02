@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "pnpm run --filter=ember-async-data build",
+    "format": "pnpm run --filter=\"*\" format",
     "lint": "pnpm run --filter=\"*\" lint",
     "lint:fix": "pnpm run --filter=\"*\" lint:fix",
     "prepare": "pnpm run build",

@@ -115,7 +115,7 @@ jobs:
       - run: yarn add -D typescript@${{ matrix.ts-version }}
         working-directory: ember-async-data
 
-      - run: yarn tsc --noEmit
+      - run: yarn tsc --version && yarn tsc --noEmit
         working-directory: ember-async-data
 
       - run: yarn tsc --noEmit --project type-tests

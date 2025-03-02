@@ -1,0 +1,5 @@
+packages:
+  - ember-async-data
+  - test-app
+onlyBuiltDependencies:
+  - core-js

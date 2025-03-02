@@ -36,18 +36,18 @@
     "dist"
   ],
   "scripts": {
-    "build": "concurrently 'npm:build:*'",
+    "build": "concurrently 'pnpm:build:*'",
     "build:js": "rollup --config",
     "build:types": "glint --declaration",
-    "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
-    "lint:fix": "concurrently 'npm:lint:*:fix' --names 'fix:'",
+    "lint": "concurrently 'pnpm:lint:*(!fix)' --names 'lint:'",
+    "lint:fix": "concurrently 'pnpm:lint:*:fix' --names 'fix:'",
     "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
     "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
     "prepack": "rollup --config",
-    "start": "concurrently 'npm:start:*'",
+    "start": "concurrently 'pnpm:start:*'",
     "start:js": "rollup --config --watch --no-watch.clearScreen",
     "start:types": "glint --declaration --watch",
     "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
@@ -65,9 +65,9 @@
     "@embroider/addon-dev": "^4.2.1",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "@glint/core": "^1.3.0",
-    "@glint/environment-ember-loose": "^1.3.0",
-    "@glint/template": "^1.3.0",
+    "@glint/core": "^1.5.2",
+    "@glint/environment-ember-loose": "^1.5.2",
+    "@glint/template": "^1.5.2",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@tsconfig/ember": "^2.0.0",
@@ -84,7 +84,8 @@
     "expect-type": "^0.18.0",
     "prettier": "^3.2.5",
     "rollup": "^3.28.0",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "webpack": "^5.90.3"
   },
   "peerDependencies": {
     "ember-source": ">=4.8.4"

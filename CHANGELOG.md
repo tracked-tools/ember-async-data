@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2025-03-09)
+
+
+
+#### :memo: Documentation
+* [#821](https://github.com/tracked-tools/ember-async-data/pull/821) Update TypeScript support badge ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#829](https://github.com/tracked-tools/ember-async-data/pull/829) Update Nightly TypeScript run job ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2025-03-02)
 
 ember-async-data 2.0.0 (major)

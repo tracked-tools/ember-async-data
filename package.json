@@ -23,16 +23,16 @@
     "test": "pnpm run --filter=test-app test",
     "test:ember": "pnpm --filter=test-app test:ember"
   },
-  "packageManager": "pnpm@10.0.0",
   "devDependencies": {
     "@glint/core": "^1.2.1",
     "concurrently": "^9.1.2",
     "prettier-plugin-ember-template-tag": "^2.0.2",
-    "release-plan": "^0.13.1"
+    "release-plan": "^0.16.0"
   },
+  "packageManager": "pnpm@10.6.3",
   "volta": {
     "node": "18.20.7",
-    "pnpm": "10.5.2"
+    "pnpm": "10.6.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

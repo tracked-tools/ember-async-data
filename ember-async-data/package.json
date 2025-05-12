@@ -87,9 +87,6 @@
     "typescript-eslint": "^8.25.0",
     "webpack": "^5.90.3"
   },
-  "peerDependencies": {
-    "ember-source": ">= 4.8.0"
-  },
   "volta": {
     "extends": "../package.json"
   },

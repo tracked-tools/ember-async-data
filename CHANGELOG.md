@@ -1,5 +1,27 @@
 # Changelog
 
+## Release (2025-05-12)
+
+* ember-async-data 2.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-async-data`
+  * [#854](https://github.com/tracked-tools/ember-async-data/pull/854) Remove unneeded peer dependency declaration ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#821](https://github.com/tracked-tools/ember-async-data/pull/821) Update TypeScript support badge ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* `ember-async-data`
+  * [#855](https://github.com/tracked-tools/ember-async-data/pull/855) chore(deps-dev): bump pnpm from 10.6.3 to 10.10.0 ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#834](https://github.com/tracked-tools/ember-async-data/pull/834) Bump release-plan from v0.13 to v0.16 ([@SergeAstapov](https://github.com/SergeAstapov))
+* Other
+  * [#829](https://github.com/tracked-tools/ember-async-data/pull/829) Update Nightly TypeScript run job ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-03-02)
 
 ember-async-data 2.0.0 (major)

@@ -238,7 +238,7 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
   ```ts
   import Component from '@glimmer/component';
   import { cached } from '@glimmer/tracking';
-  import { inject as service } from '@ember/service';
+  import { service } from '@ember/service';
   import TrackedAsyncData from 'ember-async-data/tracked-async-data';
 
   export default class SmartProfile extends Component<{ id: number }> {

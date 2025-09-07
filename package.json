@@ -81,7 +81,7 @@
     "@ember/library-tsconfig": "^1.0.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@types/qunit": "^2.19.12",
-    "babel-plugin-ember-template-compilation": "^2.2.5",
+    "babel-plugin-ember-template-compilation": "^3.0.1",
     "concurrently": "^9.0.1",
     "ember-qunit": "^9.0.2",
     "ember-resolver": "^13.1.0",

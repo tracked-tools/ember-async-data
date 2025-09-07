@@ -157,30 +157,12 @@ You can use `TrackedAsyncData` either directly in JavaScript or via the `{{load}
 
 To create a `TrackedAsyncData`, simply import it from the library and call its constructor with a `Promise`.
 
-First, a small utility function for being able to resolve or reject a `Promise` at will (so we can see how the lifecycle behaves):
-
-```ts
-function defer() {
-  let deferred!: {
-    resolve: (value: unknown) => void;
-    reject: (reason?: unknown) => void;
-  } = {};
-
-  deferred.promise = new Promise((resolve, reject) => {
-    deferred.resolve = resolve;
-    deferred.reject = reject;
-  });
-
-  return deferred;
-}
-```
-
-Now we can create promises to resolve or reject and pass them to `TrackedAsyncData`:
+Using [`Promise.withResolvers()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers) method, we can create a `Promise` and resolve or reject it at will and pass the promise to `TrackedAsyncData`:
 
 ```ts
 import { TrackedAsyncData } from 'ember-async-data';
 
-let firstDeferred = defer();
+let firstDeferred = Promise.withResolvers();
 let willResolve = new TrackedAsyncData(firstDeferred.promise);
 
 console.log(willResolve);
@@ -204,7 +186,7 @@ TrackedAsyncData: {
 */
 
 // create another promise, this time to reject
-let secondDeferred = defer();
+let secondDeferred = Promise.withResolvers();
 let willReject = new TrackedAsyncData(secondDeferred.promise);
 
 console.log(willReject);
@@ -229,7 +211,6 @@ TrackedAsyncData: {
 ```
 
 You can use `TrackedAsyncData` with *any* value, not just a `Promise`, which is convenient when working with data which may or may not already be in a `Promise`.
-
 
 #### With TypeScript
 
@@ -439,20 +420,19 @@ As a starting point, you can and should ask: "Is testing the a loading spinner w
 
 #### Unit testing
 
-Unit testing is straightforward. Using a tool like [`RSVP.defer()`](https://github.com/tildeio/rsvp.js/blob/master/lib/rsvp/defer.js), you can create a promise and control its resolution and verify that your use of `TrackedAsyncData` does what you need it to. Whenever you trigger a change in the state of the underlying promise, you will need to wait for promise resolution in the test. There are two ways to do this:
+Unit testing is straightforward. Using a tool like [`Promise.withResolvers()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers), you can create a promise and control its resolution and verify that your use of `TrackedAsyncData` does what you need it to. Whenever you trigger a change in the state of the underlying promise, you will need to wait for promise resolution in the test. There are two ways to do this:
 
 1. If you are working with a promise directly, you can simply `await` the promise itself.
 2. If you are working with things which might or might not be promises, or working at a higher level of abstraction where you don’t have direct access to the promise, you can `await` the `settled()` helper from `@ember/test-helpers`, since `TrackedAsyncData` integrates into Ember’s test waiter system.
 
 ```js
 import { TrackedAsyncData } from 'ember-async-data';
-import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { settled } from '@ember/test-helpers';
 
 module('my very own tests', function (hooks) {
   test('directly awaiting the promise works', async function (assert) {
-    let { promise, resolve } = defer();
+    let { promise, resolve } = Promise.withResolvers();
     let asyncData = new TrackedAsyncData(promise);
     assert.true(asyncData.isPending);
 
@@ -464,7 +444,7 @@ module('my very own tests', function (hooks) {
   });
 
   test('awaiting `settled` also works', async function (assert) {
-    let { promise, resolve } = defer();
+    let { promise, resolve } = Promise.withResolvers();
     let asyncData = new TrackedAsyncData(promise);
     assert.true(asyncData.isPending);
 
@@ -483,7 +463,7 @@ Handling errors is slightly more complicated: `TrackedAsyncData` “re-throws”
   test('it handles errors', async function (assert) {
     assert.expect(2);
 
-    let { promise, reject } = defer();
+    let { promise, reject } = Promise.withResolvers();
     let asyncData = new TrackedAsyncData(promise);
 
     reject(new Error("this is the error!"));
@@ -504,7 +484,6 @@ So this code, which you might write if you haven’t dealt with this before, ***
 
 ```gjs
 import { TrackedAsyncData } from 'ember-async-data';
-import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
 import { render } from "@ember/test-helpers";
@@ -513,7 +492,7 @@ module('my very own tests', function (hooks) {
   setupRenderingTest(hooks);
 
   test('THIS DOES NOT WORK', async function (assert) {
-    const { promise, resolve } = defer();
+    const { promise, resolve } = Promise.withResolvers();
     const data = new TrackedAsyncData(promise);
 
     await render(
@@ -539,7 +518,6 @@ This test will simply time out without ever having finished, because the test wa
 
 ```js
 import { TrackedAsyncData } from 'ember-async-data';
-import { defer } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '@ember/test-helpers';
 import { render, waitFor } from "@ember/test-helpers";
@@ -548,7 +526,7 @@ module('my very own tests', function (hooks) {
   setupRenderingTest(hooks);
 
   test('this actually works', async function (assert) {
-    const { promise, resolve } = defer();
+    const { promise, resolve } = Promise.withResolvers();
     const data = new TrackedAsyncData(promise);
 
     const renderPromise = render(

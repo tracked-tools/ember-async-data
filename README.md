@@ -332,7 +332,7 @@ For symmetry with templates, you can also use `load` in JavaScript; it has the e
 ```ts
 import Component from '@glimmer/component';
 import { cached } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { load } from 'ember-async-data';
 
 export default class SmartProfile extends Component {

@@ -1,5 +1,6 @@
-packages:
-  - ember-async-data
-  - test-app
+peerDependencyRules:
+  ignoreMissing:
+    - webpack
 onlyBuiltDependencies:
   - core-js
+  - esbuild

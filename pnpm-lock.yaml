@@ -82,8 +82,8 @@ importers:
         specifier: ^2.19.12
         version: 2.19.13
       babel-plugin-ember-template-compilation:
-        specifier: ^2.2.5
-        version: 2.4.1
+        specifier: ^3.0.1
+        version: 3.0.1
       concurrently:
         specifier: ^9.0.1
         version: 9.2.1

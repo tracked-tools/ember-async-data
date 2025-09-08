@@ -98,7 +98,7 @@
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.24.1",
     "qunit-dom": "^3.4.0",
-    "release-plan": "^0.16.0",
+    "release-plan": "^0.17.2",
     "rollup": "^4.35.0",
     "testem": "^3.15.1",
     "typescript": "~5.8.3",

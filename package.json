@@ -92,7 +92,7 @@
     "eslint-plugin-ember": "^12.3.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^17.15.1",
-    "expect-type": "^0.18.0",
+    "expect-type": "^1.2.2",
     "globals": "^16.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-ember-template-tag": "^2.0.4",

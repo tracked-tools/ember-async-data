@@ -115,8 +115,8 @@ importers:
         specifier: ^17.15.1
         version: 17.21.3(eslint@9.35.0(jiti@2.4.2))(typescript@5.9.2)
       expect-type:
-        specifier: ^0.18.0
-        version: 0.18.0
+        specifier: ^1.2.2
+        version: 1.2.2
       globals:
         specifier: ^16.1.0
         version: 16.4.0
@@ -3069,8 +3069,8 @@ packages:
     resolution: {integrity: sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==}
     engines: {node: '>=0.10.0'}
 
-  expect-type@0.18.0:
-    resolution: {integrity: sha512-xjKoyyDLoia2h1WF+vwV8AmEpQ0drGW0InRgyywAHyOC+XSPYMxGoMXSwPjXs46D8FgLmp32sHMd1KrVingDuQ==}
+  expect-type@1.2.2:
+    resolution: {integrity: sha512-JhFGDVJ7tmDJItKhYgJCGLOWjuK9vPxiXoUFLwLDc99NlmklilbiQJwoctZtt13+xMw91MCk/REan6MWHqDjyA==}
     engines: {node: '>=12.0.0'}
 
   express@4.21.2:
@@ -9734,7 +9734,7 @@ snapshots:
     dependencies:
       homedir-polyfill: 1.0.3
 
-  expect-type@0.18.0: {}
+  expect-type@1.2.2: {}
 
   express@4.21.2:
     dependencies:

@@ -5,16 +5,15 @@
  */
 {
   "extends": "@ember/app-tsconfig",
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
-  },
   "include": ["src/**/*", "tests/**/*", "unpublished-development-types/**/*"],
   "compilerOptions": {
     "rootDir": ".",
     "target": "es2023",
-    "types": ["ember-source/types", "vite/client", "@embroider/core/virtual"],
-    "paths": {
-      "#src/*": ["./src/*"]
-    }
+    "types": [
+      "ember-source/types",
+      "vite/client",
+      "@embroider/core/virtual",
+      "@glint/ember-tsc/types"
+    ]
   }
 }

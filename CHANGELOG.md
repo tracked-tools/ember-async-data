@@ -1,5 +1,29 @@
 # Changelog
 
+## Release (2025-11-18)
+
+* ember-async-data 2.0.2 (patch)
+
+#### :memo: Documentation
+* `ember-async-data`
+  * [#927](https://github.com/tracked-tools/ember-async-data/pull/927) Fix small comment typo ([@elwayman02](https://github.com/elwayman02))
+  * [#883](https://github.com/tracked-tools/ember-async-data/pull/883) Remove usage of defer with Promise.withResolvers() in docs ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#877](https://github.com/tracked-tools/ember-async-data/pull/877) Remove use of `inject` in docs ([@bertdeblock](https://github.com/bertdeblock))
+
+#### :house: Internal
+* `ember-async-data`
+  * [#890](https://github.com/tracked-tools/ember-async-data/pull/890) Fix "Nightly TypeScript Run" job ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#884](https://github.com/tracked-tools/ember-async-data/pull/884) Add TypeScript 5.9 to testing matrix ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#882](https://github.com/tracked-tools/ember-async-data/pull/882) Remove ember-async-data folder ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#881](https://github.com/tracked-tools/ember-async-data/pull/881) Bring back release-plan dependency ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#880](https://github.com/tracked-tools/ember-async-data/pull/880) run "npx sort-package-json" ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#879](https://github.com/tracked-tools/ember-async-data/pull/879) Sync with vite based addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 3
+- Bert De Block ([@bertdeblock](https://github.com/bertdeblock))
+- Jordan Hawker ([@elwayman02](https://github.com/elwayman02))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2025-05-12)
 
 * ember-async-data 2.0.1 (patch)

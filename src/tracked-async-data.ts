@@ -224,7 +224,7 @@ interface Rejected<T> extends _TrackedAsyncData<T> {
 /**
   An autotracked `Promise` handler, representing asynchronous data.
 
-  Given a `Promise` instance, a `TrackedAsyncData` behaves exactly lik the
+  Given a `Promise` instance, a `TrackedAsyncData` behaves exactly like the
   original `Promise`, except that it makes the state of the `Promise` visible
   via tracked state, so you can check whether the promise is pending, resolved,
   or rejected; and so you can get the value if it has resolved or the error if

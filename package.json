@@ -49,7 +49,7 @@
     "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "lint:types": "glint",
+    "lint:types": "ember-tsc --noEmit",
     "prepack": "rollup --config",
     "start": "vite dev",
     "test": "vite build --mode=development --out-dir dist-tests && testem --file testem.cjs ci --port 0"
@@ -74,11 +74,9 @@
     "@embroider/vite": "^1.1.5",
     "@eslint/js": "^9.21.0",
     "@glimmer/component": "^2.0.0",
-    "@glint/core": "^2.0.0-alpha.2",
-    "@glint/environment-ember-loose": "^2.0.0-alpha.2",
-    "@glint/environment-ember-template-imports": "^2.0.0-alpha.2",
-    "@glint/template": "^1.6.0-alpha.1",
-    "@glint/tsserver-plugin": "^2.0.0-alpha.2",
+    "@glint/ember-tsc": "^1.0.3",
+    "@glint/template": "^1.6.1",
+    "@glint/tsserver-plugin": "^2.0.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@types/qunit": "^2.19.12",
     "babel-plugin-ember-template-compilation": "^3.0.1",
@@ -103,7 +101,7 @@
     "testem": "^3.15.1",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.25.0",
-    "vite": "^6.2.4"
+    "vite": "^6.3.6"
   },
   "packageManager": "pnpm@10.15.1",
   "volta": {
